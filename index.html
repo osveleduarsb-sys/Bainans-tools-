@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#f4f7fb"
+        id="themeColor"
+    >
+
+    <title>Bainans Tools</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- DECORACIÓN DEL FONDO -->
+
+    <div class="decor decor-1"></div>
+    <div class="decor decor-2"></div>
+    <div class="decor decor-3"></div>
+    <div class="decor decor-4"></div>
+
+
+
+    <!-- =========================
+         ENCABEZADO
+    ========================== -->
+
+    <header class="app-header">
+
+        <div class="logo">
+            ₿
+        </div>
+
+        <h1>
+            <span>Bainans</span> <strong>Tools</strong>
+        </h1>
+
+
+        <!-- BOTÓN MODO -->
+
+        <button
+            id="modo"
+            type="button"
+            aria-label="Cambiar modo"
+            title="Cambiar modo"
+        >
+            🌙
+        </button>
+
+    </header>
+
+
+
+    <!-- =========================
+         RESULTADO PRINCIPAL
+    ========================== -->
+
+    <section class="hero-card">
+
+
+        <div class="hero-line"></div>
+
+
+        <span class="hero-icon">
+            💰
+        </span>
+
+
+        <h2>
+            USD que llegarán a Binance
+        </h2>
+
+
+        <h1 id="heroUsd">
+            0,00 USD
+        </h1>
+
+
+        <p id="heroEstado">
+            Ingresa el saldo y la tasa BCV
+        </p>
+
+
+    </section>
+
+
+
+    <!-- =========================
+         CONTENIDO
+    ========================== -->
+
+    <main class="container">
+
+
+        <!-- =========================
+             DATOS DE COMPRA
+        ========================== -->
+
+        <section class="card datos-card">
+
+
+            <div class="datos-header">
+
+                <h2>
+                    <span class="section-icon">📥</span>
+                    Datos de compra
+                </h2>
+
+
+                <button
+                    id="actualizarBCV"
+                    type="button"
+                    title="Actualizar tasa BCV"
+                >
+                    🔄
+                </button>
+
+            </div>
+
+
+
+            <div class="inputs-grid">
+
+
+                <!-- SALDO -->
+
+                <div class="input-group">
+
+                    <label for="saldo">                   
+                        Saldo disponible (Bs)
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="saldo"
+                        inputmode="decimal"
+                        autocomplete="off"
+                        placeholder="Ej. 170.557"
+                    >
+
+                </div>
+
+
+
+                <!-- BCV -->
+
+                <div class="input-group">
+
+                    <label for="bcv">                        
+                        Tasa BCV
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="bcv"
+                        inputmode="decimal"
+                        autocomplete="off"
+                        placeholder="Ej. 848,55"
+                    >
+
+
+                    <small id="bcvEstado">
+                        🟢 Actualizada: 2026-09-18
+                    </small>
+
+                </div>
+
+
+
+                <!-- RECARGO -->
+
+                <div class="input-group">
+
+                    <label for="recargo">                  
+                        Recargo Banco (%)
+                    </label>
+
+
+                    <input
+                        type="number"
+                        id="recargo"
+                        value="0.5"
+                        step="0.01"
+                        min="0"
+                    >
+
+                </div>
+
+
+
+                <!-- BDV -->
+
+                <div class="input-group">
+
+                    <label for="bdv">                       
+                        Banco Comisión (%)
+                    </label>
+
+
+                    <input
+                        type="number"
+                        id="bdv"
+                        value="2.5"
+                        step="0.01"
+                        min="0"
+                    >
+
+                </div>
+
+
+
+                <!-- BPAY -->
+
+                <div class="input-group">
+
+                    <label for="bpay">                    
+                        Comisión BPay (%)
+                    </label>
+
+
+                    <input
+                        type="number"
+                        id="bpay"
+                        value="4.1"
+                        step="0.01"
+                        min="0"
+                    >
+
+                </div>
+
+
+
+                <!-- P2P -->
+
+                <div class="input-group">
+
+                    <label for="p2p">
+                        Precio USDT Binance P2P                        
+                    </label>
+
+
+                    <input
+                        type="number"
+                        id="p2p"
+                        placeholder="Opcional"
+                        step="0.01"
+                        min="0"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- COPIAR -->
+
+            <button
+                id="copiar"
+                type="button"
+            >
+                <span>📋</span>
+                Copiar resumen
+            </button>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             RESULTADOS
+        ========================== -->
+
+        <section
+            class="card resultados-card"
+            id="resultados"
+        >
+
+            <div class="resultados-header">
+
+                <h2>
+                    📊 Resultados
+                </h2>
+
+                <button
+                    id="cerrarResultados"
+                    type="button"
+                >
+                    ✕
+                </button>
+
+            </div>
+
+
+            <div class="result-grid">
+
+
+                <div class="result-card">
+
+                    <span class="titulo">
+                        Tasa final
+                    </span>
+
+                    <span
+                        class="valor"
+                        id="tasaFinal"
+                    >
+                        --
+                    </span>
+
+                </div>
+
+
+                <div class="result-card">
+
+                    <span class="titulo">
+                        USD comprados
+                    </span>
+
+                    <span
+                        class="valor"
+                        id="usdComprados"
+                    >
+                        --
+                    </span>
+
+                </div>
+
+
+                <div class="result-card">
+
+                    <span class="titulo">
+                        Banco Comisión
+                    </span>
+
+                    <span
+                        class="valor"
+                        id="comisionBdv"
+                    >
+                        --
+                    </span>
+
+                </div>
+
+
+                <div class="result-card">
+
+                    <span class="titulo">
+                        Quedan después
+                    </span>
+
+                    <span
+                        class="valor"
+                        id="despuesBdv"
+                    >
+                        --
+                    </span>
+
+                </div>
+
+
+                <div class="result-card">
+
+                    <span class="titulo">
+                        Comisión BPay
+                    </span>
+
+                    <span
+                        class="valor"
+                        id="comisionBpay"
+                    >
+                        --
+                    </span>
+
+                </div>
+
+
+                <div class="result-card">
+
+                    <span class="titulo">
+                        USD finales
+                    </span>
+
+                    <span
+                        class="valor"
+                        id="usdFinales"
+                    >
+                        --
+                    </span>
+
+                </div>
+
+
+                <div class="result-card">
+
+                    <span class="titulo">
+                        Costo real por USD
+                    </span>
+
+                    <span
+                        class="valor"
+                        id="costoReal"
+                    >
+                        --
+                    </span>
+
+                </div>
+
+
+                <div class="result-card result-p2p">
+
+                    <span class="titulo">
+                        Ahorro frente al P2P
+                    </span>
+
+                    <span
+                        class="valor"
+                        id="ahorroP2p"
+                    >
+                        --
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <div id="estado">
+                ⚪ Esperando cálculo
+            </div>
+
+
+        </section>
+
+
+        <!-- BOTÓN RESULTADO -->
+
+        <button
+            id="mostrarResultados"
+            type="button"
+        >
+            <span>☰</span>
+            Resultado
+        </button>
+
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
