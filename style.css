@@ -475,7 +475,7 @@ body.dark #modo {
 
     background: var(--card);
 
-    border-radius: 13px;
+    border-radius: 20px;
 
     box-shadow: var(--shadow);
 
@@ -1209,7 +1209,7 @@ body.dark input {
 
     .hero-card {
 
-    width: calc(100% - 100px);
+    width: calc(100% - 120px);
     max-width: 540px;
 
     margin:
