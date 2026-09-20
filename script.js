@@ -1,0 +1,1469 @@
+/* =========================================
+   BAINANS TOOLS
+   LÓGICA
+========================================= */
+
+
+/* =========================================
+   ELEMENTOS
+========================================= */
+
+const saldoInput =
+    document.getElementById("saldo");
+
+const bcvInput =
+    document.getElementById("bcv");
+
+const actualizarBCV =
+    document.getElementById("actualizarBCV");
+
+const bcvEstado =
+    document.getElementById("bcvEstado");
+
+const recargoInput =
+    document.getElementById("recargo");
+
+const bdvInput =
+    document.getElementById("bdv");
+
+const bpayInput =
+    document.getElementById("bpay");
+
+const p2pInput =
+    document.getElementById("p2p");
+
+
+const heroUsd =
+    document.getElementById("heroUsd");
+
+const heroEstado =
+    document.getElementById("heroEstado");
+
+
+const tasaFinal =
+    document.getElementById("tasaFinal");
+
+const usdComprados =
+    document.getElementById("usdComprados");
+
+const comisionBdv =
+    document.getElementById("comisionBdv");
+
+const despuesBdv =
+    document.getElementById("despuesBdv");
+
+const comisionBpay =
+    document.getElementById("comisionBpay");
+
+const usdFinales =
+    document.getElementById("usdFinales");
+
+const costoReal =
+    document.getElementById("costoReal");
+
+const ahorroP2p =
+    document.getElementById("ahorroP2p");
+
+
+const estado =
+    document.getElementById("estado");
+
+
+const modoBtn =
+    document.getElementById("modo");
+
+const copiarBtn =
+    document.getElementById("copiar");
+
+
+const mostrarResultados =
+    document.getElementById(
+        "mostrarResultados"
+    );
+
+const resultados =
+    document.getElementById(
+        "resultados"
+    );
+
+const cerrarResultados =
+    document.getElementById(
+        "cerrarResultados"
+    );
+
+const themeColor =
+    document.getElementById(
+        "themeColor"
+    );
+
+
+
+/* =========================================
+   FORMATO DE NÚMEROS
+========================================= */
+
+function formatoNumero(
+    numero,
+    decimales = 2
+) {
+
+    return Number(numero).toLocaleString(
+        "es-VE",
+        {
+            minimumFractionDigits:
+                decimales,
+
+            maximumFractionDigits:
+                decimales
+        }
+    );
+
+}
+
+
+
+/* =========================================
+   CONVERTIR NÚMERO
+========================================= */
+
+function convertirNumero(valor) {
+
+    if (!valor) {
+
+        return 0;
+
+    }
+
+
+    let texto =
+        String(valor).trim();
+
+
+    texto =
+        texto.replace(/\s/g, "");
+
+
+    if (
+        texto.includes(".") &&
+        texto.includes(",")
+    ) {
+
+        texto =
+            texto
+                .replace(/\./g, "")
+                .replace(",", ".");
+
+    }
+
+
+    else if (
+        texto.includes(",")
+    ) {
+
+        texto =
+            texto.replace(",", ".");
+
+    }
+
+
+    else if (
+        texto.includes(".")
+    ) {
+
+        if (
+            /^\d{1,3}(\.\d{3})+$/
+                .test(texto)
+        ) {
+
+            texto =
+                texto.replace(/\./g, "");
+
+        }
+
+    }
+
+
+    const numero =
+        parseFloat(texto);
+
+
+    return Number.isFinite(numero)
+        ? numero
+        : 0;
+
+}
+
+
+
+/* =========================================
+   FORMATEAR ENTRADA
+========================================= */
+
+function formatearEntrada(valor) {
+
+    if (!valor) {
+
+        return "";
+
+    }
+
+
+    let texto =
+        String(valor);
+
+
+    texto =
+        texto.replace(
+            /[^\d.,]/g,
+            ""
+        );
+
+
+    if (!texto) {
+
+        return "";
+
+    }
+
+
+    let decimal = "";
+
+
+    if (
+        texto.includes(",")
+    ) {
+
+        const partes =
+            texto.split(",");
+
+
+        let entero =
+            partes.shift();
+
+
+        decimal =
+            partes.join("");
+
+
+        entero =
+            entero.replace(
+                /\./g,
+                ""
+            );
+
+
+        if (
+            entero === ""
+        ) {
+
+            entero = "0";
+
+        }
+
+
+        entero =
+            Number(entero)
+                .toLocaleString(
+                    "es-VE",
+                    {
+                        maximumFractionDigits:
+                            0
+                    }
+                );
+
+
+        return decimal !== ""
+            ? `${entero},${decimal}`
+            : `${entero},`;
+
+    }
+
+
+
+    if (
+        texto.includes(".")
+    ) {
+
+        const partes =
+            texto.split(".");
+
+
+        if (
+            partes.length === 2 &&
+            partes[1].length === 3
+        ) {
+
+            const numero =
+                texto.replace(
+                    /\./g,
+                    ""
+                );
+
+
+            return Number(numero)
+                .toLocaleString(
+                    "es-VE",
+                    {
+                        maximumFractionDigits:
+                            0
+                    }
+                );
+
+        }
+
+
+        if (
+            partes.length === 2 &&
+            partes[1].length < 3
+        ) {
+
+            const entero =
+                partes[0]
+                    .replace(/\./g, "");
+
+
+            const decimal =
+                partes[1];
+
+
+            const enteroFormateado =
+                Number(entero)
+                    .toLocaleString(
+                        "es-VE",
+                        {
+                            maximumFractionDigits:
+                                0
+                        }
+                    );
+
+
+            return `${enteroFormateado}.${decimal}`;
+
+        }
+
+    }
+
+
+    const numero =
+        parseInt(
+            texto.replace(
+                /\D/g,
+                ""
+            ),
+            10
+        );
+
+
+    if (
+        !Number.isFinite(numero)
+    ) {
+
+        return "";
+
+    }
+
+
+    return numero.toLocaleString(
+        "es-VE",
+        {
+            maximumFractionDigits:
+                0
+        }
+    );
+
+}
+
+
+
+/* =========================================
+   OBTENER NÚMERO
+========================================= */
+
+function obtenerNumero(input) {
+
+    return convertirNumero(
+        input.value
+    );
+
+}
+
+
+
+/* =========================================
+   API BCV
+========================================= */
+
+const BCV_API =
+    "https://bcv.today/api/v1/rate.json";
+
+
+
+/* =========================================
+   GUARDAR TASA
+========================================= */
+
+function guardarTasaBCV(
+    tasa,
+    fecha
+) {
+
+    const datos = {
+
+        tasa: tasa,
+
+        fecha: fecha
+
+    };
+
+
+    localStorage.setItem(
+        "bainansBCV",
+        JSON.stringify(datos)
+    );
+
+}
+
+
+
+/* =========================================
+   CARGAR TASA
+========================================= */
+
+function cargarTasaGuardada() {
+
+    const guardado =
+        localStorage.getItem(
+            "bainansBCV"
+        );
+
+
+    if (!guardado) {
+
+        return false;
+
+    }
+
+
+    try {
+
+        const datos =
+            JSON.parse(guardado);
+
+
+        if (
+            datos.tasa &&
+            Number(datos.tasa) > 0
+        ) {
+
+            bcvInput.value =
+                Number(datos.tasa)
+                    .toLocaleString(
+                        "es-VE",
+                        {
+                            minimumFractionDigits:
+                                2,
+
+                            maximumFractionDigits:
+                                4
+                        }
+                    );
+
+
+            if (datos.fecha) {
+
+                bcvEstado.textContent =
+                    `🟢 Actualizada: ${datos.fecha}`;
+
+                bcvEstado.classList.add(
+                    "exito"
+                );
+
+            }
+
+            return true;
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "No se pudo cargar la tasa BCV."
+        );
+
+    }
+
+
+    return false;
+
+}
+
+
+
+/* =========================================
+   ACTUALIZAR BCV
+========================================= */
+
+async function actualizarTasaBCV() {
+
+    if (
+        actualizarBCV.classList.contains(
+            "cargando"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    actualizarBCV.classList.add(
+        "cargando"
+    );
+
+
+    actualizarBCV.disabled =
+        true;
+
+
+    bcvEstado.textContent =
+        "🔄 Consultando tasa BCV...";
+
+
+    bcvEstado.classList.remove(
+        "exito",
+        "error"
+    );
+
+
+    try {
+
+        const respuesta =
+            await fetch(
+                BCV_API,
+                {
+                    cache:
+                        "no-store"
+                }
+            );
+
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                `HTTP ${respuesta.status}`
+            );
+
+        }
+
+
+        const datos =
+            await respuesta.json();
+
+
+        const tasa =
+            Number(datos.USD);
+
+
+        if (
+            !Number.isFinite(tasa) ||
+            tasa <= 0
+        ) {
+
+            throw new Error(
+                "Tasa BCV inválida"
+            );
+
+        }
+
+
+        const fecha =
+            datos.effective_date ||
+            datos.date ||
+            "";
+
+
+        bcvInput.value =
+            tasa.toLocaleString(
+                "es-VE",
+                {
+                    minimumFractionDigits:
+                        2,
+
+                    maximumFractionDigits:
+                        4
+                }
+            );
+
+
+        guardarTasaBCV(
+            tasa,
+            fecha
+        );
+
+
+        calcular();
+
+        guardarDatos();
+
+
+        if (fecha) {
+
+            bcvEstado.textContent =
+                `🟢 Actualizada: ${fecha}`;
+
+        }
+
+        else {
+
+            bcvEstado.textContent =
+                "🟢 Tasa BCV actualizada";
+
+        }
+
+
+        bcvEstado.classList.remove(
+            "error"
+        );
+
+        bcvEstado.classList.add(
+            "exito"
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        bcvEstado.textContent =
+            "🟠 No se actualizó. Se mantiene la última tasa.";
+
+        bcvEstado.classList.remove(
+            "exito"
+        );
+
+        bcvEstado.classList.add(
+            "error"
+        );
+
+    }
+
+
+    actualizarBCV.classList.remove(
+        "cargando"
+    );
+
+
+    actualizarBCV.disabled =
+        false;
+
+}
+
+
+actualizarBCV.addEventListener(
+    "click",
+    actualizarTasaBCV
+);
+
+
+
+/* =========================================
+   CALCULADORA
+========================================= */
+
+function calcular() {
+
+    const saldo =
+        obtenerNumero(
+            saldoInput
+        );
+
+
+    const bcv =
+        obtenerNumero(
+            bcvInput
+        );
+
+
+    const recargo =
+        obtenerNumero(
+            recargoInput
+        );
+
+
+    const bdv =
+        obtenerNumero(
+            bdvInput
+        );
+
+
+    const bpay =
+        obtenerNumero(
+            bpayInput
+        );
+
+
+    const p2p =
+        obtenerNumero(
+            p2pInput
+        );
+
+
+
+    /* VALIDACIÓN */
+
+    if (
+        saldo <= 0 ||
+        bcv <= 0
+    ) {
+
+        limpiarResultados();
+
+
+        heroEstado.textContent =
+            "Ingresa el saldo y la tasa BCV";
+
+
+        estado.textContent =
+            "⚪ Esperando cálculo";
+
+
+        return;
+
+    }
+
+
+
+    /* TASA FINAL */
+
+    const tasa =
+        bcv *
+        (
+            1 +
+            recargo / 100
+        );
+
+
+
+    /* USD COMPRADOS */
+
+    const usd =
+        saldo / tasa;
+
+
+
+    /* COMISIÓN BDV */
+
+    const comisionBDV =
+        usd *
+        (
+            bdv / 100
+        );
+
+
+
+    /* DESPUÉS DE BDV */
+
+    const despuesBDV =
+        usd -
+        comisionBDV;
+
+
+
+    /* COMISIÓN BPAY */
+
+    const comisionBPay =
+        despuesBDV *
+        (
+            bpay / 100
+        );
+
+
+
+    /* USD FINALES */
+
+    const usdQueLlegan =
+        despuesBDV -
+        comisionBPay;
+
+
+
+    /* COSTO */
+
+    const costo =
+        saldo /
+        usdQueLlegan;
+
+
+
+    /* HERO */
+
+    heroUsd.textContent =
+        `${formatoNumero(
+            usdQueLlegan
+        )} USD`;
+
+
+    heroEstado.textContent =
+        "Cantidad estimada que llegará a Binance";
+
+
+
+    /* RESULTADOS */
+
+    tasaFinal.textContent =
+        `${formatoNumero(
+            tasa,
+            4
+        )} Bs/USD`;
+
+
+    usdComprados.textContent =
+        `${formatoNumero(
+            usd
+        )} USD`;
+
+
+    comisionBdv.textContent =
+        `${formatoNumero(
+            comisionBDV
+        )} USD`;
+
+
+    despuesBdv.textContent =
+        `${formatoNumero(
+            despuesBDV
+        )} USD`;
+
+
+    comisionBpay.textContent =
+        `${formatoNumero(
+            comisionBPay
+        )} USD`;
+
+
+    usdFinales.textContent =
+        `${formatoNumero(
+            usdQueLlegan
+        )} USD`;
+
+
+    costoReal.textContent =
+        `${formatoNumero(
+            costo,
+            4
+        )} Bs/USD`;
+
+
+
+    /* P2P */
+
+    if (p2p > 0) {
+
+        const diferencia =
+            p2p -
+            costo;
+
+
+        const porcentaje =
+            (
+                diferencia /
+                p2p
+            ) * 100;
+
+
+        if (
+            diferencia > 0
+        ) {
+
+            ahorroP2p.textContent =
+                `Ahorras ${formatoNumero(
+                    diferencia,
+                    4
+                )} Bs/USD (${formatoNumero(
+                    porcentaje
+                )}%)`;
+
+        }
+
+        else if (
+            diferencia < 0
+        ) {
+
+            ahorroP2p.textContent =
+                `P2P es menor por ${formatoNumero(
+                    Math.abs(
+                        diferencia
+                    ),
+                    4
+                )} Bs/USD`;
+
+        }
+
+        else {
+
+            ahorroP2p.textContent =
+                "Mismo costo que P2P";
+
+        }
+
+    }
+
+    else {
+
+        ahorroP2p.textContent =
+            "Ingresa precio P2P";
+
+    }
+
+
+    estado.textContent =
+        "🟢 Cálculo actualizado";
+
+}
+
+
+
+/* =========================================
+   LIMPIAR
+========================================= */
+
+function limpiarResultados() {
+
+    heroUsd.textContent =
+        "0,00 USD";
+
+
+    tasaFinal.textContent =
+        "--";
+
+
+    usdComprados.textContent =
+        "--";
+
+
+    comisionBdv.textContent =
+        "--";
+
+
+    despuesBdv.textContent =
+        "--";
+
+
+    comisionBpay.textContent =
+        "--";
+
+
+    usdFinales.textContent =
+        "--";
+
+
+    costoReal.textContent =
+        "--";
+
+
+    ahorroP2p.textContent =
+        "--";
+
+}
+
+
+
+/* =========================================
+   GUARDAR DATOS
+========================================= */
+
+function guardarDatos() {
+
+    const datos = {
+
+        saldo:
+            saldoInput.value,
+
+        bcv:
+            bcvInput.value,
+
+        recargo:
+            recargoInput.value,
+
+        bdv:
+            bdvInput.value,
+
+        bpay:
+            bpayInput.value,
+
+        p2p:
+            p2pInput.value
+
+    };
+
+
+    localStorage.setItem(
+        "bainansDatos",
+        JSON.stringify(datos)
+    );
+
+}
+
+
+
+/* =========================================
+   CARGAR DATOS
+========================================= */
+
+function cargarDatos() {
+
+    const guardado =
+        localStorage.getItem(
+            "bainansDatos"
+        );
+
+
+    if (!guardado) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const datos =
+            JSON.parse(
+                guardado
+            );
+
+
+        if (datos.saldo) {
+
+            saldoInput.value =
+                datos.saldo;
+
+        }
+
+
+        if (datos.bcv) {
+
+            bcvInput.value =
+                datos.bcv;
+
+        }
+
+
+        if (datos.recargo) {
+
+            recargoInput.value =
+                datos.recargo;
+
+        }
+
+
+        if (datos.bdv) {
+
+            bdvInput.value =
+                datos.bdv;
+
+        }
+
+
+        if (datos.bpay) {
+
+            bpayInput.value =
+                datos.bpay;
+
+        }
+
+
+        if (datos.p2p) {
+
+            p2pInput.value =
+                datos.p2p;
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "No se pudieron cargar los datos."
+        );
+
+    }
+
+}
+
+
+
+/* =========================================
+   SALDO
+========================================= */
+
+saldoInput.addEventListener(
+    "input",
+    () => {
+
+        saldoInput.value =
+            formatearEntrada(
+                saldoInput.value
+            );
+
+
+        saldoInput.setSelectionRange(
+            saldoInput.value.length,
+            saldoInput.value.length
+        );
+
+
+        calcular();
+
+        guardarDatos();
+
+    }
+);
+
+
+
+/* =========================================
+   BCV
+========================================= */
+
+bcvInput.addEventListener(
+    "input",
+    () => {
+
+        bcvInput.value =
+            formatearEntrada(
+                bcvInput.value
+            );
+
+
+        bcvInput.setSelectionRange(
+            bcvInput.value.length,
+            bcvInput.value.length
+        );
+
+
+        calcular();
+
+        guardarDatos();
+
+    }
+);
+
+
+
+/* =========================================
+   OTROS CAMPOS
+========================================= */
+
+[
+    recargoInput,
+    bdvInput,
+    bpayInput,
+    p2pInput
+
+].forEach(
+    input => {
+
+        input.addEventListener(
+            "input",
+            () => {
+
+                calcular();
+
+                guardarDatos();
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =========================================
+   COPIAR RESUMEN
+========================================= */
+
+copiarBtn.addEventListener(
+    "click",
+    async () => {
+
+        const resumen = `
+
+BAINANS TOOLS
+
+Saldo disponible:
+${saldoInput.value || "No indicado"} Bs
+
+Tasa BCV:
+${bcvInput.value || "No indicada"} Bs/USD
+
+Tasa final:
+${tasaFinal.textContent}
+
+USD comprados:
+${usdComprados.textContent}
+
+Comisión BDV:
+${comisionBdv.textContent}
+
+Después de BDV:
+${despuesBdv.textContent}
+
+Comisión BPay:
+${comisionBpay.textContent}
+
+USD finales:
+${usdFinales.textContent}
+
+USD que llegarán a Binance:
+${heroUsd.textContent}
+
+Costo real por USD:
+${costoReal.textContent}
+
+Ahorro frente al P2P:
+${ahorroP2p.textContent}
+
+        `.trim();
+
+
+        try {
+
+            await navigator.clipboard.writeText(
+                resumen
+            );
+
+
+            copiarBtn.innerHTML =
+                "<span>✅</span> Resumen copiado";
+
+
+            setTimeout(
+                () => {
+
+                    copiarBtn.innerHTML =
+                        "<span>📋</span> Copiar resumen";
+
+                },
+                2000
+            );
+
+        }
+
+        catch (error) {
+
+            alert(
+                "No se pudo copiar el resumen."
+            );
+
+        }
+
+    }
+);
+
+
+
+/* =========================================
+   MODO OSCURO / CLARO
+========================================= */
+
+function actualizarModo() {
+
+    const oscuro =
+        document.body.classList.contains(
+            "dark"
+        );
+
+
+    if (oscuro) {
+
+        modoBtn.textContent =
+            "☀️";
+
+
+        modoBtn.title =
+            "Cambiar a modo claro";
+
+
+        if (themeColor) {
+
+            themeColor.setAttribute(
+                "content",
+                "#080c10"
+            );
+
+        }
+
+    }
+
+    else {
+
+        modoBtn.textContent =
+            "🌙";
+
+
+        modoBtn.title =
+            "Cambiar a modo oscuro";
+
+
+        if (themeColor) {
+
+            themeColor.setAttribute(
+                "content",
+                "#f5f7fb"
+            );
+
+        }
+
+    }
+
+}
+
+
+
+modoBtn.addEventListener(
+    "click",
+    () => {
+
+        document.body.classList.toggle(
+            "dark"
+        );
+
+
+        const oscuro =
+            document.body.classList.contains(
+                "dark"
+            );
+
+
+        localStorage.setItem(
+            "bainansModo",
+            oscuro
+                ? "dark"
+                : "light"
+        );
+
+
+        actualizarModo();
+
+    }
+);
+
+
+
+/* =========================================
+   RESULTADOS
+========================================= */
+
+mostrarResultados.addEventListener(
+    "click",
+    () => {
+
+        resultados.classList.toggle(
+            "visible"
+        );
+
+
+        if (
+            resultados.classList.contains(
+                "visible"
+            )
+        ) {
+
+            mostrarResultados.innerHTML =
+                "<span>▮▮▮</span> Ocultar resultado";
+
+        }
+
+        else {
+
+            mostrarResultados.innerHTML =
+                "<span>▮▮▮</span> Resultado";
+
+        }
+
+    }
+);
+
+
+
+cerrarResultados.addEventListener(
+    "click",
+    () => {
+
+        resultados.classList.remove(
+            "visible"
+        );
+
+
+        mostrarResultados.innerHTML =
+            "<span>▮▮▮</span> Resultado";
+
+    }
+);
+
+
+
+/* =========================================
+   INICIO
+========================================= */
+
+function iniciarApp() {
+
+
+    /* MODO */
+
+    const modoGuardado =
+        localStorage.getItem(
+            "bainansModo"
+        );
+
+
+    if (
+        modoGuardado === "dark"
+    ) {
+
+        document.body.classList.add(
+            "dark"
+        );
+
+    }
+
+
+    actualizarModo();
+
+
+
+    /* DATOS */
+
+    cargarDatos();
+
+
+    /*
+       Si no existe BCV guardado,
+       dejamos el campo vacío.
+    */
+
+    if (
+        !bcvInput.value
+    ) {
+
+        cargarTasaGuardada();
+
+    }
+
+
+    calcular();
+
+}
+
+
+iniciarApp();
