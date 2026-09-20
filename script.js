@@ -806,12 +806,7 @@ function calcular() {
     heroUsd.textContent =
         `${formatoNumero(
             usdQueLlegan
-        )} USD`;
-
-
-    heroEstado.textContent =
-        "Cantidad estimada que llegará a Binance";
-
+        )} USD`;   
 
 
     /* RESULTADOS */
