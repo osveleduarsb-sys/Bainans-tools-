@@ -475,7 +475,7 @@ body.dark #modo {
 
     background: var(--card);
 
-    border-radius: 23px;
+    border-radius: 13px;
 
     box-shadow: var(--shadow);
 
@@ -1214,7 +1214,7 @@ body.dark input {
 
     margin:
         0 auto
-        10px;
+        25px;
 
     padding:
         15px
@@ -1413,7 +1413,7 @@ body.dark input {
 
         min-height: 10px;
 
-        font-size: 5px;
+        font-size: 12px;
 
     }
 
