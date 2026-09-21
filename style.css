@@ -1475,7 +1475,7 @@ body.dark input {
    PANTALLAS MUY PEQUEÑAS
 ========================================= */
 
-@media (max-width: 580px) {
+@media (max-width: 500px) {
 
     .app-header h1 {
 
