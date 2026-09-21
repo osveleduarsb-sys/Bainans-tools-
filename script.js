@@ -1461,4 +1461,85 @@ function iniciarApp() {
 }
 
 
+    calcular();
+
+}
+
+
+/* =========================================
+   FORMATO DEL MONTO PRINCIPAL
+   Separa el número de la moneda USD
+========================================= */
+
+function actualizarHeroUsd() {
+
+    const heroUsd = document.getElementById("heroUsd");
+
+    if (!heroUsd) return;
+
+    const texto = heroUsd.textContent.trim();
+
+    if (!texto) return;
+
+    if (
+        heroUsd.querySelector("#heroUsdNumero") &&
+        heroUsd.querySelector("small")
+    ) {
+        return;
+    }
+
+    const coincidencia = texto.match(
+        /^(.+?)\s*USD$/i
+    );
+
+    if (!coincidencia) return;
+
+    heroUsd.innerHTML = `
+
+        <span id="heroUsdNumero">
+            ${coincidencia[1]}
+        </span>
+
+        <small>
+            USD
+        </small>
+
+    `;
+
+}
+
+
+/* =========================================
+   VIGILAR CAMBIOS DEL RESULTADO
+========================================= */
+
+const heroUsdElemento =
+    document.getElementById("heroUsd");
+
+
+if (heroUsdElemento) {
+
+    actualizarHeroUsd();
+
+
+    const observadorHero =
+        new MutationObserver(() => {
+
+            actualizarHeroUsd();
+
+        });
+
+
+    observadorHero.observe(
+        heroUsdElemento,
+        {
+            childList: true,
+            characterData: true,
+            subtree: true
+        }
+    );
+
+}
+
+
 iniciarApp();
