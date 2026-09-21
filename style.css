@@ -3,11 +3,9 @@
    DISEÑO PRINCIPAL
 ========================================= */
 
-
 @import url(
     'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap'
 );
-
 
 
 /* =========================================
@@ -42,9 +40,7 @@
 
     --shadow:
         0 12px 35px rgba(0,0,0,.07);
-
 }
-
 
 
 /* =========================================
@@ -67,9 +63,7 @@ body.dark {
 
     --shadow:
         none;
-
 }
-
 
 
 /* =========================================
@@ -87,9 +81,7 @@ body.dark {
     font-family:
         'Inter',
         sans-serif;
-
 }
-
 
 
 /* =========================================
@@ -114,13 +106,11 @@ body {
     transition:
         background .3s ease,
         color .3s ease;
-
 }
 
 
-
 /* =========================================
-   DECORACIÓN
+   DECORACIÓN DEL FONDO
 ========================================= */
 
 .decor {
@@ -141,7 +131,6 @@ body {
     z-index: -1;
 
     pointer-events: none;
-
 }
 
 
@@ -150,7 +139,6 @@ body {
     top: -145px;
 
     left: -90px;
-
 }
 
 
@@ -159,7 +147,6 @@ body {
     top: -145px;
 
     right: -90px;
-
 }
 
 
@@ -168,7 +155,6 @@ body {
     bottom: -150px;
 
     left: -100px;
-
 }
 
 
@@ -177,16 +163,13 @@ body {
     bottom: -150px;
 
     right: -100px;
-
 }
 
 
 body.dark .decor {
 
     opacity: .28;
-
 }
-
 
 
 /* =========================================
@@ -204,9 +187,7 @@ body.dark .decor {
     margin:
         0 auto
         16px;
-
 }
-
 
 
 .logo {
@@ -216,9 +197,7 @@ body.dark .decor {
     height: 82px;
 
     margin:
-
         0 auto
-
         10px;
 
     border-radius: 24px;
@@ -238,12 +217,9 @@ body.dark .decor {
     font-weight: 900;
 
     box-shadow:
-
         0 12px 25px
         rgba(243,186,47,.25);
-
 }
-
 
 
 .app-header h1 {
@@ -255,23 +231,19 @@ body.dark .decor {
     font-weight: 900;
 
     letter-spacing: -1.5px;
-
 }
 
 
 .app-header h1 span {
 
     color: var(--text);
-
 }
 
 
 .app-header h1 strong {
 
     color: var(--primary);
-
 }
-
 
 
 /* =========================================
@@ -309,10 +281,8 @@ body.dark .decor {
     cursor: pointer;
 
     box-shadow:
-
         0 5px 15px
         rgba(0,0,0,.08);
-
 }
 
 
@@ -323,16 +293,13 @@ body.dark #modo {
     color: var(--primary);
 
     border:
-
         1px solid
         #274052;
-
 }
 
 
-
 /* =========================================
-   HERO
+   HERO / TARJETA PRINCIPAL
 ========================================= */
 
 .hero-card {
@@ -356,7 +323,46 @@ body.dark #modo {
 
     overflow: hidden;
 
+    /*
+       FONDO GEOMÉTRICO
+       Inspirado en la segunda imagen
+    */
+
     background:
+
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.16) 0%,
+            transparent 25%
+        ),
+
+        linear-gradient(
+            315deg,
+            rgba(255,190,25,.30) 0%,
+            transparent 30%
+        ),
+
+        linear-gradient(
+            125deg,
+            transparent 0%,
+            transparent 17%,
+            rgba(255,230,115,.28) 17%,
+            rgba(255,230,115,.28) 23%,
+            transparent 23%,
+            transparent 38%,
+            rgba(239,174,20,.20) 38%,
+            rgba(239,174,20,.20) 45%,
+            transparent 45%
+        ),
+
+        linear-gradient(
+            35deg,
+            transparent 0%,
+            transparent 50%,
+            rgba(255,235,130,.18) 50%,
+            rgba(255,235,130,.18) 62%,
+            transparent 62%
+        ),
 
         linear-gradient(
             135deg,
@@ -365,13 +371,77 @@ body.dark #modo {
         );
 
     box-shadow:
+        0 8px 18px
+        rgba(243,186,47,.22);
+}
 
-        0 7px 10px
-        rgba(243,186,47,.20);
+
+/*
+   CAPAS GEOMÉTRICAS ADICIONALES
+*/
+
+.hero-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: .55;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            transparent 0 15%,
+            rgba(255,255,255,.14) 15% 18%,
+            transparent 18% 34%,
+            rgba(230,164,20,.12) 34% 38%,
+            transparent 38% 100%
+        );
 
 }
 
 
+.hero-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 55%;
+
+    height: 100%;
+
+    top: 0;
+
+    right: -12%;
+
+    pointer-events: none;
+
+    opacity: .30;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            transparent 0 30%,
+            #ffe88b 30% 40%,
+            transparent 40% 55%,
+            #eaae24 55% 65%,
+            transparent 65%
+        );
+
+    transform: skewX(-12deg);
+}
+
+
+/* =========================================
+   FRANJA NEGRA
+========================================= */
 
 .hero-line {
 
@@ -387,9 +457,17 @@ body.dark #modo {
 
     background: #11161b;
 
+    z-index: 2;
+
+    box-shadow:
+        0 1px 0
+        rgba(255,255,255,.04);
 }
 
 
+/* =========================================
+   CONTENIDO HERO
+========================================= */
 
 .hero-icon {
 
@@ -399,56 +477,62 @@ body.dark #modo {
 
     margin-bottom: 7px;
 
-}
+    position: relative;
 
+    z-index: 3;
+}
 
 
 .hero-card h2 {
 
     position: relative;
 
+    z-index: 3;
+
     font-size: 19px;
 
     font-weight: 800;
 
     margin-bottom: 10px;
-
 }
 
 
+/*
+   MONTO PRINCIPAL
+*/
 
 .hero-card h1 {
 
     position: relative;
 
-    font-size: 56px;
+    z-index: 3;
+
+    font-size: 48px;
 
     line-height: 1;
 
     font-weight: 900;
 
-    letter-spacing: -2px;
+    letter-spacing: -1.5px;
 
     margin-bottom: 14px;
 
     color: #050505;
-
 }
-
 
 
 .hero-card p {
 
     position: relative;
 
+    z-index: 3;
+
     font-size: 17px;
 
     font-weight: 700;
 
     color: #111;
-
 }
-
 
 
 /* =========================================
@@ -462,13 +546,11 @@ body.dark #modo {
     max-width: 620px;
 
     margin: 0 auto;
-
 }
 
 
-
 /* =========================================
-   TARJETA
+   TARJETAS
 ========================================= */
 
 .card {
@@ -480,35 +562,27 @@ body.dark #modo {
     box-shadow: var(--shadow);
 
     transition:
-
         background .3s ease,
-
         border .3s ease;
-
 }
 
 
 body.dark .card {
 
     border:
-
         1px solid
         #223a4c;
-
 }
 
 
-
 /* =========================================
-   DATOS
+   DATOS DE COMPRA
 ========================================= */
 
 .datos-card {
 
     padding: 18px;
-
 }
-
 
 
 .datos-header {
@@ -520,9 +594,7 @@ body.dark .card {
     justify-content: space-between;
 
     margin-bottom: 14px;
-
 }
-
 
 
 .datos-header h2 {
@@ -536,17 +608,13 @@ body.dark .card {
     font-size: 28px;
 
     font-weight: 900;
-
 }
-
 
 
 .section-icon {
 
     font-size: 30px;
-
 }
-
 
 
 #actualizarBCV {
@@ -572,53 +640,38 @@ body.dark .card {
     justify-content: center;
 
     transition: .2s ease;
-
 }
-
 
 
 #actualizarBCV:hover {
 
     transform: scale(1.05);
-
 }
-
 
 
 #actualizarBCV:active {
 
     transform: scale(.94);
-
 }
-
 
 
 #actualizarBCV.cargando {
 
     animation:
-
         girar .8s linear infinite;
-
 }
-
 
 
 @keyframes girar {
 
     from {
-
         transform: rotate(0);
-
     }
 
     to {
-
         transform: rotate(360deg);
-
     }
-
 }
-
 
 
 /* =========================================
@@ -635,17 +688,13 @@ body.dark .card {
     column-gap: 18px;
 
     row-gap: 12px;
-
 }
-
 
 
 .input-group {
 
     min-width: 0;
-
 }
-
 
 
 .input-group label {
@@ -667,9 +716,7 @@ body.dark .card {
     font-weight: 800;
 
     color: var(--text);
-
 }
-
 
 
 .campo-icon {
@@ -681,17 +728,13 @@ body.dark .card {
     text-align: center;
 
     flex-shrink: 0;
-
 }
-
 
 
 .campo-icon.grande {
 
     font-size: 30px;
-
 }
-
 
 
 .campo-icon.dinero {
@@ -701,17 +744,13 @@ body.dark .card {
     font-size: 29px;
 
     font-weight: 900;
-
 }
-
 
 
 .segunda-linea {
 
     margin-left: 32px;
-
 }
-
 
 
 input {
@@ -721,13 +760,10 @@ input {
     height: 58px;
 
     padding:
-
         0
-
         17px;
 
     border:
-
         2px solid
         var(--border);
 
@@ -742,9 +778,7 @@ input {
     font-size: 18px;
 
     transition: .2s ease;
-
 }
-
 
 
 input:focus {
@@ -752,28 +786,21 @@ input:focus {
     border-color: var(--primary);
 
     box-shadow:
-
         0 0 0 4px
         rgba(243,186,47,.12);
-
 }
-
 
 
 input::placeholder {
 
     color: #aeb4bd;
-
 }
-
 
 
 body.dark input {
 
     color: #edf4fa;
-
 }
-
 
 
 /* =========================================
@@ -793,25 +820,19 @@ body.dark input {
     color: var(--success);
 
     font-weight: 600;
-
 }
-
 
 
 #bcvEstado.exito {
 
     color: var(--success);
-
 }
-
 
 
 #bcvEstado.error {
 
     color: #db9200;
-
 }
-
 
 
 /* =========================================
@@ -849,25 +870,19 @@ body.dark input {
     gap: 12px;
 
     transition: .2s ease;
-
 }
-
 
 
 #copiar:hover {
 
     transform: translateY(-2px);
-
 }
-
 
 
 #copiar:active {
 
     transform: scale(.98);
-
 }
-
 
 
 /* =========================================
@@ -889,13 +904,10 @@ body.dark input {
     height: 52px;
 
     margin:
-
         14px auto
-
         0;
 
     border:
-
         2px solid
         var(--primary);
 
@@ -910,9 +922,7 @@ body.dark input {
     font-weight: 800;
 
     cursor: pointer;
-
 }
-
 
 
 #mostrarResultados span {
@@ -922,9 +932,7 @@ body.dark input {
     letter-spacing: -3px;
 
     color: var(--text);
-
 }
-
 
 
 /* =========================================
@@ -938,9 +946,7 @@ body.dark input {
     margin-top: 20px;
 
     padding: 25px;
-
 }
-
 
 
 .resultados-card.visible {
@@ -948,11 +954,8 @@ body.dark input {
     display: block;
 
     animation:
-
         aparecer .25s ease;
-
 }
-
 
 
 @keyframes aparecer {
@@ -962,7 +965,6 @@ body.dark input {
         opacity: 0;
 
         transform: translateY(8px);
-
     }
 
     to {
@@ -970,11 +972,8 @@ body.dark input {
         opacity: 1;
 
         transform: translateY(0);
-
     }
-
 }
-
 
 
 .resultados-header {
@@ -986,9 +985,7 @@ body.dark input {
     justify-content: space-between;
 
     margin-bottom: 20px;
-
 }
-
 
 
 .resultados-header h2 {
@@ -996,9 +993,7 @@ body.dark input {
     font-size: 25px;
 
     font-weight: 900;
-
 }
-
 
 
 #cerrarResultados {
@@ -1016,9 +1011,7 @@ body.dark input {
     color: var(--text);
 
     cursor: pointer;
-
 }
-
 
 
 .result-grid {
@@ -1029,9 +1022,7 @@ body.dark input {
         repeat(2,minmax(0,1fr));
 
     gap: 13px;
-
 }
-
 
 
 .result-card {
@@ -1041,14 +1032,11 @@ body.dark input {
     border-radius: 15px;
 
     border:
-
         1px solid
         var(--border);
 
     background: var(--input);
-
 }
-
 
 
 .result-card .titulo {
@@ -1062,9 +1050,7 @@ body.dark input {
     font-size: 13px;
 
     font-weight: 600;
-
 }
-
 
 
 .result-card .valor {
@@ -1078,9 +1064,7 @@ body.dark input {
     font-weight: 900;
 
     word-break: break-word;
-
 }
-
 
 
 #estado {
@@ -1094,15 +1078,12 @@ body.dark input {
     border-radius: 12px;
 
     background:
-
         rgba(243,186,47,.10);
 
     font-size: 14px;
 
     font-weight: 700;
-
 }
-
 
 
 /* =========================================
@@ -1114,7 +1095,6 @@ body.dark input {
     body {
 
         padding-top: 45px;
-
     }
 
 
@@ -1122,19 +1102,12 @@ body.dark input {
     .container {
 
         max-width: 700px;
-
     }
-
 }
-
 
 
 /* =========================================
    MÓVIL
-========================================= */
-
-/* =========================================
-   MÓVIL / TELÉFONOS
 ========================================= */
 
 @media (max-width: 800px) {
@@ -1145,13 +1118,10 @@ body.dark input {
             10px
             12px
             18px;
-
     }
 
 
-    /* =========================
-       ENCABEZADO
-    ========================== */
+    /* HEADER */
 
     .app-header {
 
@@ -1160,7 +1130,6 @@ body.dark input {
         margin:
             0 auto
             10px;
-
     }
 
 
@@ -1175,7 +1144,6 @@ body.dark input {
         font-size: 35px;
 
         margin-bottom: 7px;
-
     }
 
 
@@ -1184,7 +1152,6 @@ body.dark input {
         font-size: 31px;
 
         letter-spacing: -1.3px;
-
     }
 
 
@@ -1199,31 +1166,28 @@ body.dark input {
         top: 0;
 
         font-size: 20px;
-
     }
 
 
-    /* =========================
-       TARJETA PRINCIPAL
-    ========================== */
+    /* HERO */
 
     .hero-card {
 
-    width: calc(100% - 140px);
-    max-width: 540px;
+        width: calc(100% - 140px);
 
-    margin:
-        0 auto
-        25px;
+        max-width: 540px;
 
-    padding:
-        30px
-        20px
-        10px;
+        margin:
+            0 auto
+            25px;
 
-    border-radius: 15px;
+        padding:
+            30px
+            20px
+            12px;
 
-}
+        border-radius: 15px;
+    }
 
 
     .hero-line {
@@ -1231,7 +1195,6 @@ body.dark input {
         top: 18px;
 
         height: 29px;
-
     }
 
 
@@ -1240,7 +1203,6 @@ body.dark input {
         font-size: 20px;
 
         margin-bottom: 30px;
-
     }
 
 
@@ -1248,32 +1210,31 @@ body.dark input {
 
         font-size: 10px;
 
-        margin-bottom: 5px;
-
+        margin-bottom: 7px;
     }
 
 
+    /*
+       MONTO MÁS PEQUEÑO
+    */
+
     .hero-card h1 {
 
-        font-size: 43px;
+        font-size: 37px;
 
-        margin-bottom: 5px;
+        margin-bottom: 7px;
 
-        letter-spacing: -1.5px;
-
+        letter-spacing: -1.2px;
     }
 
 
     .hero-card p {
 
         font-size: 13px;
-
     }
 
 
-    /* =========================
-       CONTENEDOR
-    ========================== */
+    /* CONTENEDOR */
 
     .container {
 
@@ -1281,25 +1242,20 @@ body.dark input {
 
         margin:
             0 auto;
-
     }
 
 
-    /* =========================
-       TARJETA DATOS
-    ========================== */
+    /* DATOS */
 
     .datos-card {
 
         padding: 20px;
-
     }
 
 
     .datos-header {
 
         margin-bottom: 10px;
-
     }
 
 
@@ -1308,14 +1264,12 @@ body.dark input {
         font-size: 21px;
 
         gap: 7px;
-
     }
 
 
     .section-icon {
 
         font-size: 25px;
-
     }
 
 
@@ -1328,20 +1282,16 @@ body.dark input {
         border-radius: 8px;
 
         font-size: 20px;
-
     }
 
 
-    /* =========================
-       CAMPOS
-    ========================== */
+    /* CAMPOS */
 
     .inputs-grid {
 
         column-gap: 12px;
 
         row-gap: 8px;
-
     }
 
 
@@ -1354,7 +1304,6 @@ body.dark input {
         margin-bottom: 5px;
 
         min-height: 24px;
-
     }
 
 
@@ -1363,28 +1312,24 @@ body.dark input {
         font-size: 18px;
 
         width: 22px;
-
     }
 
 
     .campo-icon.grande {
 
         font-size: 27px;
-
     }
 
 
     .campo-icon.dinero {
 
         font-size: 25px;
-
     }
 
 
     .segunda-linea {
 
         margin-left: 27px;
-
     }
 
 
@@ -1399,13 +1344,10 @@ body.dark input {
         border-radius: 14px;
 
         font-size: 16px;
-
     }
 
 
-    /* =========================
-       ESTADO BCV
-    ========================== */
+    /* ESTADO BCV */
 
     #bcvEstado {
 
@@ -1414,13 +1356,10 @@ body.dark input {
         min-height: 10px;
 
         font-size: 8px;
-
     }
 
 
-    /* =========================
-       COPIAR
-    ========================== */
+    /* COPIAR */
 
     #copiar {
 
@@ -1433,13 +1372,10 @@ body.dark input {
         font-size: 16px;
 
         gap: 9px;
-
     }
 
 
-    /* =========================
-       BOTÓN RESULTADO
-    ========================== */
+    /* RESULTADO */
 
     #mostrarResultados {
 
@@ -1452,22 +1388,17 @@ body.dark input {
             0;
 
         font-size: 17px;
-
     }
 
 
-    /* =========================
-       RESULTADOS
-    ========================== */
+    /* RESULTADOS */
 
     .resultados-card {
 
         margin-top: 15px;
 
         padding: 18px;
-
     }
-
 }
 
 
@@ -1480,28 +1411,24 @@ body.dark input {
     .app-header h1 {
 
         font-size: 29px;
-
     }
 
 
     .hero-card h1 {
 
-        font-size: 35px;
-
+        font-size: 33px;
     }
 
 
     .datos-header h2 {
 
         font-size: 22px;
-
     }
 
 
     .input-group label {
 
         font-size: 13px;
-
     }
 
 
@@ -1510,8 +1437,5 @@ body.dark input {
         height: 45px;
 
         font-size: 15px;
-
     }
-    
-
 }
