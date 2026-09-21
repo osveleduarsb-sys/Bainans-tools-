@@ -1413,7 +1413,7 @@ body.dark input {
 
         min-height: 10px;
 
-        font-size: 9px;
+        font-size: 8px;
 
     }
 
@@ -1475,7 +1475,7 @@ body.dark input {
    PANTALLAS MUY PEQUEÑAS
 ========================================= */
 
-@media (max-width: 380px) {
+@media (max-width: 580px) {
 
     .app-header h1 {
 
@@ -1486,7 +1486,7 @@ body.dark input {
 
     .hero-card h1 {
 
-        font-size: 10px;
+        font-size: 20px;
 
     }
 
