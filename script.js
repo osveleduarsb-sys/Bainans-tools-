@@ -1461,11 +1461,6 @@ function iniciarApp() {
 }
 
 
-    calcular();
-
-}
-
-
 /* =========================================
    FORMATO DEL MONTO PRINCIPAL
    Separa el número de la moneda USD
