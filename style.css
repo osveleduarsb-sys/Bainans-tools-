@@ -518,8 +518,38 @@ body.dark #modo {
     margin-bottom: 14px;
 
     color: #050505;
+
+    white-space: nowrap;
+
 }
 
+
+/* =========================
+   NÚMERO Y MONEDA
+========================= */
+
+.hero-card h1 #heroUsdNumero {
+
+    font-size: 1em;
+
+    font-weight: 900;
+
+}
+
+
+.hero-card h1 small {
+
+    font-size: .42em;
+
+    font-weight: 900;
+
+    letter-spacing: -0.5px;
+
+    margin-left: 4px;
+
+    vertical-align: baseline;
+
+}
 
 .hero-card p {
 
