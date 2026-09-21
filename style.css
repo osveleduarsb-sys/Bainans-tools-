@@ -1250,12 +1250,32 @@ body.dark input {
 
     .hero-card h1 {
 
-        font-size: 37px;
+    font-size: 37px;
 
-        margin-bottom: 7px;
+    margin-bottom: 7px;
 
-        letter-spacing: -1.2px;
-    }
+    letter-spacing: -1.2px;
+
+    white-space: nowrap;
+}
+
+
+.hero-card h1 #heroUsdNumero {
+
+    font-size: 1em;
+
+}
+
+
+.hero-card h1 small {
+
+    font-size: .42em;
+
+    margin-left: 3px;
+
+    letter-spacing: -0.5px;
+
+}
 
 
     .hero-card p {
