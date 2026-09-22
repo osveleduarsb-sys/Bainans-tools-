@@ -1,8 +1,3 @@
-/* =========================================
-   BAINANS TOOLS
-   DISEÑO PRINCIPAL
-========================================= */
-
 @import url(
     'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap'
 );
@@ -15,23 +10,18 @@
 :root {
 
     --bg: #f5f7fb;
-
     --card: #ffffff;
-
     --input: #ffffff;
 
     --primary: #f3ba2f;
-
     --primary-2: #ffd95e;
 
     --text: #151515;
-
     --sub: #737984;
 
     --border: #dfe3e9;
 
     --success: #18a957;
-
     --danger: #e04b4b;
 
     --dark: #101318;
@@ -50,19 +40,15 @@
 body.dark {
 
     --bg: #080c10;
-
     --card: #0e151b;
-
     --input: #101a22;
 
     --text: #f4f7fb;
-
     --sub: #8c9aa8;
 
     --border: #233a4c;
 
-    --shadow:
-        none;
+    --shadow: none;
 }
 
 
@@ -73,9 +59,7 @@ body.dark {
 * {
 
     margin: 0;
-
     padding: 0;
-
     box-sizing: border-box;
 
     font-family:
@@ -93,7 +77,6 @@ body {
     min-height: 100vh;
 
     background: var(--bg);
-
     color: var(--text);
 
     padding:
@@ -110,7 +93,7 @@ body {
 
 
 /* =========================================
-   DECORACIÓN DEL FONDO
+   DECORACIÓN
 ========================================= */
 
 .decor {
@@ -118,13 +101,11 @@ body {
     position: fixed;
 
     width: 230px;
-
     height: 230px;
 
     border-radius: 50%;
 
-    background:
-        var(--primary);
+    background: var(--primary);
 
     opacity: .20;
 
@@ -135,39 +116,30 @@ body {
 
 
 .decor-1 {
-
     top: -145px;
-
     left: -90px;
 }
 
 
 .decor-2 {
-
     top: -145px;
-
     right: -90px;
 }
 
 
 .decor-3 {
-
     bottom: -150px;
-
     left: -100px;
 }
 
 
 .decor-4 {
-
     bottom: -150px;
-
     right: -100px;
 }
 
 
 body.dark .decor {
-
     opacity: .28;
 }
 
@@ -193,7 +165,6 @@ body.dark .decor {
 .logo {
 
     width: 82px;
-
     height: 82px;
 
     margin:
@@ -205,7 +176,6 @@ body.dark .decor {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     background: var(--primary);
@@ -213,7 +183,6 @@ body.dark .decor {
     color: #111;
 
     font-size: 47px;
-
     font-weight: 900;
 
     box-shadow:
@@ -235,19 +204,17 @@ body.dark .decor {
 
 
 .app-header h1 span {
-
     color: var(--text);
 }
 
 
 .app-header h1 strong {
-
     color: var(--primary);
 }
 
 
 /* =========================================
-   BOTÓN MODO
+   MODO OSCURO
 ========================================= */
 
 #modo {
@@ -255,16 +222,14 @@ body.dark .decor {
     position: absolute;
 
     right: -5px;
-
     top: 5px;
 
     width: 58px;
-
     height: 58px;
 
-    border-radius: 50%;
-
     border: none;
+
+    border-radius: 50%;
 
     background: #e9eef5;
 
@@ -275,7 +240,6 @@ body.dark .decor {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     cursor: pointer;
@@ -291,7 +255,6 @@ body.dark .decor {
 
 
 #modo:hover {
-
     transform: scale(1.05);
 }
 
@@ -309,7 +272,7 @@ body.dark #modo {
 
 
 /* =========================================
-   HERO / TARJETA PRINCIPAL
+   HERO
 ========================================= */
 
 .hero-card {
@@ -333,30 +296,20 @@ body.dark #modo {
 
     overflow: hidden;
 
-    /*
-       EFECTO 3D
-    */
-
-    transform-style: preserve-3d;
-
     animation:
         flotarGiro 5s ease-in-out infinite;
-
-    /*
-       FONDO GEOMÉTRICO
-    */
 
     background:
 
         linear-gradient(
             135deg,
-            rgba(255,255,255,.16) 0%,
+            rgba(255,255,255,.16),
             transparent 25%
         ),
 
         linear-gradient(
             315deg,
-            rgba(255,190,25,.30) 0%,
+            rgba(255,190,25,.30),
             transparent 30%
         ),
 
@@ -393,6 +346,7 @@ body.dark #modo {
         rgba(243,186,47,.22);
 }
 
+
 @keyframes flotarGiro {
 
     0% {
@@ -404,7 +358,7 @@ body.dark #modo {
     25% {
         transform:
             perspective(1000px)
-            rotateY(-9deg);
+            rotateY(-3deg);
     }
 
     50% {
@@ -416,7 +370,7 @@ body.dark #modo {
     75% {
         transform:
             perspective(1000px)
-            rotateY(9deg);
+            rotateY(3deg);
     }
 
     100% {
@@ -427,85 +381,6 @@ body.dark #modo {
 
 }
 
-
-/* =========================================
-   ANIMACIÓN DE FLOTACIÓN
-========================================= */
-
-@keyframes heroFlotar {
-
-    0% {
-
-        transform:
-            translateY(0)
-            rotate(0deg);
-
-        box-shadow:
-            0 12px 25px
-            rgba(243,186,47,.22);
-    }
-
-
-    25% {
-
-        transform:
-            translateY(-4px)
-            rotate(-1deg);
-
-        box-shadow:
-            0 17px 30px
-            rgba(243,186,47,.26);
-    }
-
-
-    50% {
-
-        transform:
-            translateY(0)
-            rotate(0.8deg);
-
-        box-shadow:
-            0 11px 23px
-            rgba(243,186,47,.20);
-    }
-
-
-    75% {
-
-        transform:
-            translateY(-4px)
-            rotate(-0.8deg);
-
-        box-shadow:
-            0 17px 30px
-            rgba(243,186,47,.26);
-    }
-
-
-    100% {
-
-        transform:
-            translateY(0)
-            rotate(0deg);
-
-        box-shadow:
-            0 12px 25px
-            rgba(243,186,47,.22);
-    }
-
-}
-
-
-.hero-card:hover {
-
-    animation-play-state: paused;
-
-}
-
-
-/*
-   CAPAS GEOMÉTRICAS ADICIONALES
-*/
 
 .hero-card::before {
 
@@ -529,7 +404,6 @@ body.dark #modo {
             rgba(230,164,20,.12) 34% 38%,
             transparent 38% 100%
         );
-
 }
 
 
@@ -540,11 +414,9 @@ body.dark #modo {
     position: absolute;
 
     width: 55%;
-
     height: 100%;
 
     top: 0;
-
     right: -12%;
 
     pointer-events: none;
@@ -578,7 +450,6 @@ body.dark #modo {
     top: 20px;
 
     left: 0;
-
     right: 0;
 
     height: 31px;
@@ -586,15 +457,11 @@ body.dark #modo {
     background: #11161b;
 
     z-index: 2;
-
-    box-shadow:
-        0 1px 0
-        rgba(255,255,255,.04);
 }
 
 
 /* =========================================
-   CONTENIDO HERO
+   HERO CONTENIDO
 ========================================= */
 
 .hero-icon {
@@ -625,10 +492,6 @@ body.dark #modo {
 }
 
 
-/*
-   MONTO PRINCIPAL
-*/
-
 .hero-card h1 {
 
     position: relative;
@@ -651,10 +514,6 @@ body.dark #modo {
 }
 
 
-/* =========================
-   NÚMERO Y MONEDA
-========================= */
-
 .hero-card h1 #heroUsdNumero {
 
     font-size: 1em;
@@ -669,11 +528,7 @@ body.dark #modo {
 
     font-weight: 900;
 
-    letter-spacing: -0.5px;
-
     margin-left: 4px;
-
-    vertical-align: baseline;
 }
 
 
@@ -692,7 +547,7 @@ body.dark #modo {
 
 
 /* =========================================
-   NAVEGACIÓN RÁPIDA
+   NAVEGACIÓN
 ========================================= */
 
 .quick-nav {
@@ -702,8 +557,7 @@ body.dark #modo {
     max-width: 350px;
 
     margin:
-        14px
-        auto
+        14px auto
         22px;
 
     display: grid;
@@ -751,11 +605,7 @@ body.dark #modo {
         0 6px 16px
         rgba(0,0,0,.045);
 
-    transition:
-        transform .2s ease,
-        background .2s ease,
-        border-color .2s ease,
-        box-shadow .2s ease;
+    transition: .2s ease;
 }
 
 
@@ -766,17 +616,11 @@ body.dark #modo {
 
     border-color:
         var(--primary);
-
-    box-shadow:
-        0 9px 20px
-        rgba(243,186,47,.13);
 }
 
 
 .nav-item:active {
-
-    transform:
-        scale(.96);
+    transform: scale(.96);
 }
 
 
@@ -793,10 +637,6 @@ body.dark #modo {
         var(--primary);
 
     color: #111;
-
-    box-shadow:
-        0 7px 18px
-        rgba(243,186,47,.20);
 }
 
 
@@ -819,15 +659,7 @@ body.dark #modo {
 
 
 body.dark .nav-item {
-
-    box-shadow:
-        none;
-}
-
-
-body.dark .nav-item.activo {
-
-    color: #111;
+    box-shadow: none;
 }
 
 
@@ -872,7 +704,7 @@ body.dark .card {
 
 
 /* =========================================
-   DATOS DE COMPRA
+   DATOS
 ========================================= */
 
 .datos-card {
@@ -893,7 +725,7 @@ body.dark .card {
 }
 
 
-.datos-header h2 {
+.titulo-modo {
 
     display: flex;
 
@@ -901,23 +733,126 @@ body.dark .card {
 
     gap: 9px;
 
+    min-width: 0;
+}
+
+
+.datos-header h2 {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
     font-size: 28px;
 
     font-weight: 900;
+
+    white-space: nowrap;
 }
 
 
 .section-icon {
-
     font-size: 30px;
 }
 
 
+/* =========================================
+   INTERRUPTOR
+========================================= */
+
+.switch-modo {
+
+    position: relative;
+
+    width: 46px;
+    height: 25px;
+
+    flex-shrink: 0;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: #d8dde3;
+
+    cursor: pointer;
+
+    transition:
+        background .25s ease,
+        transform .2s ease;
+}
+
+
+.switch-modo::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: inherit;
+
+    box-shadow:
+        inset 0 1px 3px
+        rgba(0,0,0,.16);
+}
+
+
+.switch-circulo {
+
+    position: absolute;
+
+    width: 19px;
+    height: 19px;
+
+    top: 3px;
+    left: 3px;
+
+    border-radius: 50%;
+
+    background: #fff;
+
+    box-shadow:
+        0 2px 5px
+        rgba(0,0,0,.20);
+
+    transition:
+        transform .25s ease;
+}
+
+
+.switch-modo.activo {
+
+    background: var(--primary);
+}
+
+
+.switch-modo.activo
+.switch-circulo {
+
+    transform:
+        translateX(21px);
+}
+
+
+.switch-modo:active {
+    transform: scale(.94);
+}
+
+
+/* =========================================
+   BOTÓN BCV
+========================================= */
+
 #actualizarBCV {
 
     width: 58px;
-
     height: 58px;
+
+    flex-shrink: 0;
 
     border: none;
 
@@ -932,7 +867,6 @@ body.dark .card {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     transition: .2s ease;
@@ -940,13 +874,11 @@ body.dark .card {
 
 
 #actualizarBCV:hover {
-
     transform: scale(1.05);
 }
 
 
 #actualizarBCV:active {
-
     transform: scale(.94);
 }
 
@@ -967,6 +899,7 @@ body.dark .card {
     to {
         transform: rotate(360deg);
     }
+
 }
 
 
@@ -988,7 +921,6 @@ body.dark .card {
 
 
 .input-group {
-
     min-width: 0;
 }
 
@@ -1001,8 +933,6 @@ body.dark .card {
 
     min-height: 28px;
 
-    gap: 7px;
-
     margin-bottom: 8px;
 
     font-size: 16px;
@@ -1012,40 +942,6 @@ body.dark .card {
     font-weight: 800;
 
     color: var(--text);
-}
-
-
-.campo-icon {
-
-    font-size: 21px;
-
-    width: 25px;
-
-    text-align: center;
-
-    flex-shrink: 0;
-}
-
-
-.campo-icon.grande {
-
-    font-size: 30px;
-}
-
-
-.campo-icon.dinero {
-
-    color: #10b85a;
-
-    font-size: 29px;
-
-    font-weight: 900;
-}
-
-
-.segunda-linea {
-
-    margin-left: 32px;
 }
 
 
@@ -1079,7 +975,8 @@ input {
 
 input:focus {
 
-    border-color: var(--primary);
+    border-color:
+        var(--primary);
 
     box-shadow:
         0 0 0 4px
@@ -1088,19 +985,17 @@ input:focus {
 
 
 input::placeholder {
-
     color: #aeb4bd;
 }
 
 
 body.dark input {
-
     color: #edf4fa;
 }
 
 
 /* =========================================
-   ESTADO BCV
+   BCV ESTADO
 ========================================= */
 
 #bcvEstado {
@@ -1119,14 +1014,7 @@ body.dark input {
 }
 
 
-#bcvEstado.exito {
-
-    color: var(--success);
-}
-
-
 #bcvEstado.error {
-
     color: #db9200;
 }
 
@@ -1160,7 +1048,6 @@ body.dark input {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 12px;
@@ -1170,16 +1057,12 @@ body.dark input {
 
 
 #copiar:hover {
-
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
 }
 
 
 #copiar:active {
-
-    transform:
-        scale(.98);
+    transform: scale(.98);
 }
 
 
@@ -1192,13 +1075,11 @@ body.dark input {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 12px;
 
     width: 220px;
-
     height: 52px;
 
     margin:
@@ -1228,8 +1109,6 @@ body.dark input {
     font-size: 19px;
 
     letter-spacing: -3px;
-
-    color: var(--text);
 }
 
 
@@ -1273,6 +1152,7 @@ body.dark input {
         transform:
             translateY(0);
     }
+
 }
 
 
@@ -1299,7 +1179,6 @@ body.dark input {
 #cerrarResultados {
 
     width: 38px;
-
     height: 38px;
 
     border: none;
@@ -1327,7 +1206,9 @@ body.dark input {
 
 .result-card {
 
-    padding: 7px;
+    min-width: 0;
+
+    padding: 13px;
 
     border-radius: 15px;
 
@@ -1359,11 +1240,21 @@ body.dark input {
 
     color: var(--success);
 
-    font-size: 10px;
+    font-size: 15px;
 
     font-weight: 900;
 
     word-break: break-word;
+}
+
+
+.resultado-ganancia .valor {
+    color: var(--success);
+}
+
+
+.resultado-roi .valor {
+    color: var(--primary);
 }
 
 
@@ -1395,14 +1286,14 @@ body.dark input {
     position: fixed;
 
     left: 50%;
-
     bottom: 24px;
 
     z-index: 100;
 
     min-width: 230px;
 
-    max-width: calc(100% - 40px);
+    max-width:
+        calc(100% - 40px);
 
     padding:
         12px
@@ -1429,7 +1320,7 @@ body.dark input {
     pointer-events: none;
 
     transform:
-        translate(-50%, 15px);
+        translate(-50%,15px);
 
     transition:
         opacity .25s ease,
@@ -1442,7 +1333,7 @@ body.dark input {
     opacity: 1;
 
     transform:
-        translate(-50%, 0);
+        translate(-50%,0);
 }
 
 
@@ -1453,14 +1344,12 @@ body.dark input {
 @media (min-width: 800px) {
 
     body {
-
         padding-top: 45px;
     }
 
 
     .hero-card,
     .container {
-
         max-width: 700px;
     }
 
@@ -1468,7 +1357,6 @@ body.dark input {
     .quick-nav {
 
         margin-top: 17px;
-
         margin-bottom: 25px;
     }
 
@@ -1505,7 +1393,6 @@ body.dark input {
     .logo {
 
         width: 58px;
-
         height: 58px;
 
         border-radius: 18px;
@@ -1527,11 +1414,9 @@ body.dark input {
     #modo {
 
         width: 48px;
-
         height: 48px;
 
         right: 0;
-
         top: 0;
 
         font-size: 20px;
@@ -1584,10 +1469,6 @@ body.dark input {
     }
 
 
-    /*
-       MONTO MÁS PEQUEÑO
-    */
-
     .hero-card h1 {
 
         font-size: 37px;
@@ -1595,29 +1476,10 @@ body.dark input {
         margin-bottom: 7px;
 
         letter-spacing: -1.2px;
-
-        white-space: nowrap;
-    }
-
-
-    .hero-card h1 #heroUsdNumero {
-
-        font-size: 1em;
-    }
-
-
-    .hero-card h1 small {
-
-        font-size: .42em;
-
-        margin-left: 3px;
-
-        letter-spacing: -0.5px;
     }
 
 
     .hero-card p {
-
         font-size: 13px;
     }
 
@@ -1649,139 +1511,120 @@ body.dark input {
 
 
     .nav-icon {
-
         font-size: 20px;
     }
 
 
     .nav-text {
-
         font-size: 9px;
-    }
-
-
-    /* CONTENEDOR */
-
-    .container {
-
-        max-width: 600px;
-
-        margin:
-            0 auto;
     }
 
 
     /* DATOS */
 
     .datos-card {
-
-        padding: 20px;
+        padding: 18px;
     }
 
 
     .datos-header {
-
         margin-bottom: 10px;
     }
 
 
     .datos-header h2 {
 
-        font-size: 21px;
+        font-size: 20px;
 
-        gap: 7px;
+        gap: 5px;
     }
 
 
     .section-icon {
+        font-size: 22px;
+    }
 
-        font-size: 25px;
+
+    .titulo-modo {
+        gap: 6px;
+    }
+
+
+    .switch-modo {
+
+        width: 42px;
+        height: 23px;
+    }
+
+
+    .switch-circulo {
+
+        width: 17px;
+        height: 17px;
+
+        top: 3px;
+        left: 3px;
+    }
+
+
+    .switch-modo.activo
+    .switch-circulo {
+
+        transform:
+            translateX(19px);
     }
 
 
     #actualizarBCV {
 
-        width: 30px;
+        width: 45px;
+        height: 45px;
 
-        height: 30px;
-
-        border-radius: 8px;
+        border-radius: 13px;
 
         font-size: 20px;
     }
 
 
-    /* CAMPOS */
+    /* INPUTS */
 
     .inputs-grid {
 
         column-gap: 12px;
 
-        row-gap: 8px;
+        row-gap: 10px;
     }
 
 
     .input-group label {
 
-        font-size: 12px;
-
-        gap: 5px;
-
-        margin-bottom: 5px;
-
         min-height: 24px;
-    }
 
+        margin-bottom: 6px;
 
-    .campo-icon {
-
-        font-size: 18px;
-
-        width: 22px;
-    }
-
-
-    .campo-icon.grande {
-
-        font-size: 27px;
-    }
-
-
-    .campo-icon.dinero {
-
-        font-size: 25px;
-    }
-
-
-    .segunda-linea {
-
-        margin-left: 27px;
+        font-size: 13px;
     }
 
 
     input {
 
-        height: 52px;
+        height: 53px;
 
         padding:
             0
-            10px;
+            13px;
 
-        border-radius: 14px;
+        border-radius: 13px;
 
         font-size: 16px;
     }
 
 
-    /* ESTADO BCV */
-
     #bcvEstado {
 
-        margin-top: 3px;
+        font-size: 10px;
 
-        min-height: 10px;
-
-        font-size: 8px;
+        margin-top: 4px;
     }
 
 
@@ -1789,29 +1632,11 @@ body.dark input {
 
     #copiar {
 
-        height: 48px;
+        height: 50px;
 
-        margin-top: 12px;
+        margin-top: 13px;
 
         border-radius: 14px;
-
-        font-size: 16px;
-
-        gap: 9px;
-    }
-
-
-    /* RESULTADO */
-
-    #mostrarResultados {
-
-        width: 205px;
-
-        height: 48px;
-
-        margin:
-            12px auto
-            0;
 
         font-size: 17px;
     }
@@ -1821,104 +1646,72 @@ body.dark input {
 
     .resultados-card {
 
-        margin-top: 15px;
-
         padding: 18px;
+
+        margin-top: 15px;
     }
 
 
-    /* TOAST */
+    .resultados-header {
 
-    #toast {
-
-        bottom: 18px;
-
-        font-size: 12px;
-
-        min-width: 210px;
-    }
-
-}
-
-
-/* =========================================
-   PANTALLAS MUY PEQUEÑAS
-========================================= */
-
-@media (max-width: 400px) {
-
-    .app-header h1 {
-
-        font-size: 29px;
+        margin-bottom: 15px;
     }
 
 
-    .hero-card h1 {
-
-        font-size: 33px;
+    .resultados-header h2 {
+        font-size: 21px;
     }
 
 
-    .datos-header h2 {
+    #cerrarResultados {
 
-        font-size: 22px;
+        width: 34px;
+        height: 34px;
     }
 
 
-    .input-group label {
+    .result-grid {
+        gap: 9px;
+    }
+
+
+    .result-card {
+
+        padding: 10px;
+
+        border-radius: 12px;
+    }
+
+
+    .result-card .titulo {
+
+        font-size: 11px;
+
+        margin-bottom: 5px;
+    }
+
+
+    .result-card .valor {
 
         font-size: 13px;
     }
 
 
-    input {
+    #estado {
 
-        height: 45px;
+        font-size: 12px;
 
-        font-size: 15px;
+        padding: 10px;
     }
 
 
-    .quick-nav {
+    #mostrarResultados {
 
-        max-width: 305px;
+        width: 200px;
 
-        gap: 5px;
-    }
+        height: 50px;
 
-
-    .nav-item {
-
-        height: 56px;
-
-        border-radius: 14px;
-    }
-
-
-    .nav-icon {
-
-        font-size: 19px;
-    }
-
-
-    .nav-text {
-
-        font-size: 8px;
-    }
-
-}
-
-
-/* =========================================
-   REDUCIR MOVIMIENTO
-   Accesibilidad
-========================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    .hero-card {
-
-        animation: none;
+        font-size: 17px;
     }
 
 }
