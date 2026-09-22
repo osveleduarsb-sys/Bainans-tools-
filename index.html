@@ -69,7 +69,10 @@
          RESULTADO PRINCIPAL
     ========================== -->
 
-    <section class="hero-card">
+    <section
+        class="hero-card"
+        id="inicio"
+    >
 
 
         <div class="hero-line"></div>
@@ -110,6 +113,77 @@
 
 
     <!-- =========================
+         NAVEGACIÓN PRINCIPAL
+    ========================== -->
+
+    <nav
+        class="quick-nav"
+        aria-label="Navegación principal"
+    >
+
+        <!-- INICIO -->
+
+        <button
+            class="nav-item activo"
+            id="navInicio"
+            type="button"
+        >
+
+            <span class="nav-icon">
+                🏠
+            </span>
+
+            <span class="nav-text">
+                Inicio
+            </span>
+
+        </button>
+
+
+
+        <!-- OPERACIONES -->
+
+        <button
+            class="nav-item"
+            id="navOperaciones"
+            type="button"
+        >
+
+            <span class="nav-icon">
+                📒
+            </span>
+
+            <span class="nav-text">
+                Operaciones
+            </span>
+
+        </button>
+
+
+
+        <!-- CONFIGURACIÓN -->
+
+        <button
+            class="nav-item"
+            id="navConfiguracion"
+            type="button"
+        >
+
+            <span class="nav-icon">
+                ⚙️
+            </span>
+
+            <span class="nav-text">
+                Configuración
+            </span>
+
+        </button>
+
+    </nav>
+
+
+
+    <!-- =========================
          CONTENIDO
     ========================== -->
 
@@ -120,7 +194,10 @@
              DATOS DE COMPRA
         ========================== -->
 
-        <section class="card datos-card">
+        <section
+            class="card datos-card"
+            id="datosCompra"
+        >
 
 
             <div class="datos-header">
@@ -474,6 +551,21 @@
 
 
     </main>
+
+
+
+    <!-- =========================
+         AVISO / TOAST
+    ========================== -->
+
+    <div
+        id="toast"
+        role="status"
+        aria-live="polite"
+    >
+        Próximamente
+    </div>
+
 
 
     <script src="script.js"></script>
