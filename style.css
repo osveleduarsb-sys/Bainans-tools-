@@ -393,6 +393,40 @@ body.dark #modo {
         rgba(243,186,47,.22);
 }
 
+@keyframes flotarGiro {
+
+    0% {
+        transform:
+            perspective(1000px)
+            rotateY(0deg);
+    }
+
+    25% {
+        transform:
+            perspective(1000px)
+            rotateY(-3deg);
+    }
+
+    50% {
+        transform:
+            perspective(1000px)
+            rotateY(0deg);
+    }
+
+    75% {
+        transform:
+            perspective(1000px)
+            rotateY(3deg);
+    }
+
+    100% {
+        transform:
+            perspective(1000px)
+            rotateY(0deg);
+    }
+
+}
+
 
 /* =========================================
    ANIMACIÓN DE FLOTACIÓN
