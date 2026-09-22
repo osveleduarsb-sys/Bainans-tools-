@@ -283,6 +283,16 @@ body.dark .decor {
     box-shadow:
         0 5px 15px
         rgba(0,0,0,.08);
+
+    transition:
+        transform .2s ease,
+        background .3s ease;
+}
+
+
+#modo:hover {
+
+    transform: scale(1.05);
 }
 
 
@@ -310,7 +320,7 @@ body.dark #modo {
 
     margin:
         0 auto
-        17px;
+        10px;
 
     padding:
         55px
@@ -323,9 +333,22 @@ body.dark #modo {
 
     overflow: hidden;
 
+    transform-origin:
+        center
+        center;
+
+    /*
+       ANIMACIÓN FLOTANTE
+    */
+
+    animation:
+        heroFlotar
+        6s
+        ease-in-out
+        infinite;
+
     /*
        FONDO GEOMÉTRICO
-       Inspirado en la segunda imagen
     */
 
     background:
@@ -371,8 +394,83 @@ body.dark #modo {
         );
 
     box-shadow:
-        0 8px 18px
+        0 12px 25px
         rgba(243,186,47,.22);
+}
+
+
+/* =========================================
+   ANIMACIÓN DE FLOTACIÓN
+========================================= */
+
+@keyframes heroFlotar {
+
+    0% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        box-shadow:
+            0 12px 25px
+            rgba(243,186,47,.22);
+    }
+
+
+    25% {
+
+        transform:
+            translateY(-4px)
+            rotate(-1deg);
+
+        box-shadow:
+            0 17px 30px
+            rgba(243,186,47,.26);
+    }
+
+
+    50% {
+
+        transform:
+            translateY(0)
+            rotate(0.8deg);
+
+        box-shadow:
+            0 11px 23px
+            rgba(243,186,47,.20);
+    }
+
+
+    75% {
+
+        transform:
+            translateY(-4px)
+            rotate(-0.8deg);
+
+        box-shadow:
+            0 17px 30px
+            rgba(243,186,47,.26);
+    }
+
+
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        box-shadow:
+            0 12px 25px
+            rgba(243,186,47,.22);
+    }
+
+}
+
+
+.hero-card:hover {
+
+    animation-play-state: paused;
+
 }
 
 
@@ -435,7 +533,8 @@ body.dark #modo {
             transparent 65%
         );
 
-    transform: skewX(-12deg);
+    transform:
+        skewX(-12deg);
 }
 
 
@@ -520,7 +619,6 @@ body.dark #modo {
     color: #050505;
 
     white-space: nowrap;
-
 }
 
 
@@ -533,7 +631,6 @@ body.dark #modo {
     font-size: 1em;
 
     font-weight: 900;
-
 }
 
 
@@ -548,8 +645,8 @@ body.dark #modo {
     margin-left: 4px;
 
     vertical-align: baseline;
-
 }
+
 
 .hero-card p {
 
@@ -560,6 +657,146 @@ body.dark #modo {
     font-size: 17px;
 
     font-weight: 700;
+
+    color: #111;
+}
+
+
+/* =========================================
+   NAVEGACIÓN RÁPIDA
+========================================= */
+
+.quick-nav {
+
+    width: 100%;
+
+    max-width: 350px;
+
+    margin:
+        14px
+        auto
+        22px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 9px;
+}
+
+
+.nav-item {
+
+    min-width: 0;
+
+    height: 66px;
+
+    padding:
+        7px
+        5px;
+
+    border:
+        1.5px solid
+        var(--border);
+
+    border-radius: 17px;
+
+    background: var(--card);
+
+    color: var(--text);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 16px
+        rgba(0,0,0,.045);
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.nav-item:hover {
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        var(--primary);
+
+    box-shadow:
+        0 9px 20px
+        rgba(243,186,47,.13);
+}
+
+
+.nav-item:active {
+
+    transform:
+        scale(.96);
+}
+
+
+.nav-item.activo {
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd95e,
+            #f3ba2f
+        );
+
+    border-color:
+        var(--primary);
+
+    color: #111;
+
+    box-shadow:
+        0 7px 18px
+        rgba(243,186,47,.20);
+}
+
+
+.nav-icon {
+
+    font-size: 22px;
+
+    line-height: 1;
+}
+
+
+.nav-text {
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+
+body.dark .nav-item {
+
+    box-shadow:
+        none;
+}
+
+
+body.dark .nav-item.activo {
 
     color: #111;
 }
@@ -905,13 +1142,15 @@ body.dark input {
 
 #copiar:hover {
 
-    transform: translateY(-2px);
+    transform:
+        translateY(-2px);
 }
 
 
 #copiar:active {
 
-    transform: scale(.98);
+    transform:
+        scale(.98);
 }
 
 
@@ -994,14 +1233,16 @@ body.dark input {
 
         opacity: 0;
 
-        transform: translateY(8px);
+        transform:
+            translateY(8px);
     }
 
     to {
 
         opacity: 1;
 
-        transform: translateY(0);
+        transform:
+            translateY(0);
     }
 }
 
@@ -1117,6 +1358,66 @@ body.dark input {
 
 
 /* =========================================
+   TOAST
+========================================= */
+
+#toast {
+
+    position: fixed;
+
+    left: 50%;
+
+    bottom: 24px;
+
+    z-index: 100;
+
+    min-width: 230px;
+
+    max-width: calc(100% - 40px);
+
+    padding:
+        12px
+        18px;
+
+    border-radius: 14px;
+
+    background: #11161b;
+
+    color: #fff;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.20);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transform:
+        translate(-50%, 15px);
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease;
+}
+
+
+#toast.visible {
+
+    opacity: 1;
+
+    transform:
+        translate(-50%, 0);
+}
+
+
+/* =========================================
    DESKTOP
 ========================================= */
 
@@ -1133,6 +1434,15 @@ body.dark input {
 
         max-width: 700px;
     }
+
+
+    .quick-nav {
+
+        margin-top: 17px;
+
+        margin-bottom: 25px;
+    }
+
 }
 
 
@@ -1203,13 +1513,14 @@ body.dark input {
 
     .hero-card {
 
-        width: calc(100% - 140px);
+        width:
+            calc(100% - 140px);
 
         max-width: 540px;
 
         margin:
             0 auto
-            25px;
+            10px;
 
         padding:
             30px
@@ -1250,37 +1561,73 @@ body.dark input {
 
     .hero-card h1 {
 
-    font-size: 37px;
+        font-size: 37px;
 
-    margin-bottom: 7px;
+        margin-bottom: 7px;
 
-    letter-spacing: -1.2px;
+        letter-spacing: -1.2px;
 
-    white-space: nowrap;
-}
-
-
-.hero-card h1 #heroUsdNumero {
-
-    font-size: 1em;
-
-}
+        white-space: nowrap;
+    }
 
 
-.hero-card h1 small {
+    .hero-card h1 #heroUsdNumero {
 
-    font-size: .42em;
+        font-size: 1em;
+    }
 
-    margin-left: 3px;
 
-    letter-spacing: -0.5px;
+    .hero-card h1 small {
 
-}
+        font-size: .42em;
+
+        margin-left: 3px;
+
+        letter-spacing: -0.5px;
+    }
 
 
     .hero-card p {
 
         font-size: 13px;
+    }
+
+
+    /* NAVEGACIÓN */
+
+    .quick-nav {
+
+        max-width: 330px;
+
+        margin:
+            13px auto
+            20px;
+
+        gap: 7px;
+    }
+
+
+    .nav-item {
+
+        height: 59px;
+
+        border-radius: 15px;
+
+        padding:
+            5px
+            3px;
+    }
+
+
+    .nav-icon {
+
+        font-size: 20px;
+    }
+
+
+    .nav-text {
+
+        font-size: 9px;
     }
 
 
@@ -1449,6 +1796,19 @@ body.dark input {
 
         padding: 18px;
     }
+
+
+    /* TOAST */
+
+    #toast {
+
+        bottom: 18px;
+
+        font-size: 12px;
+
+        min-width: 210px;
+    }
+
 }
 
 
@@ -1488,4 +1848,48 @@ body.dark input {
 
         font-size: 15px;
     }
+
+
+    .quick-nav {
+
+        max-width: 305px;
+
+        gap: 5px;
+    }
+
+
+    .nav-item {
+
+        height: 56px;
+
+        border-radius: 14px;
+    }
+
+
+    .nav-icon {
+
+        font-size: 19px;
+    }
+
+
+    .nav-text {
+
+        font-size: 8px;
+    }
+
+}
+
+
+/* =========================================
+   REDUCIR MOVIMIENTO
+   Accesibilidad
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hero-card {
+
+        animation: none;
+    }
+
 }
