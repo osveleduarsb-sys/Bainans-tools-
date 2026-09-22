@@ -26,7 +26,7 @@
 <body>
 
 
-    <!-- DECORACIÓN DEL FONDO -->
+    <!-- DECORACIÓN -->
 
     <div class="decor decor-1"></div>
     <div class="decor decor-2"></div>
@@ -50,8 +50,6 @@
         </h1>
 
 
-        <!-- BOTÓN MODO -->
-
         <button
             id="modo"
             type="button"
@@ -74,21 +72,13 @@
         id="inicio"
     >
 
-
         <div class="hero-line"></div>
 
-
-        <span class="hero-icon">
-            
-        </span>
-
+        <span class="hero-icon"></span>
 
         <h2>
             USD que llegarán a Binance
         </h2>
-
-
-        <!-- MONTO PRINCIPAL -->
 
         <h1 id="heroUsd">
 
@@ -102,26 +92,22 @@
 
         </h1>
 
-
         <p id="heroEstado">
             Ingresa el saldo y la tasa BCV
         </p>
-
 
     </section>
 
 
 
     <!-- =========================
-         NAVEGACIÓN PRINCIPAL
+         NAVEGACIÓN
     ========================== -->
 
     <nav
         class="quick-nav"
         aria-label="Navegación principal"
     >
-
-        <!-- INICIO -->
 
         <button
             class="nav-item activo"
@@ -140,9 +126,6 @@
         </button>
 
 
-
-        <!-- OPERACIONES -->
-
         <button
             class="nav-item"
             id="navOperaciones"
@@ -159,9 +142,6 @@
 
         </button>
 
-
-
-        <!-- CONFIGURACIÓN -->
 
         <button
             class="nav-item"
@@ -191,7 +171,7 @@
 
 
         <!-- =========================
-             DATOS DE COMPRA
+             DATOS / CALCULAR
         ========================== -->
 
         <section
@@ -199,14 +179,36 @@
             id="datosCompra"
         >
 
-
             <div class="datos-header">
 
-                <h2>
-                    <span class="section-icon">📥</span>
-                    Datos de compra
-                </h2>
 
+                <div class="titulo-modo">
+
+                    <h2 id="datosTitulo">
+                        <span class="section-icon">📥</span>
+                        Datos de compra
+                    </h2>
+
+
+                    <!-- INTERRUPTOR -->
+
+                    <button
+                        id="modoCalculo"
+                        class="switch-modo"
+                        type="button"
+                        aria-label="Cambiar modo de cálculo"
+                        title="Cambiar modo"
+                    >
+
+                        <span class="switch-circulo"></span>
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- ACTUALIZAR BCV -->
 
                 <button
                     id="actualizarBCV"
@@ -223,11 +225,11 @@
             <div class="inputs-grid">
 
 
-                <!-- SALDO -->
+                <!-- SALDO / CUÁNTO GANO -->
 
                 <div class="input-group">
 
-                    <label for="saldo">
+                    <label for="saldo" id="saldoLabel">
                         Saldo disponible (Bs)
                     </label>
 
@@ -291,7 +293,7 @@
 
 
 
-                <!-- BDV -->
+                <!-- BANCO -->
 
                 <div class="input-group">
 
@@ -363,8 +365,13 @@
                 id="copiar"
                 type="button"
             >
+
                 <span>📋</span>
-                Copiar resumen
+
+                <span id="textoCopiar">
+                    Copiar resumen
+                </span>
+
             </button>
 
 
@@ -397,8 +404,13 @@
             </div>
 
 
-            <div class="result-grid">
 
+            <!-- RESULTADOS MODO COMPRA -->
+
+            <div
+                class="result-grid resultados-compra"
+                id="resultadosCompra"
+            >
 
                 <div class="result-card">
 
@@ -527,16 +539,122 @@
 
                 </div>
 
+            </div>
+
+
+
+            <!-- RESULTADOS MODO GANANCIA -->
+
+            <div
+                class="result-grid resultados-ganancia"
+                id="resultadosGanancia"
+            >
+
+                <div class="result-card">
+
+                    <span class="titulo">
+                        Tasa final
+                    </span>
+
+                    <span
+                        class="valor"
+                        id="ganTasaFinal"
+                    >
+                        --
+                    </span>
+
+                </div>
+
+
+                <div class="result-card">
+
+                    <span class="titulo">
+                        Bs necesarios
+                    </span>
+
+                    <span
+                        class="valor"
+                        id="bsNecesarios"
+                    >
+                        --
+                    </span>
+
+                </div>
+
+
+                <div class="result-card">
+
+                    <span class="titulo">
+                        Tasa banco – Binance
+                    </span>
+
+                    <span
+                        class="valor"
+                        id="tasaBancoBinance"
+                    >
+                        --
+                    </span>
+
+                </div>
+
+
+                <div class="result-card">
+
+                    <span class="titulo">
+                        USDT de venta usado
+                    </span>
+
+                    <span
+                        class="valor"
+                        id="usdtVentaUsado"
+                    >
+                        --
+                    </span>
+
+                </div>
+
+
+                <div class="result-card resultado-ganancia">
+
+                    <span class="titulo">
+                        Ganancia
+                    </span>
+
+                    <span
+                        class="valor"
+                        id="ganancia"
+                    >
+                        --
+                    </span>
+
+                </div>
+
+
+                <div class="result-card resultado-roi">
+
+                    <span class="titulo">
+                        ROI
+                    </span>
+
+                    <span
+                        class="valor"
+                        id="roi"
+                    >
+                        --
+                    </span>
+
+                </div>
 
             </div>
+
 
 
             <div id="estado">
                 ⚪ Esperando cálculo
             </div>
 
-
         </section>
+
 
 
         <!-- BOTÓN RESULTADO -->
@@ -545,8 +663,11 @@
             id="mostrarResultados"
             type="button"
         >
+
             <span>☰</span>
+
             Resultado
+
         </button>
 
 
@@ -554,9 +675,7 @@
 
 
 
-    <!-- =========================
-         AVISO / TOAST
-    ========================== -->
+    <!-- TOAST -->
 
     <div
         id="toast"
