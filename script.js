@@ -1,6 +1,6 @@
 /* =========================================
    BAINANS TOOLS
-   LÓGICA
+   LÓGICA V4
 ========================================= */
 
 
@@ -10,6 +10,9 @@
 
 const saldoInput =
     document.getElementById("saldo");
+
+const saldoLabel =
+    document.getElementById("saldoLabel");
 
 const bcvInput =
     document.getElementById("bcv");
@@ -33,12 +36,21 @@ const p2pInput =
     document.getElementById("p2p");
 
 
-const heroUsd =
-    document.getElementById("heroUsd");
+const datosTitulo =
+    document.getElementById("datosTitulo");
+
+const modoCalculo =
+    document.getElementById("modoCalculo");
+
+
+const heroUsdNumero =
+    document.getElementById("heroUsdNumero");
 
 const heroEstado =
     document.getElementById("heroEstado");
 
+
+/* RESULTADOS COMPRA */
 
 const tasaFinal =
     document.getElementById("tasaFinal");
@@ -65,15 +77,53 @@ const ahorroP2p =
     document.getElementById("ahorroP2p");
 
 
+/* RESULTADOS GANANCIA */
+
+const ganTasaFinal =
+    document.getElementById("ganTasaFinal");
+
+const bsNecesarios =
+    document.getElementById("bsNecesarios");
+
+const tasaBancoBinance =
+    document.getElementById("tasaBancoBinance");
+
+const usdtVentaUsado =
+    document.getElementById("usdtVentaUsado");
+
+const ganancia =
+    document.getElementById("ganancia");
+
+const roi =
+    document.getElementById("roi");
+
+
 const estado =
     document.getElementById("estado");
+
+
+const resultadosCompra =
+    document.getElementById(
+        "resultadosCompra"
+    );
+
+const resultadosGanancia =
+    document.getElementById(
+        "resultadosGanancia"
+    );
 
 
 const modoBtn =
     document.getElementById("modo");
 
+
 const copiarBtn =
     document.getElementById("copiar");
+
+const textoCopiar =
+    document.getElementById(
+        "textoCopiar"
+    );
 
 
 const mostrarResultados =
@@ -97,9 +147,7 @@ const themeColor =
     );
 
 
-/* =========================================
-   NAVEGACIÓN
-========================================= */
+/* NAVEGACIÓN */
 
 const navInicio =
     document.getElementById(
@@ -118,72 +166,59 @@ const navConfiguracion =
 
 
 const toast =
-    document.getElementById(
-        "toast"
-    );
+    document.getElementById("toast");
 
 
 let toastTimer;
 
 
 /* =========================================
-   MOSTRAR AVISO
+   MODO DE CÁLCULO
+========================================= */
+
+let modoGanancia = false;
+
+
+
+/* =========================================
+   TOAST
 ========================================= */
 
 function mostrarToast(mensaje) {
 
-    if (!toast) {
-        return;
-    }
+    if (!toast) return;
 
+    toast.textContent = mensaje;
 
-    toast.textContent =
-        mensaje;
+    toast.classList.add("visible");
 
+    clearTimeout(toastTimer);
 
-    toast.classList.add(
-        "visible"
-    );
+    toastTimer = setTimeout(() => {
 
+        toast.classList.remove("visible");
 
-    clearTimeout(
-        toastTimer
-    );
-
-
-    toastTimer =
-        setTimeout(
-            () => {
-
-                toast.classList.remove(
-                    "visible"
-                );
-
-            },
-            2500
-        );
+    }, 2500);
 
 }
 
 
 
 /* =========================================
-   ACTIVAR NAVEGACIÓN
+   NAVEGACIÓN
 ========================================= */
 
 function activarNav(boton) {
 
     document
         .querySelectorAll(".nav-item")
-        .forEach(
-            item => {
+        .forEach(item => {
 
-                item.classList.remove(
-                    "activo"
-                );
+            item.classList.remove(
+                "activo"
+            );
 
-            }
-        );
+        });
 
 
     if (boton) {
@@ -197,25 +232,16 @@ function activarNav(boton) {
 }
 
 
-
-/* =========================================
-   INICIO
-========================================= */
-
 navInicio.addEventListener(
     "click",
     () => {
 
-        activarNav(
-            navInicio
-        );
-
+        activarNav(navInicio);
 
         const inicio =
             document.getElementById(
                 "inicio"
             );
-
 
         if (inicio) {
 
@@ -230,19 +256,11 @@ navInicio.addEventListener(
 );
 
 
-
-/* =========================================
-   OPERACIONES
-========================================= */
-
 navOperaciones.addEventListener(
     "click",
     () => {
 
-        activarNav(
-            navOperaciones
-        );
-
+        activarNav(navOperaciones);
 
         mostrarToast(
             "📒 Historial de operaciones — próximamente"
@@ -252,19 +270,11 @@ navOperaciones.addEventListener(
 );
 
 
-
-/* =========================================
-   CONFIGURACIÓN
-========================================= */
-
 navConfiguracion.addEventListener(
     "click",
     () => {
 
-        activarNav(
-            navConfiguracion
-        );
-
+        activarNav(navConfiguracion);
 
         mostrarToast(
             "⚙️ Configuración — próximamente"
@@ -305,16 +315,10 @@ function formatoNumero(
 
 function convertirNumero(valor) {
 
-    if (!valor) {
-
-        return 0;
-
-    }
-
+    if (!valor) return 0;
 
     let texto =
         String(valor).trim();
-
 
     texto =
         texto.replace(/\s/g, "");
@@ -332,7 +336,6 @@ function convertirNumero(valor) {
 
     }
 
-
     else if (
         texto.includes(",")
     ) {
@@ -341,7 +344,6 @@ function convertirNumero(valor) {
             texto.replace(",", ".");
 
     }
-
 
     else if (
         texto.includes(".")
@@ -378,16 +380,10 @@ function convertirNumero(valor) {
 
 function formatearEntrada(valor) {
 
-    if (!valor) {
-
-        return "";
-
-    }
-
+    if (!valor) return "";
 
     let texto =
         String(valor);
-
 
     texto =
         texto.replace(
@@ -395,12 +391,7 @@ function formatearEntrada(valor) {
             ""
         );
 
-
-    if (!texto) {
-
-        return "";
-
-    }
+    if (!texto) return "";
 
 
     let decimal = "";
@@ -413,14 +404,11 @@ function formatearEntrada(valor) {
         const partes =
             texto.split(",");
 
-
         let entero =
             partes.shift();
 
-
         decimal =
             partes.join("");
-
 
         entero =
             entero.replace(
@@ -428,15 +416,9 @@ function formatearEntrada(valor) {
                 ""
             );
 
-
-        if (
-            entero === ""
-        ) {
-
+        if (!entero) {
             entero = "0";
-
         }
-
 
         entero =
             Number(entero)
@@ -448,13 +430,11 @@ function formatearEntrada(valor) {
                     }
                 );
 
-
         return decimal !== ""
             ? `${entero},${decimal}`
             : `${entero},`;
 
     }
-
 
 
     if (
@@ -475,7 +455,6 @@ function formatearEntrada(valor) {
                     /\./g,
                     ""
                 );
-
 
             return Number(numero)
                 .toLocaleString(
@@ -498,10 +477,8 @@ function formatearEntrada(valor) {
                 partes[0]
                     .replace(/\./g, "");
 
-
             const decimal =
                 partes[1];
-
 
             const enteroFormateado =
                 Number(entero)
@@ -512,7 +489,6 @@ function formatearEntrada(valor) {
                                 0
                         }
                     );
-
 
             return `${enteroFormateado}.${decimal}`;
 
@@ -576,7 +552,7 @@ const BCV_API =
 
 
 /* =========================================
-   GUARDAR TASA
+   GUARDAR TASA BCV
 ========================================= */
 
 function guardarTasaBCV(
@@ -585,11 +561,8 @@ function guardarTasaBCV(
 ) {
 
     const datos = {
-
         tasa: tasa,
-
         fecha: fecha
-
     };
 
 
@@ -603,7 +576,7 @@ function guardarTasaBCV(
 
 
 /* =========================================
-   CARGAR TASA
+   CARGAR TASA BCV
 ========================================= */
 
 function cargarTasaGuardada() {
@@ -615,9 +588,7 @@ function cargarTasaGuardada() {
 
 
     if (!guardado) {
-
         return false;
-
     }
 
 
@@ -699,9 +670,7 @@ async function actualizarTasaBCV() {
         "cargando"
     );
 
-
-    actualizarBCV.disabled =
-        true;
+    actualizarBCV.disabled = true;
 
 
     bcvEstado.textContent =
@@ -812,10 +781,7 @@ async function actualizarTasaBCV() {
 
     catch (error) {
 
-        console.error(
-            error
-        );
-
+        console.error(error);
 
         bcvEstado.textContent =
             "🟠 No se actualizó. Se mantiene la última tasa.";
@@ -835,9 +801,7 @@ async function actualizarTasaBCV() {
         "cargando"
     );
 
-
-    actualizarBCV.disabled =
-        false;
+    actualizarBCV.disabled = false;
 
 }
 
@@ -850,40 +814,171 @@ actualizarBCV.addEventListener(
 
 
 /* =========================================
-   CALCULADORA
+   CAMBIAR MODO
+========================================= */
+
+function actualizarInterfazModo() {
+
+    if (modoGanancia) {
+
+        datosTitulo.innerHTML =
+            `<span class="section-icon">📊</span>
+             Calcular dato`;
+
+
+        saldoLabel.textContent =
+            "Cuánto gano con:";
+
+
+        saldoInput.placeholder =
+            "Ej. 400 USDT";
+
+
+        modoCalculo.classList.add(
+            "activo"
+        );
+
+
+        heroEstado.textContent =
+            "Ingresa el monto, BCV y precio P2P";
+
+
+        resultadosCompra.style.display =
+            "none";
+
+
+        resultadosGanancia.style.display =
+            "grid";
+
+
+        textoCopiar.textContent =
+            "Copiar cálculo";
+
+
+        localStorage.setItem(
+            "bainansModoCalculo",
+            "ganancia"
+        );
+
+    }
+
+    else {
+
+        datosTitulo.innerHTML =
+            `<span class="section-icon">📥</span>
+             Datos de compra`;
+
+
+        saldoLabel.textContent =
+            "Saldo disponible (Bs)";
+
+
+        saldoInput.placeholder =
+            "Ej. 170.557";
+
+
+        modoCalculo.classList.remove(
+            "activo"
+        );
+
+
+        resultadosCompra.style.display =
+            "grid";
+
+
+        resultadosGanancia.style.display =
+            "none";
+
+
+        textoCopiar.textContent =
+            "Copiar resumen";
+
+
+        localStorage.setItem(
+            "bainansModoCalculo",
+            "compra"
+        );
+
+    }
+
+
+    calcular();
+
+}
+
+
+
+/* =========================================
+   CLICK DEL INTERRUPTOR
+========================================= */
+
+modoCalculo.addEventListener(
+    "click",
+    () => {
+
+        modoGanancia =
+            !modoGanancia;
+
+
+        actualizarInterfazModo();
+
+    }
+);
+
+
+
+/* =========================================
+   CALCULADORA PRINCIPAL
 ========================================= */
 
 function calcular() {
+
+    if (modoGanancia) {
+
+        calcularGanancia();
+
+    }
+
+    else {
+
+        calcularCompra();
+
+    }
+
+}
+
+
+
+/* =========================================
+   MODO COMPRA
+========================================= */
+
+function calcularCompra() {
 
     const saldo =
         obtenerNumero(
             saldoInput
         );
 
-
     const bcv =
         obtenerNumero(
             bcvInput
         );
-
 
     const recargo =
         obtenerNumero(
             recargoInput
         );
 
-
     const bdv =
         obtenerNumero(
             bdvInput
         );
 
-
     const bpay =
         obtenerNumero(
             bpayInput
         );
-
 
     const p2p =
         obtenerNumero(
@@ -891,32 +986,23 @@ function calcular() {
         );
 
 
-
-    /* VALIDACIÓN */
-
     if (
         saldo <= 0 ||
         bcv <= 0
     ) {
 
-        limpiarResultados();
-
+        limpiarCompra();
 
         heroEstado.textContent =
             "Ingresa el saldo y la tasa BCV";
 
-
         estado.textContent =
             "⚪ Esperando cálculo";
-
 
         return;
 
     }
 
-
-
-    /* TASA FINAL */
 
     const tasa =
         bcv *
@@ -926,15 +1012,9 @@ function calcular() {
         );
 
 
-
-    /* USD COMPRADOS */
-
     const usd =
         saldo / tasa;
 
-
-
-    /* COMISIÓN BDV */
 
     const comisionBDV =
         usd *
@@ -943,16 +1023,10 @@ function calcular() {
         );
 
 
-
-    /* DESPUÉS DE BDV */
-
     const despuesBDV =
         usd -
         comisionBDV;
 
-
-
-    /* COMISIÓN BPAY */
 
     const comisionBPay =
         despuesBDV *
@@ -961,43 +1035,25 @@ function calcular() {
         );
 
 
-
-    /* USD FINALES */
-
     const usdQueLlegan =
         despuesBDV -
         comisionBPay;
 
-
-
-    /* COSTO */
 
     const costo =
         saldo /
         usdQueLlegan;
 
 
-
-    /* HERO */
-
-    heroUsd.textContent =
-        `${formatoNumero(
+    heroUsdNumero.textContent =
+        formatoNumero(
             usdQueLlegan
-        )} USD`;
+        );
 
-
-    /*
-       CORRECCIÓN:
-       Cuando hay datos válidos,
-       mostramos el estado correcto.
-    */
 
     heroEstado.textContent =
         "Cantidad estimada que llegará a Binance";
 
-
-
-    /* RESULTADOS */
 
     tasaFinal.textContent =
         `${formatoNumero(
@@ -1043,9 +1099,6 @@ function calcular() {
         )} Bs/USD`;
 
 
-
-    /* P2P */
-
     if (p2p > 0) {
 
         const diferencia =
@@ -1060,9 +1113,7 @@ function calcular() {
             ) * 100;
 
 
-        if (
-            diferencia > 0
-        ) {
+        if (diferencia > 0) {
 
             ahorroP2p.textContent =
                 `Ahorras ${formatoNumero(
@@ -1074,15 +1125,11 @@ function calcular() {
 
         }
 
-        else if (
-            diferencia < 0
-        ) {
+        else if (diferencia < 0) {
 
             ahorroP2p.textContent =
                 `P2P es menor por ${formatoNumero(
-                    Math.abs(
-                        diferencia
-                    ),
+                    Math.abs(diferencia),
                     4
                 )} Bs/USD`;
 
@@ -1113,13 +1160,230 @@ function calcular() {
 
 
 /* =========================================
-   LIMPIAR
+   MODO CALCULAR DATO / GANANCIA
 ========================================= */
 
-function limpiarResultados() {
+function calcularGanancia() {
 
-    heroUsd.textContent =
-        "0,00 USD";
+    const capital =
+        obtenerNumero(
+            saldoInput
+        );
+
+
+    const bcv =
+        obtenerNumero(
+            bcvInput
+        );
+
+
+    const recargo =
+        obtenerNumero(
+            recargoInput
+        );
+
+
+    const bdv =
+        obtenerNumero(
+            bdvInput
+        );
+
+
+    const bpay =
+        obtenerNumero(
+            bpayInput
+        );
+
+
+    const p2p =
+        obtenerNumero(
+            p2pInput
+        );
+
+
+    if (
+        capital <= 0 ||
+        bcv <= 0 ||
+        p2p <= 0
+    ) {
+
+        limpiarGanancia();
+
+        heroEstado.textContent =
+            "Ingresa monto, BCV y precio P2P";
+
+        estado.textContent =
+            "⚪ Esperando datos";
+
+        return;
+
+    }
+
+
+    /* TASA BCV + RECARGO */
+
+    const tasa =
+        bcv *
+        (
+            1 +
+            recargo / 100
+        );
+
+
+    /* BS NECESARIOS PARA CONSEGUIR
+       EL MONTO INDICADO */
+
+    const bs =
+        capital *
+        tasa;
+
+
+    /* USDT QUE DEBES VENDER
+       EN P2P PARA CONSEGUIR ESOS BS */
+
+    const usdtVenta =
+        bs /
+        p2p;
+
+
+    /* COMISIÓN TOTAL */
+
+    const comisionTotal =
+        bdv +
+        bpay;
+
+
+    /* USDT QUE QUEDAN
+       DESPUÉS DE LAS COMISIONES */
+
+    const usdtRetornados =
+        capital *
+        (
+            1 -
+            comisionTotal / 100
+        );
+
+
+    /* GANANCIA */
+
+    const gananciaCalculada =
+        usdtRetornados -
+        usdtVenta;
+
+
+    /* ROI */
+
+    const roiCalculado =
+        usdtVenta > 0
+            ? (
+                gananciaCalculada /
+                usdtVenta
+            ) * 100
+            : 0;
+
+
+    /* HERO */
+
+    heroUsdNumero.textContent =
+        formatoNumero(
+            usdtRetornados
+        );
+
+
+    heroEstado.textContent =
+        "Cantidad estimada que llegará a Binance";
+
+
+    /* RESULTADOS */
+
+    ganTasaFinal.textContent =
+        `${formatoNumero(
+            tasa,
+            4
+        )} Bs/USD`;
+
+
+    bsNecesarios.textContent =
+        `${formatoNumero(
+            bs
+        )} Bs`;
+
+
+    tasaBancoBinance.textContent =
+        `${formatoNumero(
+            comisionTotal
+        )}% → ${formatoNumero(
+            usdtRetornados
+        )} USDT`;
+
+
+    usdtVentaUsado.textContent =
+        `${formatoNumero(
+            usdtVenta
+        )} USDT`;
+
+
+    if (
+        gananciaCalculada >= 0
+    ) {
+
+        ganancia.textContent =
+            `+${formatoNumero(
+                gananciaCalculada
+            )} USDT`;
+
+    }
+
+    else {
+
+        ganancia.textContent =
+            `${formatoNumero(
+                gananciaCalculada
+            )} USDT`;
+
+    }
+
+
+    roi.textContent =
+        `${formatoNumero(
+            roiCalculado
+        )}%`;
+
+
+    if (
+        gananciaCalculada >= 0
+    ) {
+
+        estado.textContent =
+            `🟢 Ganancia estimada: ${formatoNumero(
+                gananciaCalculada
+            )} USDT`;
+
+    }
+
+    else {
+
+        estado.textContent =
+            `🔴 Resultado negativo: ${formatoNumero(
+                Math.abs(
+                    gananciaCalculada
+                )
+            )} USDT`;
+
+    }
+
+}
+
+
+
+/* =========================================
+   LIMPIAR COMPRA
+========================================= */
+
+function limpiarCompra() {
+
+    heroUsdNumero.textContent =
+        "0,00";
 
 
     tasaFinal.textContent =
@@ -1151,6 +1415,43 @@ function limpiarResultados() {
 
 
     ahorroP2p.textContent =
+        "--";
+
+}
+
+
+
+/* =========================================
+   LIMPIAR GANANCIA
+========================================= */
+
+function limpiarGanancia() {
+
+    heroUsdNumero.textContent =
+        "0,00";
+
+
+    ganTasaFinal.textContent =
+        "--";
+
+
+    bsNecesarios.textContent =
+        "--";
+
+
+    tasaBancoBinance.textContent =
+        "--";
+
+
+    usdtVentaUsado.textContent =
+        "--";
+
+
+    ganancia.textContent =
+        "--";
+
+
+    roi.textContent =
         "--";
 
 }
@@ -1207,11 +1508,7 @@ function cargarDatos() {
         );
 
 
-    if (!guardado) {
-
-        return;
-
-    }
+    if (!guardado) return;
 
 
     try {
@@ -1238,7 +1535,7 @@ function cargarDatos() {
         }
 
 
-        if (datos.recargo) {
+        if (datos.recargo !== undefined) {
 
             recargoInput.value =
                 datos.recargo;
@@ -1246,7 +1543,7 @@ function cargarDatos() {
         }
 
 
-        if (datos.bdv) {
+        if (datos.bdv !== undefined) {
 
             bdvInput.value =
                 datos.bdv;
@@ -1254,7 +1551,7 @@ function cargarDatos() {
         }
 
 
-        if (datos.bpay) {
+        if (datos.bpay !== undefined) {
 
             bpayInput.value =
                 datos.bpay;
@@ -1284,7 +1581,7 @@ function cargarDatos() {
 
 
 /* =========================================
-   SALDO
+   CAMPOS DE ENTRADA
 ========================================= */
 
 saldoInput.addEventListener(
@@ -1311,11 +1608,6 @@ saldoInput.addEventListener(
 );
 
 
-
-/* =========================================
-   BCV
-========================================= */
-
 bcvInput.addEventListener(
     "input",
     () => {
@@ -1340,33 +1632,26 @@ bcvInput.addEventListener(
 );
 
 
-
-/* =========================================
-   OTROS CAMPOS
-========================================= */
-
 [
     recargoInput,
     bdvInput,
     bpayInput,
     p2pInput
 
-].forEach(
-    input => {
+].forEach(input => {
 
-        input.addEventListener(
-            "input",
-            () => {
+    input.addEventListener(
+        "input",
+        () => {
 
-                calcular();
+            calcular();
 
-                guardarDatos();
+            guardarDatos();
 
-            }
-        );
+        }
+    );
 
-    }
-);
+});
 
 
 
@@ -1378,7 +1663,57 @@ copiarBtn.addEventListener(
     "click",
     async () => {
 
-        const resumen = `
+        let resumen = "";
+
+
+        if (modoGanancia) {
+
+            resumen = `
+
+BAINANS TOOLS
+
+CÁLCULO DE GANANCIA
+
+Capital:
+${saldoInput.value || "No indicado"} USDT
+
+Tasa BCV:
+${bcvInput.value || "No indicada"} Bs/USD
+
+Recargo Banco:
+${recargoInput.value || "0"}%
+
+Tasa final:
+${ganTasaFinal.textContent}
+
+Bs necesarios:
+${bsNecesarios.textContent}
+
+Comisión Banco + BPay:
+${tasaBancoBinance.textContent}
+
+USDT de venta usado:
+${usdtVentaUsado.textContent}
+
+Ganancia:
+${ganancia.textContent}
+
+ROI:
+${roi.textContent}
+
+USD que llegarán a Binance:
+${heroUsdNumero.textContent} USD
+
+Precio P2P:
+${p2pInput.value || "No indicado"} Bs
+
+            `.trim();
+
+        }
+
+        else {
+
+            resumen = `
 
 BAINANS TOOLS
 
@@ -1407,7 +1742,7 @@ USD finales:
 ${usdFinales.textContent}
 
 USD que llegarán a Binance:
-${heroUsd.textContent}
+${heroUsdNumero.textContent} USD
 
 Costo real por USD:
 ${costoReal.textContent}
@@ -1415,7 +1750,9 @@ ${costoReal.textContent}
 Ahorro frente al P2P:
 ${ahorroP2p.textContent}
 
-        `.trim();
+            `.trim();
+
+        }
 
 
         try {
@@ -1425,19 +1762,28 @@ ${ahorroP2p.textContent}
             );
 
 
-            copiarBtn.innerHTML =
-                "<span>✅</span> Resumen copiado";
+            textoCopiar.textContent =
+                "Resumen copiado";
 
 
-            setTimeout(
-                () => {
+            copiarBtn.querySelector(
+                "span"
+            ).textContent = "✅";
 
-                    copiarBtn.innerHTML =
-                        "<span>📋</span> Copiar resumen";
 
-                },
-                2000
-            );
+            setTimeout(() => {
+
+                copiarBtn.querySelector(
+                    "span"
+                ).textContent = "📋";
+
+
+                textoCopiar.textContent =
+                    modoGanancia
+                        ? "Copiar cálculo"
+                        : "Copiar resumen";
+
+            }, 2000);
 
         }
 
@@ -1455,7 +1801,7 @@ ${ahorroP2p.textContent}
 
 
 /* =========================================
-   MODO OSCURO / CLARO
+   MODO OSCURO
 ========================================= */
 
 function actualizarModo() {
@@ -1470,7 +1816,6 @@ function actualizarModo() {
 
         modoBtn.textContent =
             "☀️";
-
 
         modoBtn.title =
             "Cambiar a modo claro";
@@ -1492,7 +1837,6 @@ function actualizarModo() {
         modoBtn.textContent =
             "🌙";
 
-
         modoBtn.title =
             "Cambiar a modo oscuro";
 
@@ -1509,7 +1853,6 @@ function actualizarModo() {
     }
 
 }
-
 
 
 modoBtn.addEventListener(
@@ -1539,6 +1882,7 @@ modoBtn.addEventListener(
 
     }
 );
+
 
 
 /* =========================================
@@ -1576,7 +1920,6 @@ mostrarResultados.addEventListener(
 );
 
 
-
 cerrarResultados.addEventListener(
     "click",
     () => {
@@ -1595,13 +1938,12 @@ cerrarResultados.addEventListener(
 
 
 /* =========================================
-   INICIO
+   INICIAR APP
 ========================================= */
 
 function iniciarApp() {
 
-
-    /* MODO */
+    /* MODO OSCURO */
 
     const modoGuardado =
         localStorage.getItem(
@@ -1623,132 +1965,46 @@ function iniciarApp() {
     actualizarModo();
 
 
-
     /* DATOS */
 
     cargarDatos();
 
 
-    /*
-       Si no existe BCV guardado,
-       dejamos el campo vacío.
-    */
+    /* BCV */
 
-    if (
-        !bcvInput.value
-    ) {
+    if (!bcvInput.value) {
 
         cargarTasaGuardada();
 
     }
 
 
-    calcular();
+    /* MODO CALCULADORA */
 
-}
-
-
-/* =========================================
-   FORMATO DEL MONTO PRINCIPAL
-   Separa el número de la moneda USD
-========================================= */
-
-function actualizarHeroUsd() {
-
-    const heroUsdElemento =
-        document.getElementById(
-            "heroUsd"
+    const modoCalculoGuardado =
+        localStorage.getItem(
+            "bainansModoCalculo"
         );
-
-
-    if (!heroUsdElemento) {
-        return;
-    }
-
-
-    const texto =
-        heroUsdElemento.textContent.trim();
-
-
-    if (!texto) {
-        return;
-    }
 
 
     if (
-        heroUsdElemento.querySelector(
-            "#heroUsdNumero"
-        ) &&
-        heroUsdElemento.querySelector(
-            "small"
-        )
+        modoCalculoGuardado === "ganancia"
     ) {
 
-        return;
+        modoGanancia = true;
+
+    }
+
+    else {
+
+        modoGanancia = false;
 
     }
 
 
-    const coincidencia =
-        texto.match(
-            /^(.+?)\s*USD$/i
-        );
+    actualizarInterfazModo();
 
-
-    if (!coincidencia) {
-        return;
-    }
-
-
-    heroUsdElemento.innerHTML = `
-
-        <span id="heroUsdNumero">
-            ${coincidencia[1]}
-        </span>
-
-        <small>
-            USD
-        </small>
-
-    `;
-
-}
-
-
-
-/* =========================================
-   VIGILAR CAMBIOS DEL RESULTADO
-========================================= */
-
-const heroUsdElemento =
-    document.getElementById(
-        "heroUsd"
-    );
-
-
-if (heroUsdElemento) {
-
-    actualizarHeroUsd();
-
-
-    const observadorHero =
-        new MutationObserver(
-            () => {
-
-                actualizarHeroUsd();
-
-            }
-        );
-
-
-    observadorHero.observe(
-        heroUsdElemento,
-        {
-            childList: true,
-            characterData: true,
-            subtree: true
-        }
-    );
+    calcular();
 
 }
 
