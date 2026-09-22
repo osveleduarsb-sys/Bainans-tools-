@@ -404,7 +404,7 @@ body.dark #modo {
     25% {
         transform:
             perspective(1000px)
-            rotateY(-3deg);
+            rotateY(-4deg);
     }
 
     50% {
@@ -416,7 +416,7 @@ body.dark #modo {
     75% {
         transform:
             perspective(1000px)
-            rotateY(3deg);
+            rotateY(4deg);
     }
 
     100% {
