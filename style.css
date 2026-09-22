@@ -320,7 +320,7 @@ body.dark #modo {
 
     margin:
         0 auto
-        10px;
+        17px;
 
     padding:
         55px
@@ -333,19 +333,14 @@ body.dark #modo {
 
     overflow: hidden;
 
-    transform-origin:
-        center
-        center;
-
     /*
-       ANIMACIÓN FLOTANTE
+       EFECTO 3D
     */
 
+    transform-style: preserve-3d;
+
     animation:
-        heroFlotar
-        6s
-        ease-in-out
-        infinite;
+        flotarGiro 5s ease-in-out infinite;
 
     /*
        FONDO GEOMÉTRICO
@@ -394,7 +389,7 @@ body.dark #modo {
         );
 
     box-shadow:
-        0 12px 25px
+        0 8px 18px
         rgba(243,186,47,.22);
 }
 
