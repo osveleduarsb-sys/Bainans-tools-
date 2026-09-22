@@ -97,6 +97,183 @@ const themeColor =
     );
 
 
+/* =========================================
+   NAVEGACIÓN
+========================================= */
+
+const navInicio =
+    document.getElementById(
+        "navInicio"
+    );
+
+const navOperaciones =
+    document.getElementById(
+        "navOperaciones"
+    );
+
+const navConfiguracion =
+    document.getElementById(
+        "navConfiguracion"
+    );
+
+
+const toast =
+    document.getElementById(
+        "toast"
+    );
+
+
+let toastTimer;
+
+
+/* =========================================
+   MOSTRAR AVISO
+========================================= */
+
+function mostrarToast(mensaje) {
+
+    if (!toast) {
+        return;
+    }
+
+
+    toast.textContent =
+        mensaje;
+
+
+    toast.classList.add(
+        "visible"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "visible"
+                );
+
+            },
+            2500
+        );
+
+}
+
+
+
+/* =========================================
+   ACTIVAR NAVEGACIÓN
+========================================= */
+
+function activarNav(boton) {
+
+    document
+        .querySelectorAll(".nav-item")
+        .forEach(
+            item => {
+
+                item.classList.remove(
+                    "activo"
+                );
+
+            }
+        );
+
+
+    if (boton) {
+
+        boton.classList.add(
+            "activo"
+        );
+
+    }
+
+}
+
+
+
+/* =========================================
+   INICIO
+========================================= */
+
+navInicio.addEventListener(
+    "click",
+    () => {
+
+        activarNav(
+            navInicio
+        );
+
+
+        const inicio =
+            document.getElementById(
+                "inicio"
+            );
+
+
+        if (inicio) {
+
+            inicio.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+    }
+);
+
+
+
+/* =========================================
+   OPERACIONES
+========================================= */
+
+navOperaciones.addEventListener(
+    "click",
+    () => {
+
+        activarNav(
+            navOperaciones
+        );
+
+
+        mostrarToast(
+            "📒 Historial de operaciones — próximamente"
+        );
+
+    }
+);
+
+
+
+/* =========================================
+   CONFIGURACIÓN
+========================================= */
+
+navConfiguracion.addEventListener(
+    "click",
+    () => {
+
+        activarNav(
+            navConfiguracion
+        );
+
+
+        mostrarToast(
+            "⚙️ Configuración — próximamente"
+        );
+
+    }
+);
+
+
 
 /* =========================================
    FORMATO DE NÚMEROS
@@ -806,7 +983,18 @@ function calcular() {
     heroUsd.textContent =
         `${formatoNumero(
             usdQueLlegan
-        )} USD`;   
+        )} USD`;
+
+
+    /*
+       CORRECCIÓN:
+       Cuando hay datos válidos,
+       mostramos el estado correcto.
+    */
+
+    heroEstado.textContent =
+        "Cantidad estimada que llegará a Binance";
+
 
 
     /* RESULTADOS */
@@ -1353,7 +1541,6 @@ modoBtn.addEventListener(
 );
 
 
-
 /* =========================================
    RESULTADOS
 ========================================= */
@@ -1468,28 +1655,52 @@ function iniciarApp() {
 
 function actualizarHeroUsd() {
 
-    const heroUsd = document.getElementById("heroUsd");
+    const heroUsdElemento =
+        document.getElementById(
+            "heroUsd"
+        );
 
-    if (!heroUsd) return;
 
-    const texto = heroUsd.textContent.trim();
-
-    if (!texto) return;
-
-    if (
-        heroUsd.querySelector("#heroUsdNumero") &&
-        heroUsd.querySelector("small")
-    ) {
+    if (!heroUsdElemento) {
         return;
     }
 
-    const coincidencia = texto.match(
-        /^(.+?)\s*USD$/i
-    );
 
-    if (!coincidencia) return;
+    const texto =
+        heroUsdElemento.textContent.trim();
 
-    heroUsd.innerHTML = `
+
+    if (!texto) {
+        return;
+    }
+
+
+    if (
+        heroUsdElemento.querySelector(
+            "#heroUsdNumero"
+        ) &&
+        heroUsdElemento.querySelector(
+            "small"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    const coincidencia =
+        texto.match(
+            /^(.+?)\s*USD$/i
+        );
+
+
+    if (!coincidencia) {
+        return;
+    }
+
+
+    heroUsdElemento.innerHTML = `
 
         <span id="heroUsdNumero">
             ${coincidencia[1]}
@@ -1504,12 +1715,15 @@ function actualizarHeroUsd() {
 }
 
 
+
 /* =========================================
    VIGILAR CAMBIOS DEL RESULTADO
 ========================================= */
 
 const heroUsdElemento =
-    document.getElementById("heroUsd");
+    document.getElementById(
+        "heroUsd"
+    );
 
 
 if (heroUsdElemento) {
@@ -1518,11 +1732,13 @@ if (heroUsdElemento) {
 
 
     const observadorHero =
-        new MutationObserver(() => {
+        new MutationObserver(
+            () => {
 
-            actualizarHeroUsd();
+                actualizarHeroUsd();
 
-        });
+            }
+        );
 
 
     observadorHero.observe(
