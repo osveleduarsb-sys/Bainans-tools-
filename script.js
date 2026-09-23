@@ -554,6 +554,243 @@ const P2P_API =
 
 const P2P_INTERVALO = 2 * 60 * 1000; // 2 minutos
 
+/* =========================================
+   PRECIO P2P BINANCE AUTOMÁTICO
+   ========================================= */
+
+async function actualizarPrecioP2P() {
+
+  const p2pInput = document.getElementById("p2p");
+  const p2pEstado = document.getElementById("p2pEstado");
+  const botonP2P = document.getElementById("actualizarP2P");
+
+  if (!p2pInput || !p2pEstado) return;
+
+  if (botonP2P) {
+    botonP2P.classList.add("actualizando");
+    botonP2P.disabled = true;
+  }
+
+  p2pEstado.textContent = "🔄 Actualizando precio P2P...";
+
+  try {
+
+    const url =
+      `${P2P_API}?fiat=VES&asset=USDT&tradeType=SELL&_=${Date.now()}`;
+
+    const respuesta = await fetch(url, {
+      method: "GET",
+      cache: "no-store"
+    });
+
+    if (!respuesta.ok) {
+      throw new Error(`HTTP ${respuesta.status}`);
+    }
+
+    const datos = await respuesta.json();
+
+    /*
+     * Binance puede cambiar ligeramente
+     * la estructura de respuesta.
+     * Buscamos primero las propiedades
+     * conocidas del precio.
+     */
+
+    let precio = null;
+
+    const candidatos = [
+      datos?.data?.price,
+      datos?.data?.referencePrice,
+      datos?.price,
+      datos?.referencePrice
+    ];
+
+    for (const valor of candidatos) {
+
+      const numero = Number(valor);
+
+      if (
+        Number.isFinite(numero) &&
+        numero > 0
+      ) {
+        precio = numero;
+        break;
+      }
+    }
+
+    if (!precio) {
+      throw new Error("No se encontró el precio P2P");
+    }
+
+    /* Guardar precio */
+    localStorage.setItem(
+      "bainansP2P",
+      JSON.stringify({
+        precio: precio,
+        fecha: Date.now()
+      })
+    );
+
+    /* Mostrar precio */
+    p2pInput.value = formatoNumero(precio, 2);
+
+    /* Estado */
+    const hora = new Date().toLocaleTimeString(
+      "es-VE",
+      {
+        hour: "2-digit",
+        minute: "2-digit"
+      }
+    );
+
+    p2pEstado.textContent =
+      `🟢 Actualizado automáticamente: ${hora}`;
+
+    /* Recalcular */
+    calcular();
+
+  } catch (error) {
+
+    console.warn(
+      "No se pudo actualizar el precio P2P:",
+      error
+    );
+
+    /*
+     * Intentar utilizar el último precio
+     * guardado localmente.
+     */
+
+    const guardado =
+      localStorage.getItem("bainansP2P");
+
+    if (guardado) {
+
+      try {
+
+        const datosGuardados =
+          JSON.parse(guardado);
+
+        if (
+          datosGuardados?.precio &&
+          Number(datosGuardados.precio) > 0
+        ) {
+
+          p2pInput.value =
+            formatoNumero(
+              Number(datosGuardados.precio),
+              2
+            );
+
+          const fecha =
+            new Date(datosGuardados.fecha);
+
+          const hora =
+            fecha.toLocaleTimeString(
+              "es-VE",
+              {
+                hour: "2-digit",
+                minute: "2-digit"
+              }
+            );
+
+          p2pEstado.textContent =
+            `🟠 Sin conexión. Último precio: ${hora}`;
+
+          calcular();
+
+          return;
+        }
+
+      } catch (e) {
+        console.warn(
+          "Error leyendo P2P guardado:",
+          e
+        );
+      }
+    }
+
+    p2pEstado.textContent =
+      "🔴 No se pudo actualizar el precio P2P";
+
+  } finally {
+
+    if (botonP2P) {
+      botonP2P.classList.remove("actualizando");
+      botonP2P.disabled = false;
+    }
+
+  }
+} 
+
+/* =========================================
+   CARGAR P2P GUARDADO
+   ========================================= */
+
+function cargarP2PGuardado() {
+
+  const p2pInput =
+    document.getElementById("p2p");
+
+  const p2pEstado =
+    document.getElementById("p2pEstado");
+
+  if (!p2pInput) return;
+
+  const guardado =
+    localStorage.getItem("bainansP2P");
+
+  if (!guardado) {
+    p2pInput.value = "";
+    return;
+  }
+
+  try {
+
+    const datos =
+      JSON.parse(guardado);
+
+    if (
+      datos?.precio &&
+      Number(datos.precio) > 0
+    ) {
+
+      p2pInput.value =
+        formatoNumero(
+          Number(datos.precio),
+          2
+        );
+
+      if (p2pEstado) {
+
+        const fecha =
+          new Date(datos.fecha);
+
+        const hora =
+          fecha.toLocaleTimeString(
+            "es-VE",
+            {
+              hour: "2-digit",
+              minute: "2-digit"
+            }
+          );
+
+        p2pEstado.textContent =
+          `🟠 Último precio guardado: ${hora}`;
+      }
+    }
+
+  } catch (error) {
+
+    console.warn(
+      "No se pudo cargar P2P guardado:",
+      error
+    );
+
+  }
+   }
+
+
 
 
 /* =========================================
