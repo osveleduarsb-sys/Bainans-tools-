@@ -549,6 +549,11 @@ function obtenerNumero(input) {
 const BCV_API =
     "https://bcv.today/api/v1/rate.json";
 
+const P2P_API =
+  "https://www.binance.com/bapi/c2c/v1/public/c2c/agent/quote-price";
+
+const P2P_INTERVALO = 2 * 60 * 1000; // 2 minutos
+
 
 
 /* =========================================
