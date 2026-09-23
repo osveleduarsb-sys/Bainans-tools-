@@ -337,22 +337,30 @@
 
                 <!-- P2P -->
 
-                <div class="input-group">
+                <div class="input-group p2p-group">
+  <label for="p2p">Precio USDT Binance P2P</label>
 
-                    <label for="p2p">
-                        Precio USDT Binance P2P
-                    </label>
+  <div class="p2p-input-wrap">
+    <input
+      type="text"
+      id="p2p"
+      placeholder="Actualizando..."
+      readonly
+    >
 
+    <button
+      id="actualizarP2P"
+      type="button"
+      title="Actualizar precio P2P"
+    >
+      🔄
+    </button>
+  </div>
 
-                    <input
-                        type="number"
-                        id="p2p"
-                        placeholder="Opcional"
-                        step="0.01"
-                        min="0"
-                    >
-
-                </div>
+  <small id="p2pEstado" class="p2p-estado">
+    ⚪ Esperando actualización...
+  </small>
+</div>
 
 
             </div>
