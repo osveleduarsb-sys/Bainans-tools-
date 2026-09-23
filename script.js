@@ -549,274 +549,527 @@ function obtenerNumero(input) {
 const BCV_API =
     "https://bcv.today/api/v1/rate.json";
 
+// ======================================================
+// BINANCE P2P - PRECIO REAL DE ANUNCIOS
+// ======================================================
+
 const P2P_API =
-  "https://www.binance.com/bapi/c2c/v1/public/c2c/agent/quote-price";
+  "https://www.binance.com/bapi/c2c/v1/public/c2c/agent/ad-list";
 
-const P2P_INTERVALO = 2 * 60 * 1000; // 2 minutos
+const P2P_INTERVALO = 2 * 60 * 1000;
 
-/* =========================================
-   PRECIO P2P BINANCE AUTOMÁTICO
-   ========================================= */
 
-async function actualizarPrecioP2P() {
+// ------------------------------------------------------
+// Convierte diferentes formatos de respuesta de Binance
+// en una lista de anuncios.
+// ------------------------------------------------------
+function obtenerAnunciosP2P(respuesta) {
 
-  const p2pInput = document.getElementById("p2p");
-  const p2pEstado = document.getElementById("p2pEstado");
-  const botonP2P = document.getElementById("actualizarP2P");
+  const posiblesListas = [
+    respuesta?.data,
+    respuesta?.data?.data,
+    respuesta?.data?.ads,
+    respuesta?.data?.list,
+    respuesta?.data?.items,
+    respuesta?.ads,
+    respuesta?.list
+  ];
 
-  if (!p2pInput || !p2pEstado) return;
+  for (const lista of posiblesListas) {
 
-  if (botonP2P) {
-    botonP2P.classList.add("actualizando");
-    botonP2P.disabled = true;
+    if (
+      Array.isArray(lista) &&
+      lista.length &&
+      lista.some(item => item && typeof item === "object" && item.price != null)
+    ) {
+      return lista;
+    }
   }
 
-  p2pEstado.textContent = "🔄 Actualizando precio P2P...";
+  return [];
+}
+
+
+// ------------------------------------------------------
+// Convierte un valor Binance a número.
+// ------------------------------------------------------
+function numeroP2P(valor) {
+
+  if (valor === null || valor === undefined || valor === "") {
+    return 0;
+  }
+
+  if (typeof valor === "number") {
+    return valor;
+  }
+
+  return parseFloat(
+    String(valor)
+      .replace(/\s/g, "")
+      .replace(",", ".")
+  ) || 0;
+}
+
+
+// ------------------------------------------------------
+// Comprueba si el anuncio puede utilizarse para la
+// cantidad de USDT que estamos calculando.
+// ------------------------------------------------------
+function anuncioEsUtilizable(anuncio, usdtObjetivo) {
+
+  if (!usdtObjetivo || usdtObjetivo <= 0) {
+    return true;
+  }
+
+  const precio = numeroP2P(anuncio.price);
+
+  if (!precio) {
+    return false;
+  }
+
+  // Cantidad disponible del anuncio
+  const disponible = numeroP2P(
+    anuncio.surplusAmount ??
+    anuncio.surplus ??
+    anuncio.availableAmount ??
+    anuncio.quantity
+  );
+
+  // Límites en VES
+  const minimoVES = numeroP2P(
+    anuncio.minSingleTransAmount ??
+    anuncio.minAmount ??
+    anuncio.minSingleTrans
+  );
+
+  const maximoVES = numeroP2P(
+    anuncio.maxSingleTransAmount ??
+    anuncio.maxAmount ??
+    anuncio.maxSingleTrans
+  );
+
+  // Valor aproximado de nuestra operación en VES
+  const totalVES = usdtObjetivo * precio;
+
+
+  // Si Binance informa cantidad disponible,
+  // comprobamos que alcance para nuestra operación.
+  if (disponible > 0 && usdtObjetivo > disponible) {
+    return false;
+  }
+
+
+  // Comprobar mínimo
+  if (minimoVES > 0 && totalVES < minimoVES) {
+    return false;
+  }
+
+
+  // Comprobar máximo
+  if (maximoVES > 0 && totalVES > maximoVES) {
+    return false;
+  }
+
+
+  return true;
+}
+
+
+// ------------------------------------------------------
+// Obtiene el precio P2P real del mercado.
+// NO fija ningún banco.
+// ------------------------------------------------------
+async function actualizarPrecioP2P() {
+
+  if (!p2pInput) return;
 
   try {
 
+    if (p2pEstado) {
+      p2pEstado.textContent =
+        "🔄 Consultando anuncios P2P...";
+    }
+
+
+    /*
+     * Si estamos en modo ganancia, tenemos una cantidad
+     * de USDT que queremos vender.
+     *
+     * Esto permite descartar anuncios cuyos límites no
+     * permitan realizar la operación.
+     */
+    let usdtObjetivo = 0;
+
+    if (
+      typeof modoGanancia !== "undefined" &&
+      modoGanancia &&
+      saldoInput
+    ) {
+      usdtObjetivo = obtenerNumero(saldoInput);
+    }
+
+
+    // --------------------------------------------------
+    // CONSULTAMOS ANUNCIOS SELL
+    // --------------------------------------------------
+
     const url =
-      `${P2P_API}?fiat=VES&asset=USDT&tradeType=SELL&_=${Date.now()}`;
+      P2P_API +
+      "?fiat=VES" +
+      "&asset=USDT" +
+      "&tradeType=SELL" +
+      "&limit=20" +
+      "&order=priceDesc" +
+      "&_=" + Date.now();
+
 
     const respuesta = await fetch(url, {
       method: "GET",
       cache: "no-store"
     });
 
+
     if (!respuesta.ok) {
-      throw new Error(`HTTP ${respuesta.status}`);
+      throw new Error(
+        "HTTP " + respuesta.status
+      );
     }
+
 
     const datos = await respuesta.json();
 
-    /*
-     * Binance puede cambiar ligeramente
-     * la estructura de respuesta.
-     * Buscamos primero las propiedades
-     * conocidas del precio.
-     */
 
-    let precio = null;
+    const anuncios = obtenerAnunciosP2P(datos);
 
-    const candidatos = [
-      datos?.data?.price,
-      datos?.data?.referencePrice,
-      datos?.price,
-      datos?.referencePrice
-    ];
 
-    for (const valor of candidatos) {
-
-      const numero = Number(valor);
-
-      if (
-        Number.isFinite(numero) &&
-        numero > 0
-      ) {
-        precio = numero;
-        break;
-      }
+    if (!anuncios.length) {
+      throw new Error(
+        "Binance no devolvió anuncios P2P"
+      );
     }
 
-    if (!precio) {
-      throw new Error("No se encontró el precio P2P");
+
+    // --------------------------------------------------
+    // FILTRAMOS ANUNCIOS VÁLIDOS
+    // --------------------------------------------------
+
+    const anunciosValidos = anuncios
+      .filter(anuncio => {
+
+        const precio =
+          numeroP2P(anuncio.price);
+
+        return (
+          precio > 0 &&
+          anuncioEsUtilizable(
+            anuncio,
+            usdtObjetivo
+          )
+        );
+
+      })
+      .sort((a, b) => {
+
+        return (
+          numeroP2P(b.price) -
+          numeroP2P(a.price)
+        );
+
+      });
+
+
+    if (!anunciosValidos.length) {
+
+      /*
+       * Si ningún anuncio cumple los límites,
+       * utilizamos el mejor anuncio disponible para
+       * evitar dejar la calculadora sin tasa.
+       */
+
+      anunciosValidos.push(
+        ...anuncios
+          .filter(a => numeroP2P(a.price) > 0)
+          .sort(
+            (a, b) =>
+              numeroP2P(b.price) -
+              numeroP2P(a.price)
+          )
+      );
     }
 
-    /* Guardar precio */
+
+    const anuncio = anunciosValidos[0];
+
+
+    if (!anuncio) {
+      throw new Error(
+        "No se encontró un anuncio válido"
+      );
+    }
+
+
+    const precio = numeroP2P(
+      anuncio.price
+    );
+
+
+    // --------------------------------------------------
+    // DATOS DEL ANUNCIO
+    // --------------------------------------------------
+
+    const comerciante =
+      anuncio.nickName ||
+      anuncio.nickname ||
+      anuncio.merchantName ||
+      anuncio.userName ||
+      "Anuncio P2P";
+
+
+    const adNo =
+      anuncio.adNo ||
+      anuncio.advNo ||
+      "";
+
+
+    // --------------------------------------------------
+    // GUARDAR PRECIO
+    // --------------------------------------------------
+
     localStorage.setItem(
       "bainansP2P",
       JSON.stringify({
+
         precio: precio,
-        fecha: Date.now()
+
+        comerciante: comerciante,
+
+        adNo: adNo,
+
+        fecha: new Date().toISOString()
+
       })
     );
 
-    /* Mostrar precio */
-    p2pInput.value = formatoNumero(precio, 2);
 
-    /* Estado */
-    const hora = new Date().toLocaleTimeString(
-      "es-VE",
-      {
-        hour: "2-digit",
-        minute: "2-digit"
-      }
-    );
+    // --------------------------------------------------
+    // MOSTRAR PRECIO
+    // --------------------------------------------------
 
-    p2pEstado.textContent =
-      `🟢 Actualizado automáticamente: ${hora}`;
+    p2pInput.value =
+      formatoNumero(precio, 2);
 
-    /* Recalcular */
-    calcular();
+
+    if (p2pEstado) {
+
+      const hora =
+        new Date().toLocaleTimeString(
+          "es-VE",
+          {
+            hour: "2-digit",
+            minute: "2-digit"
+          }
+        );
+
+
+      p2pEstado.textContent =
+        "🟢 Mercado P2P actualizado: " +
+        hora;
+
+    }
+
+
+    // --------------------------------------------------
+    // RECALCULAR
+    // --------------------------------------------------
+
+    if (
+      typeof calcularGanancia === "function" &&
+      typeof modoGanancia !== "undefined" &&
+      modoGanancia
+    ) {
+
+      calcularGanancia();
+
+    } else if (
+      typeof calcularCompra === "function"
+    ) {
+
+      calcularCompra();
+
+    }
+
 
   } catch (error) {
 
-    console.warn(
-      "No se pudo actualizar el precio P2P:",
+    console.error(
+      "Error P2P:",
       error
     );
 
-    /*
-     * Intentar utilizar el último precio
-     * guardado localmente.
-     */
+
+    // --------------------------------------------------
+    // SI FALLA, USAMOS LA ÚLTIMA TASA GUARDADA
+    // --------------------------------------------------
 
     const guardado =
-      localStorage.getItem("bainansP2P");
+      localStorage.getItem(
+        "bainansP2P"
+      );
+
 
     if (guardado) {
 
       try {
 
-        const datosGuardados =
+        const datos =
           JSON.parse(guardado);
 
-        if (
-          datosGuardados?.precio &&
-          Number(datosGuardados.precio) > 0
-        ) {
+
+        const precio =
+          numeroP2P(datos.precio);
+
+
+        if (precio > 0) {
 
           p2pInput.value =
             formatoNumero(
-              Number(datosGuardados.precio),
+              precio,
               2
             );
 
-          const fecha =
-            new Date(datosGuardados.fecha);
 
-          const hora =
-            fecha.toLocaleTimeString(
-              "es-VE",
-              {
-                hour: "2-digit",
-                minute: "2-digit"
-              }
-            );
+          if (p2pEstado) {
 
-          p2pEstado.textContent =
-            `🟠 Sin conexión. Último precio: ${hora}`;
+            p2pEstado.textContent =
+              "🟠 Binance no respondió. " +
+              "Última tasa guardada";
 
-          calcular();
+          }
+
+
+          if (
+            typeof calcularGanancia === "function" &&
+            typeof modoGanancia !== "undefined" &&
+            modoGanancia
+          ) {
+
+            calcularGanancia();
+
+          } else if (
+            typeof calcularCompra === "function"
+          ) {
+
+            calcularCompra();
+
+          }
 
           return;
+
         }
 
       } catch (e) {
-        console.warn(
+
+        console.error(
           "Error leyendo P2P guardado:",
           e
         );
+
       }
+
     }
 
-    p2pEstado.textContent =
-      "🔴 No se pudo actualizar el precio P2P";
 
-  } finally {
+    if (p2pEstado) {
 
-    if (botonP2P) {
-      botonP2P.classList.remove("actualizando");
-      botonP2P.disabled = false;
+      p2pEstado.textContent =
+        "🔴 No se pudo actualizar P2P";
+
     }
 
   }
-} 
 
-/* =========================================
-   CARGAR P2P GUARDADO
-   ========================================= */
+}
 
+
+// ------------------------------------------------------
+// CARGAR ÚLTIMO PRECIO GUARDADO
+// ------------------------------------------------------
 function cargarP2PGuardado() {
 
-  const p2pInput =
-    document.getElementById("p2p");
-
-  const p2pEstado =
-    document.getElementById("p2pEstado");
-
-  if (!p2pInput) return;
-
   const guardado =
-    localStorage.getItem("bainansP2P");
+    localStorage.getItem(
+      "bainansP2P"
+    );
 
-  if (!guardado) {
-    p2pInput.value = "";
+
+  if (!guardado || !p2pInput) {
     return;
   }
+
 
   try {
 
     const datos =
       JSON.parse(guardado);
 
-    if (
-      datos?.precio &&
-      Number(datos.precio) > 0
-    ) {
+
+    const precio =
+      numeroP2P(datos.precio);
+
+
+    if (precio > 0) {
 
       p2pInput.value =
         formatoNumero(
-          Number(datos.precio),
+          precio,
           2
         );
 
+
       if (p2pEstado) {
 
-        const fecha =
-          new Date(datos.fecha);
-
-        const hora =
-          fecha.toLocaleTimeString(
-            "es-VE",
-            {
-              hour: "2-digit",
-              minute: "2-digit"
-            }
-          );
-
         p2pEstado.textContent =
-          `🟠 Último precio guardado: ${hora}`;
+          "🟠 Última tasa P2P guardada";
+
       }
+
     }
 
   } catch (error) {
 
-    console.warn(
-      "No se pudo cargar P2P guardado:",
+    console.error(
+      "Error cargando P2P:",
       error
     );
 
   }
-   }
 
-/* =========================================
-   INICIAR ACTUALIZACIÓN AUTOMÁTICA P2P
-   ========================================= */
+}
 
+
+// ------------------------------------------------------
+// ACTUALIZACIÓN MANUAL + AUTOMÁTICA
+// ------------------------------------------------------
 function iniciarActualizacionP2P() {
 
-  const botonP2P =
-    document.getElementById("actualizarP2P");
+  if (actualizarP2P) {
 
-  if (botonP2P) {
-
-    botonP2P.addEventListener(
+    actualizarP2P.addEventListener(
       "click",
       actualizarPrecioP2P
     );
+
   }
 
-  /*
-   * Actualización automática cada 2 minutos
-   */
 
+  // Actualizar automáticamente cada 2 minutos
   setInterval(
     actualizarPrecioP2P,
     P2P_INTERVALO
   );
-}
 
+}
+     
 
 /* =========================================
    GUARDAR TASA BCV
