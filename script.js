@@ -790,7 +790,32 @@ function cargarP2PGuardado() {
   }
    }
 
+/* =========================================
+   INICIAR ACTUALIZACIÓN AUTOMÁTICA P2P
+   ========================================= */
 
+function iniciarActualizacionP2P() {
+
+  const botonP2P =
+    document.getElementById("actualizarP2P");
+
+  if (botonP2P) {
+
+    botonP2P.addEventListener(
+      "click",
+      actualizarPrecioP2P
+    );
+  }
+
+  /*
+   * Actualización automática cada 2 minutos
+   */
+
+  setInterval(
+    actualizarPrecioP2P,
+    P2P_INTERVALO
+  );
+}
 
 
 /* =========================================
