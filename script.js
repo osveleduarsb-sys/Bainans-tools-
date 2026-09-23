@@ -2275,5 +2275,10 @@ function iniciarApp() {
 
 }
 
+cargarP2PGuardado();
+iniciarActualizacionP2P();
+
+/* Primera consulta automática */
+actualizarPrecioP2P();
 
 iniciarApp();
