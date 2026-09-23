@@ -1823,15 +1823,7 @@ function cargarDatos() {
             bpayInput.value =
                 datos.bpay;
 
-        }
-
-
-        if (datos.p2p) {
-
-            p2pInput.value =
-                datos.p2p;
-
-        }
+        }        
 
     }
 
@@ -2202,8 +2194,6 @@ cerrarResultados.addEventListener(
     }
 );
 
-
-
 /* =========================================
    INICIAR APP
 ========================================= */
@@ -2273,12 +2263,23 @@ function iniciarApp() {
 
     calcular();
 
+
+    /* ==============================
+       P2P BINANCE
+       ============================== */
+
+    cargarP2PGuardado();
+
+    iniciarActualizacionP2P();
+
+    /* Primera consulta automática */
+    actualizarPrecioP2P();
+
 }
 
-cargarP2PGuardado();
-iniciarActualizacionP2P();
 
-/* Primera consulta automática */
-actualizarPrecioP2P();
+/* =========================================
+   INICIAR
+========================================= */
 
 iniciarApp();
