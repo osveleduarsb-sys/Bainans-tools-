@@ -1715,3 +1715,66 @@ body.dark input {
     }
 
 }
+
+/* ==============================
+   PRECIO P2P AUTOMÁTICO
+   ============================== */
+
+.p2p-group {
+  position: relative;
+}
+
+.p2p-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.p2p-input-wrap input {
+  flex: 1;
+}
+
+#actualizarP2P {
+  width: 46px;
+  min-width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 12px;
+  background: var(--primary);
+  color: #111;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+#actualizarP2P:active {
+  transform: scale(0.92);
+}
+
+#actualizarP2P.actualizando {
+  animation: girarP2P 1s linear infinite;
+  opacity: 0.7;
+}
+
+.p2p-estado {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+@keyframes girarP2P {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Modo oscuro */
+body.dark .p2p-estado {
+  opacity: 0.8;
+}
