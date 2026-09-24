@@ -1783,78 +1783,20 @@ body.dark input {
 
 }
 
-/* ==============================
-   PRECIO P2P AUTOMÁTICO
-   ============================== */
-
-.p2p-group {
-  position: relative;
-}
-
-.p2p-input-wrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.p2p-input-wrap input {
-  flex: 1;
-}
-
-#actualizarP2P {
-  width: 46px;
-  min-width: 46px;
-  height: 46px;
-  border: none;
-  border-radius: 12px;
-  background: var(--primary);
-  color: #111;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-#actualizarP2P:active {
-  transform: scale(0.92);
-}
-
-#actualizarP2P.actualizando {
-  animation: girarP2P 1s linear infinite;
-  opacity: 0.7;
-}
-
-.p2p-estado {
-  display: block;
-  margin-top: 6px;
-  font-size: 12px;
-  opacity: 0.75;
-}
-
-@keyframes girarP2P {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Modo oscuro */
-body.dark .p2p-estado {
-  opacity: 0.8;
-}
-
 /* =========================================================
-   AJUSTE FINAL — BOTONES BCV Y P2P DENTRO DE SUS CAMPOS
-   Ambos botones usan exactamente el mismo tamaño y giro.
+   BOTONES DE ACTUALIZACIÓN BCV / P2P
+   MISMO TAMAÑO + MISMA ANIMACIÓN
 ========================================================= */
+
 .tasa-input-wrap,
 .p2p-input-wrap {
     position: relative;
     width: 100%;
 }
+
+
+/* Espacio interno para que el texto
+   no quede debajo del botón */
 
 .tasa-input-wrap input,
 .p2p-input-wrap input {
@@ -1862,75 +1804,187 @@ body.dark .p2p-estado {
     padding-right: 55px;
 }
 
+
+/* Ambos botones exactamente iguales */
+
 #actualizarBCV,
 #actualizarP2P {
+
     position: absolute;
+
     right: 6px;
     top: 50%;
+
+    transform: translateY(-50%);
+
     width: 40px;
-    min-width: 40px;
     height: 40px;
+
+    min-width: 40px;
+
     padding: 0;
-    margin: 0;
+
     border: none;
+
     border-radius: 11px;
+
     background: var(--primary);
+
     color: #111;
+
     font-size: 18px;
-    font-weight: 700;
+
+    cursor: pointer;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
-    z-index: 3;
-    cursor: pointer;
-    transform: translateY(-50%);
-    transition: background .2s ease, opacity .2s ease;
+
+    z-index: 5;
+
+    transition:
+        background .2s ease,
+        transform .2s ease,
+        opacity .2s ease;
+
 }
+
+
+/* Hover */
 
 #actualizarBCV:hover,
 #actualizarP2P:hover {
-    transform: translateY(-50%) scale(1.05);
+
+    transform:
+        translateY(-50%)
+        scale(1.05);
+
 }
+
+
+/* Presionar */
 
 #actualizarBCV:active,
 #actualizarP2P:active {
-    transform: translateY(-50%) scale(.92);
+
+    transform:
+        translateY(-50%)
+        scale(.92);
+
 }
+
+
+/* Desactivado */
 
 #actualizarBCV:disabled,
 #actualizarP2P:disabled {
+
     cursor: default;
+
     opacity: .75;
+
 }
 
-/* Misma animación para BCV y P2P */
-#actualizarBCV.cargando,
-#actualizarP2P.actualizando {
-    animation: girarBoton .8s linear infinite;
-    opacity: .75;
+
+/* =========================================================
+   ICONO GIRANDO
+========================================================= */
+
+.icono-refresh {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
 }
 
-@keyframes girarBoton {
+
+/* BCV y P2P usan exactamente la misma animación */
+
+#actualizarBCV.cargando .icono-refresh,
+#actualizarP2P.cargando .icono-refresh {
+
+    animation:
+        girarRefresh
+        .8s
+        linear
+        infinite;
+
+}
+
+
+/* Animación */
+
+@keyframes girarRefresh {
+
     from {
-        transform: translateY(-50%) rotate(0deg);
+        transform: rotate(0deg);
     }
+
     to {
-        transform: translateY(-50%) rotate(360deg);
+        transform: rotate(360deg);
     }
+
 }
+
+
+/* =========================================================
+   ESTADO P2P
+========================================================= */
+
+.p2p-estado {
+
+    display: block;
+
+    margin-top: 6px;
+
+    font-size: 12px;
+
+    opacity: .75;
+
+}
+
+
+body.dark .p2p-estado {
+
+    opacity: .8;
+
+}
+
+
+/* =========================================================
+   MÓVIL
+========================================================= */
 
 @media (max-width: 800px) {
+
     #actualizarBCV,
     #actualizarP2P {
+
         width: 36px;
-        min-width: 36px;
         height: 36px;
+
+        min-width: 36px;
+
+        right: 6px;
+
         border-radius: 10px;
+
         font-size: 17px;
+
     }
+
 
     .tasa-input-wrap input,
     .p2p-input-wrap input {
+
         padding-right: 49px;
+
     }
-}
+
+}    
