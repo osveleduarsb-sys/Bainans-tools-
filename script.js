@@ -2311,11 +2311,13 @@ bcvInput.addEventListener(
 );
 
 
+/* =========================================
+   CAMPOS NUMÉRICOS SIMPLES
+========================================= */
+
 [
     recargoInput,
-    bdvInput,
-    bpayInput,
-    p2pInput
+    bdvInput
 
 ].forEach(input => {
 
@@ -2331,6 +2333,50 @@ bcvInput.addEventListener(
     );
 
 });
+
+
+/* =========================================
+   BPAY
+========================================= */
+
+bpayInput.addEventListener(
+    "input",
+    () => {
+
+        calcular();
+
+        guardarDatos();
+
+    }
+);
+
+
+/* =========================================
+   PRECIO P2P MANUAL
+========================================= */
+
+p2pInput.addEventListener(
+    "input",
+    () => {
+
+        p2pInput.value =
+            formatearEntrada(
+                p2pInput.value
+            );
+
+
+        p2pInput.setSelectionRange(
+            p2pInput.value.length,
+            p2pInput.value.length
+        );
+
+
+        calcular();
+
+        guardarDatos();
+
+    }
+);
 
 
 
