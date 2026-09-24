@@ -248,28 +248,40 @@
 
                 <!-- BCV -->
 
-                <div class="input-group">
+                <!-- BCV -->
 
-                    <label for="bcv">
-                        Tasa BCV
-                    </label>
+<div class="input-group">
 
+    <label for="bcv">
+        Tasa BCV
+    </label>
 
-                    <input
-                        type="text"
-                        id="bcv"
-                        inputmode="decimal"
-                        autocomplete="off"
-                        placeholder="Ej. 848,55"
-                    >
+    <div class="tasa-input-wrap">
 
+        <input
+            type="text"
+            id="bcv"
+            inputmode="decimal"
+            autocomplete="off"
+            placeholder="Ej. 848,55"
+        >
 
-                    <small id="bcvEstado">
-                        🟢 Actualizada: 2026-09-18
-                    </small>
+        <button
+            id="actualizarBCV"
+            type="button"
+            title="Actualizar tasa BCV"
+            aria-label="Actualizar tasa BCV"
+        >
+            🔄
+        </button>
 
-                </div>
+    </div>
 
+    <small id="bcvEstado">
+        🟢 Actualizada: 2026-09-18
+    </small>
+
+</div>
 
 
                 <!-- RECARGO -->
