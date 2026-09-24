@@ -1631,15 +1631,26 @@ body.dark input {
     }
 
 
-    #actualizarBCV {
+    /* BOTONES BCV / P2P DENTRO DEL INPUT */
 
-        width: 45px;
-        height: 45px;
+#actualizarBCV,
+#actualizarP2P {
 
-        border-radius: 13px;
+    width: 36px;
+    height: 36px;
 
-        font-size: 20px;
-    }
+    right: 6px;
+
+    border-radius: 10px;
+
+    font-size: 17px;
+}
+
+
+.tasa-input-wrap input {
+
+    padding-right: 49px;
+}
 
 
     /* INPUTS */
