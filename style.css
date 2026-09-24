@@ -1,0 +1,1936 @@
+@import url(
+    'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap'
+);
+
+
+/* =========================================
+   VARIABLES
+========================================= */
+
+:root {
+
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --input: #ffffff;
+
+    --primary: #f3ba2f;
+    --primary-2: #ffd95e;
+
+    --text: #151515;
+    --sub: #737984;
+
+    --border: #dfe3e9;
+
+    --success: #18a957;
+    --danger: #e04b4b;
+
+    --dark: #101318;
+
+    --radius: 22px;
+
+    --shadow:
+        0 12px 35px rgba(0,0,0,.07);
+}
+
+
+/* =========================================
+   MODO OSCURO
+========================================= */
+
+body.dark {
+
+    --bg: #080c10;
+    --card: #0e151b;
+    --input: #101a22;
+
+    --text: #f4f7fb;
+    --sub: #8c9aa8;
+
+    --border: #233a4c;
+
+    --shadow: none;
+}
+
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family:
+        'Inter',
+        sans-serif;
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+body {
+
+    min-height: 100vh;
+
+    background: var(--bg);
+    color: var(--text);
+
+    padding:
+        18px
+        16px
+        25px;
+
+    overflow-x: hidden;
+
+    transition:
+        background .3s ease,
+        color .3s ease;
+}
+
+
+/* =========================================
+   DECORACIÓN
+========================================= */
+
+.decor {
+
+    position: fixed;
+
+    width: 230px;
+    height: 230px;
+
+    border-radius: 50%;
+
+    background: var(--primary);
+
+    opacity: .20;
+
+    z-index: -1;
+
+    pointer-events: none;
+}
+
+
+.decor-1 {
+    top: -145px;
+    left: -90px;
+}
+
+
+.decor-2 {
+    top: -145px;
+    right: -90px;
+}
+
+
+.decor-3 {
+    bottom: -150px;
+    left: -100px;
+}
+
+
+.decor-4 {
+    bottom: -150px;
+    right: -100px;
+}
+
+
+body.dark .decor {
+    opacity: .28;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.app-header {
+
+    position: relative;
+
+    text-align: center;
+
+    max-width: 620px;
+
+    margin:
+        0 auto
+        16px;
+}
+
+
+.logo {
+
+    width: 82px;
+    height: 82px;
+
+    margin:
+        0 auto
+        10px;
+
+    border-radius: 24px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--primary);
+
+    color: #111;
+
+    font-size: 47px;
+    font-weight: 900;
+
+    box-shadow:
+        0 12px 25px
+        rgba(243,186,47,.25);
+}
+
+
+.app-header h1 {
+
+    font-size: 43px;
+
+    line-height: 1.05;
+
+    font-weight: 900;
+
+    letter-spacing: -1.5px;
+}
+
+
+.app-header h1 span {
+    color: var(--text);
+}
+
+
+.app-header h1 strong {
+    color: var(--primary);
+}
+
+
+/* =========================================
+   MODO OSCURO
+========================================= */
+
+#modo {
+
+    position: absolute;
+
+    right: -5px;
+    top: 5px;
+
+    width: 58px;
+    height: 58px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #e9eef5;
+
+    color: #111;
+
+    font-size: 24px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,.08);
+
+    transition:
+        transform .2s ease,
+        background .3s ease;
+}
+
+
+#modo:hover {
+    transform: scale(1.05);
+}
+
+
+body.dark #modo {
+
+    background: #101b25;
+
+    color: var(--primary);
+
+    border:
+        1px solid
+        #274052;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero-card {
+
+    position: relative;
+
+    max-width: 620px;
+
+    margin:
+        0 auto
+        17px;
+
+    padding:
+        55px
+        18px
+        22px;
+
+    border-radius: 23px;
+
+    text-align: center;
+
+    overflow: hidden;
+
+    animation:
+        flotarGiro 5s ease-in-out infinite;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.16),
+            transparent 25%
+        ),
+
+        linear-gradient(
+            315deg,
+            rgba(255,190,25,.30),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            125deg,
+            transparent 0%,
+            transparent 17%,
+            rgba(255,230,115,.28) 17%,
+            rgba(255,230,115,.28) 23%,
+            transparent 23%,
+            transparent 38%,
+            rgba(239,174,20,.20) 38%,
+            rgba(239,174,20,.20) 45%,
+            transparent 45%
+        ),
+
+        linear-gradient(
+            35deg,
+            transparent 0%,
+            transparent 50%,
+            rgba(255,235,130,.18) 50%,
+            rgba(255,235,130,.18) 62%,
+            transparent 62%
+        ),
+
+        linear-gradient(
+            135deg,
+            #ffc52e,
+            #ffd95e
+        );
+
+    box-shadow:
+        0 8px 18px
+        rgba(243,186,47,.22);
+}
+
+
+@keyframes flotarGiro {
+
+    0% {
+        transform:
+            perspective(1000px)
+            rotateY(0deg);
+    }
+
+    25% {
+        transform:
+            perspective(1000px)
+            rotateY(-3deg);
+    }
+
+    50% {
+        transform:
+            perspective(1000px)
+            rotateY(0deg);
+    }
+
+    75% {
+        transform:
+            perspective(1000px)
+            rotateY(3deg);
+    }
+
+    100% {
+        transform:
+            perspective(1000px)
+            rotateY(0deg);
+    }
+
+}
+
+
+.hero-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: .55;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            transparent 0 15%,
+            rgba(255,255,255,.14) 15% 18%,
+            transparent 18% 34%,
+            rgba(230,164,20,.12) 34% 38%,
+            transparent 38% 100%
+        );
+}
+
+
+.hero-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 55%;
+    height: 100%;
+
+    top: 0;
+    right: -12%;
+
+    pointer-events: none;
+
+    opacity: .30;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            transparent 0 30%,
+            #ffe88b 30% 40%,
+            transparent 40% 55%,
+            #eaae24 55% 65%,
+            transparent 65%
+        );
+
+    transform:
+        skewX(-12deg);
+}
+
+
+/* =========================================
+   FRANJA NEGRA
+========================================= */
+
+.hero-line {
+
+    position: absolute;
+
+    top: 20px;
+
+    left: 0;
+    right: 0;
+
+    height: 31px;
+
+    background: #11161b;
+
+    z-index: 2;
+}
+
+
+/* =========================================
+   HERO CONTENIDO
+========================================= */
+
+.hero-icon {
+
+    display: block;
+
+    font-size: 34px;
+
+    margin-bottom: 7px;
+
+    position: relative;
+
+    z-index: 3;
+}
+
+
+.hero-card h2 {
+
+    position: relative;
+
+    z-index: 3;
+
+    font-size: 19px;
+
+    font-weight: 800;
+
+    margin-bottom: 10px;
+}
+
+
+.hero-card h1 {
+
+    position: relative;
+
+    z-index: 3;
+
+    font-size: 48px;
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    letter-spacing: -1.5px;
+
+    margin-bottom: 14px;
+
+    color: #050505;
+
+    white-space: nowrap;
+}
+
+
+.hero-card h1 #heroUsdNumero {
+
+    font-size: 1em;
+
+    font-weight: 900;
+}
+
+
+.hero-card h1 small {
+
+    font-size: .42em;
+
+    font-weight: 900;
+
+    margin-left: 4px;
+}
+
+
+.hero-card p {
+
+    position: relative;
+
+    z-index: 3;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    color: #111;
+}
+
+
+/* =========================================
+   NAVEGACIÓN
+========================================= */
+
+.quick-nav {
+
+    width: 100%;
+
+    max-width: 350px;
+
+    margin:
+        14px auto
+        22px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 9px;
+}
+
+
+.nav-item {
+
+    min-width: 0;
+
+    height: 66px;
+
+    padding:
+        7px
+        5px;
+
+    border:
+        1.5px solid
+        var(--border);
+
+    border-radius: 17px;
+
+    background: var(--card);
+
+    color: var(--text);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 16px
+        rgba(0,0,0,.045);
+
+    transition: .2s ease;
+}
+
+
+.nav-item:hover {
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        var(--primary);
+}
+
+
+.nav-item:active {
+    transform: scale(.96);
+}
+
+
+.nav-item.activo {
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd95e,
+            #f3ba2f
+        );
+
+    border-color:
+        var(--primary);
+
+    color: #111;
+}
+
+
+.nav-icon {
+
+    font-size: 22px;
+
+    line-height: 1;
+}
+
+
+.nav-text {
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+
+body.dark .nav-item {
+    box-shadow: none;
+}
+
+
+/* =========================================
+   CONTENEDOR
+========================================= */
+
+.container {
+
+    width: 100%;
+
+    max-width: 620px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   TARJETAS
+========================================= */
+
+.card {
+
+    background: var(--card);
+
+    border-radius: 20px;
+
+    box-shadow: var(--shadow);
+
+    transition:
+        background .3s ease,
+        border .3s ease;
+}
+
+
+body.dark .card {
+
+    border:
+        1px solid
+        #223a4c;
+}
+
+
+/* =========================================
+   DATOS
+========================================= */
+
+.datos-card {
+
+    padding: 18px;
+}
+
+
+.datos-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 14px;
+}
+
+
+.titulo-modo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    min-width: 0;
+}
+
+
+.datos-header h2 {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 28px;
+
+    font-weight: 900;
+
+    white-space: nowrap;
+}
+
+
+.section-icon {
+    font-size: 30px;
+}
+
+
+/* =========================================
+   INTERRUPTOR
+========================================= */
+
+.switch-modo {
+
+    position: relative;
+
+    width: 46px;
+    height: 25px;
+
+    flex-shrink: 0;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: #d8dde3;
+
+    cursor: pointer;
+
+    transition:
+        background .25s ease,
+        transform .2s ease;
+}
+
+
+.switch-modo::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: inherit;
+
+    box-shadow:
+        inset 0 1px 3px
+        rgba(0,0,0,.16);
+}
+
+
+.switch-circulo {
+
+    position: absolute;
+
+    width: 19px;
+    height: 19px;
+
+    top: 3px;
+    left: 3px;
+
+    border-radius: 50%;
+
+    background: #fff;
+
+    box-shadow:
+        0 2px 5px
+        rgba(0,0,0,.20);
+
+    transition:
+        transform .25s ease;
+}
+
+
+.switch-modo.activo {
+
+    background: var(--primary);
+}
+
+
+.switch-modo.activo
+.switch-circulo {
+
+    transform:
+        translateX(21px);
+}
+
+
+.switch-modo:active {
+    transform: scale(.94);
+}
+
+
+/* =========================================
+   CAMPOS CON BOTÓN DE ACTUALIZACIÓN
+========================================= */
+
+.tasa-input-wrap {
+
+    position: relative;
+
+    width: 100%;
+}
+
+
+.tasa-input-wrap input {
+
+    padding-right: 55px;
+}
+
+
+/* =========================================
+   BOTÓN BCV / P2P DENTRO DEL CAMPO
+========================================= */
+
+#actualizarBCV,
+#actualizarP2P {
+
+    position: absolute;
+
+    right: 6px;
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    width: 40px;
+    height: 40px;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background: var(--primary);
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 2;
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
+}
+
+
+#actualizarBCV:hover,
+#actualizarP2P:hover {
+
+    transform:
+        translateY(-50%)
+        scale(1.05);
+}
+
+
+#actualizarBCV:active,
+#actualizarP2P:active {
+
+    transform:
+        translateY(-50%)
+        scale(.92);
+}
+
+
+#actualizarBCV:disabled,
+#actualizarP2P:disabled {
+
+    cursor: default;
+
+    opacity: .75;
+}
+
+
+#actualizarBCV.cargando {
+
+    animation:
+        girar .8s linear infinite;
+}
+
+
+/* P2P */
+
+.p2p-input-wrap input {
+
+    padding-right: 55px;
+}
+
+
+@keyframes girar {
+
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================
+   INPUT GRID
+========================================= */
+
+.inputs-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    column-gap: 18px;
+
+    row-gap: 12px;
+}
+
+
+.input-group {
+    min-width: 0;
+}
+
+
+.input-group label {
+
+    display: flex;
+
+    align-items: center;
+
+    min-height: 28px;
+
+    margin-bottom: 8px;
+
+    font-size: 16px;
+
+    line-height: 1.2;
+
+    font-weight: 800;
+
+    color: var(--text);
+}
+
+
+input {
+
+    width: 100%;
+
+    height: 58px;
+
+    padding:
+        0
+        17px;
+
+    border:
+        2px solid
+        var(--border);
+
+    border-radius: 15px;
+
+    outline: none;
+
+    background: var(--input);
+
+    color: var(--text);
+
+    font-size: 18px;
+
+    transition: .2s ease;
+}
+
+
+input:focus {
+
+    border-color:
+        var(--primary);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(243,186,47,.12);
+}
+
+
+input::placeholder {
+    color: #aeb4bd;
+}
+
+
+body.dark input {
+    color: #edf4fa;
+}
+
+
+/* =========================================
+   BCV ESTADO
+========================================= */
+
+#bcvEstado {
+
+    display: block;
+
+    margin-top: 5px;
+
+    min-height: 16px;
+
+    font-size: 13px;
+
+    color: var(--success);
+
+    font-weight: 600;
+}
+
+
+#bcvEstado.error {
+    color: #db9200;
+}
+
+
+/* =========================================
+   COPIAR
+========================================= */
+
+#copiar {
+
+    width: 100%;
+
+    height: 52px;
+
+    margin-top: 15px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    background: var(--primary);
+
+    color: #111;
+
+    font-size: 20px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    transition: .2s ease;
+}
+
+
+#copiar:hover {
+    transform: translateY(-2px);
+}
+
+
+#copiar:active {
+    transform: scale(.98);
+}
+
+
+/* =========================================
+   BOTÓN RESULTADO
+========================================= */
+
+#mostrarResultados {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    width: 220px;
+    height: 52px;
+
+    margin:
+        14px auto
+        0;
+
+    border:
+        2px solid
+        var(--primary);
+
+    border-radius: 30px;
+
+    background: transparent;
+
+    color: var(--text);
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+
+#mostrarResultados span {
+
+    font-size: 19px;
+
+    letter-spacing: -3px;
+}
+
+
+/* =========================================
+   RESULTADOS
+========================================= */
+
+.resultados-card {
+
+    display: none;
+
+    margin-top: 20px;
+
+    padding: 25px;
+}
+
+
+.resultados-card.visible {
+
+    display: block;
+
+    animation:
+        aparecer .25s ease;
+}
+
+
+@keyframes aparecer {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(8px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+.resultados-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+
+.resultados-header h2 {
+
+    font-size: 25px;
+
+    font-weight: 900;
+}
+
+
+#cerrarResultados {
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: var(--border);
+
+    color: var(--text);
+
+    cursor: pointer;
+}
+
+
+.result-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    gap: 13px;
+}
+
+
+.result-card {
+
+    min-width: 0;
+
+    padding: 13px;
+
+    border-radius: 15px;
+
+    border:
+        1px solid
+        var(--border);
+
+    background: var(--input);
+}
+
+
+.result-card .titulo {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--sub);
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+.result-card .valor {
+
+    display: block;
+
+    color: var(--success);
+
+    font-size: 15px;
+
+    font-weight: 900;
+
+    word-break: break-word;
+}
+
+
+.resultado-ganancia .valor {
+    color: var(--success);
+}
+
+
+.resultado-roi .valor {
+    color: var(--primary);
+}
+
+
+#estado {
+
+    margin-top: 17px;
+
+    padding: 12px;
+
+    text-align: center;
+
+    border-radius: 12px;
+
+    background:
+        rgba(243,186,47,.10);
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   TOAST
+========================================= */
+
+#toast {
+
+    position: fixed;
+
+    left: 50%;
+    bottom: 24px;
+
+    z-index: 100;
+
+    min-width: 230px;
+
+    max-width:
+        calc(100% - 40px);
+
+    padding:
+        12px
+        18px;
+
+    border-radius: 14px;
+
+    background: #11161b;
+
+    color: #fff;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.20);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transform:
+        translate(-50%,15px);
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease;
+}
+
+
+#toast.visible {
+
+    opacity: 1;
+
+    transform:
+        translate(-50%,0);
+}
+
+
+/* =========================================
+   DESKTOP
+========================================= */
+
+@media (min-width: 800px) {
+
+    body {
+        padding-top: 45px;
+    }
+
+
+    .hero-card,
+    .container {
+        max-width: 700px;
+    }
+
+
+    .quick-nav {
+
+        margin-top: 17px;
+        margin-bottom: 25px;
+    }
+
+}
+
+
+/* =========================================
+   MÓVIL
+========================================= */
+
+@media (max-width: 800px) {
+
+    body {
+
+        padding:
+            10px
+            12px
+            18px;
+    }
+
+
+    /* HEADER */
+
+    .app-header {
+
+        max-width: 600px;
+
+        margin:
+            0 auto
+            10px;
+    }
+
+
+    .logo {
+
+        width: 58px;
+        height: 58px;
+
+        border-radius: 18px;
+
+        font-size: 35px;
+
+        margin-bottom: 7px;
+    }
+
+
+    .app-header h1 {
+
+        font-size: 31px;
+
+        letter-spacing: -1.3px;
+    }
+
+
+    #modo {
+
+        width: 48px;
+        height: 48px;
+
+        right: 0;
+        top: 0;
+
+        font-size: 20px;
+    }
+
+
+    /* HERO */
+
+    .hero-card {
+
+        width:
+            calc(100% - 140px);
+
+        max-width: 540px;
+
+        margin:
+            0 auto
+            10px;
+
+        padding:
+            30px
+            20px
+            12px;
+
+        border-radius: 15px;
+    }
+
+
+    .hero-line {
+
+        top: 18px;
+
+        height: 29px;
+    }
+
+
+    .hero-icon {
+
+        font-size: 20px;
+
+        margin-bottom: 30px;
+    }
+
+
+    .hero-card h2 {
+
+        font-size: 10px;
+
+        margin-bottom: 7px;
+    }
+
+
+    .hero-card h1 {
+
+        font-size: 37px;
+
+        margin-bottom: 7px;
+
+        letter-spacing: -1.2px;
+    }
+
+
+    .hero-card p {
+        font-size: 13px;
+    }
+
+
+    /* NAVEGACIÓN */
+
+    .quick-nav {
+
+        max-width: 330px;
+
+        margin:
+            13px auto
+            20px;
+
+        gap: 7px;
+    }
+
+
+    .nav-item {
+
+        height: 59px;
+
+        border-radius: 15px;
+
+        padding:
+            5px
+            3px;
+    }
+
+
+    .nav-icon {
+        font-size: 20px;
+    }
+
+
+    .nav-text {
+        font-size: 9px;
+    }
+
+
+    /* DATOS */
+
+    .datos-card {
+        padding: 18px;
+    }
+
+
+    .datos-header {
+        margin-bottom: 10px;
+    }
+
+
+    .datos-header h2 {
+
+        font-size: 20px;
+
+        gap: 5px;
+    }
+
+
+    .section-icon {
+        font-size: 22px;
+    }
+
+
+    .titulo-modo {
+        gap: 6px;
+    }
+
+
+    .switch-modo {
+
+        width: 42px;
+        height: 23px;
+    }
+
+
+    .switch-circulo {
+
+        width: 17px;
+        height: 17px;
+
+        top: 3px;
+        left: 3px;
+    }
+
+
+    .switch-modo.activo
+    .switch-circulo {
+
+        transform:
+            translateX(19px);
+    }
+
+
+    /* BOTONES BCV / P2P DENTRO DEL INPUT */
+
+#actualizarBCV,
+#actualizarP2P {
+
+    width: 36px;
+    height: 36px;
+
+    right: 6px;
+
+    border-radius: 10px;
+
+    font-size: 17px;
+}
+
+
+.tasa-input-wrap input {
+
+    padding-right: 49px;
+}
+
+
+    /* INPUTS */
+
+    .inputs-grid {
+
+        column-gap: 12px;
+
+        row-gap: 10px;
+    }
+
+
+    .input-group label {
+
+        min-height: 24px;
+
+        margin-bottom: 6px;
+
+        font-size: 13px;
+    }
+
+
+    input {
+
+        height: 53px;
+
+        padding:
+            0
+            13px;
+
+        border-radius: 13px;
+
+        font-size: 16px;
+    }
+
+
+    #bcvEstado {
+
+        font-size: 10px;
+
+        margin-top: 4px;
+    }
+
+
+    /* COPIAR */
+
+    #copiar {
+
+        height: 50px;
+
+        margin-top: 13px;
+
+        border-radius: 14px;
+
+        font-size: 17px;
+    }
+
+
+    /* RESULTADOS */
+
+    .resultados-card {
+
+        padding: 18px;
+
+        margin-top: 15px;
+    }
+
+
+    .resultados-header {
+
+        margin-bottom: 15px;
+    }
+
+
+    .resultados-header h2 {
+        font-size: 21px;
+    }
+
+
+    #cerrarResultados {
+
+        width: 34px;
+        height: 34px;
+    }
+
+
+    .result-grid {
+        gap: 9px;
+    }
+
+
+    .result-card {
+
+        padding: 10px;
+
+        border-radius: 12px;
+    }
+
+
+    .result-card .titulo {
+
+        font-size: 11px;
+
+        margin-bottom: 5px;
+    }
+
+
+    .result-card .valor {
+
+        font-size: 13px;
+    }
+
+
+    #estado {
+
+        font-size: 12px;
+
+        padding: 10px;
+    }
+
+
+    #mostrarResultados {
+
+        width: 200px;
+
+        height: 50px;
+
+        font-size: 17px;
+    }
+
+}
+
+/* ==============================
+   PRECIO P2P AUTOMÁTICO
+   ============================== */
+
+.p2p-group {
+  position: relative;
+}
+
+.p2p-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.p2p-input-wrap input {
+  flex: 1;
+}
+
+#actualizarP2P {
+  width: 46px;
+  min-width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 12px;
+  background: var(--primary);
+  color: #111;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+#actualizarP2P:active {
+  transform: scale(0.92);
+}
+
+#actualizarP2P.actualizando {
+  animation: girarP2P 1s linear infinite;
+  opacity: 0.7;
+}
+
+.p2p-estado {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+@keyframes girarP2P {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Modo oscuro */
+body.dark .p2p-estado {
+  opacity: 0.8;
+}
+
+/* =========================================================
+   AJUSTE FINAL — BOTONES BCV Y P2P DENTRO DE SUS CAMPOS
+   Ambos botones usan exactamente el mismo tamaño y giro.
+========================================================= */
+.tasa-input-wrap,
+.p2p-input-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.tasa-input-wrap input,
+.p2p-input-wrap input {
+    width: 100%;
+    padding-right: 55px;
+}
+
+#actualizarBCV,
+#actualizarP2P {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 11px;
+    background: var(--primary);
+    color: #111;
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: background .2s ease, opacity .2s ease;
+}
+
+#actualizarBCV:hover,
+#actualizarP2P:hover {
+    transform: translateY(-50%) scale(1.05);
+}
+
+#actualizarBCV:active,
+#actualizarP2P:active {
+    transform: translateY(-50%) scale(.92);
+}
+
+#actualizarBCV:disabled,
+#actualizarP2P:disabled {
+    cursor: default;
+    opacity: .75;
+}
+
+/* Misma animación para BCV y P2P */
+#actualizarBCV.cargando,
+#actualizarP2P.actualizando {
+    animation: girarBoton .8s linear infinite;
+    opacity: .75;
+}
+
+@keyframes girarBoton {
+    from {
+        transform: translateY(-50%) rotate(0deg);
+    }
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
+@media (max-width: 800px) {
+    #actualizarBCV,
+    #actualizarP2P {
+        width: 36px;
+        min-width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        font-size: 17px;
+    }
+
+    .tasa-input-wrap input,
+    .p2p-input-wrap input {
+        padding-right: 49px;
+    }
+}
