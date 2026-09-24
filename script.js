@@ -1,6 +1,6 @@
 /* =========================================
    BAINANS TOOLS
-   LÓGICA V4
+   SCRIPT COMPLETO CORREGIDO
 ========================================= */
 
 
@@ -35,6 +35,12 @@ const bpayInput =
 const p2pInput =
     document.getElementById("p2p");
 
+const actualizarP2P =
+    document.getElementById("actualizarP2P");
+
+const p2pEstado =
+    document.getElementById("p2pEstado");
+
 
 const datosTitulo =
     document.getElementById("datosTitulo");
@@ -50,7 +56,9 @@ const heroEstado =
     document.getElementById("heroEstado");
 
 
-/* RESULTADOS COMPRA */
+/* =========================================
+   RESULTADOS COMPRA
+========================================= */
 
 const tasaFinal =
     document.getElementById("tasaFinal");
@@ -77,7 +85,9 @@ const ahorroP2p =
     document.getElementById("ahorroP2p");
 
 
-/* RESULTADOS GANANCIA */
+/* =========================================
+   RESULTADOS GANANCIA
+========================================= */
 
 const ganTasaFinal =
     document.getElementById("ganTasaFinal");
@@ -103,14 +113,10 @@ const estado =
 
 
 const resultadosCompra =
-    document.getElementById(
-        "resultadosCompra"
-    );
+    document.getElementById("resultadosCompra");
 
 const resultadosGanancia =
-    document.getElementById(
-        "resultadosGanancia"
-    );
+    document.getElementById("resultadosGanancia");
 
 
 const modoBtn =
@@ -121,53 +127,38 @@ const copiarBtn =
     document.getElementById("copiar");
 
 const textoCopiar =
-    document.getElementById(
-        "textoCopiar"
-    );
+    document.getElementById("textoCopiar");
 
 
 const mostrarResultados =
-    document.getElementById(
-        "mostrarResultados"
-    );
+    document.getElementById("mostrarResultados");
 
 const resultados =
-    document.getElementById(
-        "resultados"
-    );
+    document.getElementById("resultados");
 
 const cerrarResultados =
-    document.getElementById(
-        "cerrarResultados"
-    );
+    document.getElementById("cerrarResultados");
 
 const themeColor =
-    document.getElementById(
-        "themeColor"
-    );
+    document.getElementById("themeColor");
 
 
-/* NAVEGACIÓN */
+/* =========================================
+   NAVEGACIÓN
+========================================= */
 
 const navInicio =
-    document.getElementById(
-        "navInicio"
-    );
+    document.getElementById("navInicio");
 
 const navOperaciones =
-    document.getElementById(
-        "navOperaciones"
-    );
+    document.getElementById("navOperaciones");
 
 const navConfiguracion =
-    document.getElementById(
-        "navConfiguracion"
-    );
+    document.getElementById("navConfiguracion");
 
 
 const toast =
     document.getElementById("toast");
-
 
 let toastTimer;
 
@@ -177,7 +168,6 @@ let toastTimer;
 ========================================= */
 
 let modoGanancia = false;
-
 
 
 /* =========================================
@@ -195,13 +185,9 @@ function mostrarToast(mensaje) {
     clearTimeout(toastTimer);
 
     toastTimer = setTimeout(() => {
-
         toast.classList.remove("visible");
-
     }, 2500);
-
 }
-
 
 
 /* =========================================
@@ -213,76 +199,75 @@ function activarNav(boton) {
     document
         .querySelectorAll(".nav-item")
         .forEach(item => {
-
-            item.classList.remove(
-                "activo"
-            );
-
+            item.classList.remove("activo");
         });
 
-
     if (boton) {
-
-        boton.classList.add(
-            "activo"
-        );
-
+        boton.classList.add("activo");
     }
+}
+
+
+if (navInicio) {
+
+    navInicio.addEventListener(
+        "click",
+        () => {
+
+            activarNav(navInicio);
+
+            const inicio =
+                document.getElementById("inicio");
+
+            if (inicio) {
+
+                inicio.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+
+        }
+    );
 
 }
 
 
-navInicio.addEventListener(
-    "click",
-    () => {
+if (navOperaciones) {
 
-        activarNav(navInicio);
+    navOperaciones.addEventListener(
+        "click",
+        () => {
 
-        const inicio =
-            document.getElementById(
-                "inicio"
+            activarNav(navOperaciones);
+
+            mostrarToast(
+                "📒 Historial de operaciones — próximamente"
             );
 
-        if (inicio) {
+        }
+    );
 
-            inicio.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
+}
+
+
+if (navConfiguracion) {
+
+    navConfiguracion.addEventListener(
+        "click",
+        () => {
+
+            activarNav(navConfiguracion);
+
+            mostrarToast(
+                "⚙️ Configuración — próximamente"
+            );
 
         }
+    );
 
-    }
-);
-
-
-navOperaciones.addEventListener(
-    "click",
-    () => {
-
-        activarNav(navOperaciones);
-
-        mostrarToast(
-            "📒 Historial de operaciones — próximamente"
-        );
-
-    }
-);
-
-
-navConfiguracion.addEventListener(
-    "click",
-    () => {
-
-        activarNav(navConfiguracion);
-
-        mostrarToast(
-            "⚙️ Configuración — próximamente"
-        );
-
-    }
-);
-
+}
 
 
 /* =========================================
@@ -297,16 +282,12 @@ function formatoNumero(
     return Number(numero).toLocaleString(
         "es-VE",
         {
-            minimumFractionDigits:
-                decimales,
-
-            maximumFractionDigits:
-                decimales
+            minimumFractionDigits: decimales,
+            maximumFractionDigits: decimales
         }
     );
 
 }
-
 
 
 /* =========================================
@@ -350,8 +331,7 @@ function convertirNumero(valor) {
     ) {
 
         if (
-            /^\d{1,3}(\.\d{3})+$/
-                .test(texto)
+            /^\d{1,3}(\.\d{3})+$/.test(texto)
         ) {
 
             texto =
@@ -373,7 +353,6 @@ function convertirNumero(valor) {
 }
 
 
-
 /* =========================================
    FORMATEAR ENTRADA
 ========================================= */
@@ -393,13 +372,10 @@ function formatearEntrada(valor) {
 
     if (!texto) return "";
 
-
     let decimal = "";
 
 
-    if (
-        texto.includes(",")
-    ) {
+    if (texto.includes(",")) {
 
         const partes =
             texto.split(",");
@@ -411,24 +387,19 @@ function formatearEntrada(valor) {
             partes.join("");
 
         entero =
-            entero.replace(
-                /\./g,
-                ""
-            );
+            entero.replace(/\./g, "");
 
         if (!entero) {
             entero = "0";
         }
 
         entero =
-            Number(entero)
-                .toLocaleString(
-                    "es-VE",
-                    {
-                        maximumFractionDigits:
-                            0
-                    }
-                );
+            Number(entero).toLocaleString(
+                "es-VE",
+                {
+                    maximumFractionDigits: 0
+                }
+            );
 
         return decimal !== ""
             ? `${entero},${decimal}`
@@ -437,9 +408,7 @@ function formatearEntrada(valor) {
     }
 
 
-    if (
-        texto.includes(".")
-    ) {
+    if (texto.includes(".")) {
 
         const partes =
             texto.split(".");
@@ -451,19 +420,14 @@ function formatearEntrada(valor) {
         ) {
 
             const numero =
-                texto.replace(
-                    /\./g,
-                    ""
-                );
+                texto.replace(/\./g, "");
 
-            return Number(numero)
-                .toLocaleString(
-                    "es-VE",
-                    {
-                        maximumFractionDigits:
-                            0
-                    }
-                );
+            return Number(numero).toLocaleString(
+                "es-VE",
+                {
+                    maximumFractionDigits: 0
+                }
+            );
 
         }
 
@@ -474,21 +438,18 @@ function formatearEntrada(valor) {
         ) {
 
             const entero =
-                partes[0]
-                    .replace(/\./g, "");
+                partes[0].replace(/\./g, "");
 
             const decimal =
                 partes[1];
 
             const enteroFormateado =
-                Number(entero)
-                    .toLocaleString(
-                        "es-VE",
-                        {
-                            maximumFractionDigits:
-                                0
-                        }
-                    );
+                Number(entero).toLocaleString(
+                    "es-VE",
+                    {
+                        maximumFractionDigits: 0
+                    }
+                );
 
             return `${enteroFormateado}.${decimal}`;
 
@@ -499,33 +460,24 @@ function formatearEntrada(valor) {
 
     const numero =
         parseInt(
-            texto.replace(
-                /\D/g,
-                ""
-            ),
+            texto.replace(/\D/g, ""),
             10
         );
 
 
-    if (
-        !Number.isFinite(numero)
-    ) {
-
+    if (!Number.isFinite(numero)) {
         return "";
-
     }
 
 
     return numero.toLocaleString(
         "es-VE",
         {
-            maximumFractionDigits:
-                0
+            maximumFractionDigits: 0
         }
     );
 
 }
-
 
 
 /* =========================================
@@ -534,12 +486,13 @@ function formatearEntrada(valor) {
 
 function obtenerNumero(input) {
 
+    if (!input) return 0;
+
     return convertirNumero(
         input.value
     );
 
 }
-
 
 
 /* =========================================
@@ -550,693 +503,756 @@ const BCV_API =
     "https://bcv.today/api/v1/rate.json";
 
 
-// ============================================================
-// BAINANS TOOLS - MERCADO P2P BINANCE
-// Usa el 2.º anuncio válido como referencia de mercado
-// ============================================================
+/* =========================================
+   API BINANCE P2P
+========================================= */
 
 const P2P_API =
-  "https://www.binance.com/bapi/c2c/v1/public/c2c/agent/ad-list";
+    "https://www.binance.com/bapi/c2c/v1/public/c2c/agent/ad-list";
 
-const P2P_INTERVALO = 2 * 60 * 1000;
+const P2P_INTERVALO =
+    2 * 60 * 1000;
 
 
-// ------------------------------------------------------------
-// OBTENER LISTA DE ANUNCIOS
-// ------------------------------------------------------------
+/* =========================================
+   OBTENER ANUNCIOS P2P
+========================================= */
 
 function obtenerAnunciosP2P(respuesta) {
 
-  const posiblesListas = [
-    respuesta?.data,
-    respuesta?.data?.data,
-    respuesta?.data?.ads,
-    respuesta?.data?.list,
-    respuesta?.data?.items,
-    respuesta?.ads,
-    respuesta?.list
-  ];
+    const posiblesListas = [
 
-  for (const lista of posiblesListas) {
+        respuesta?.data,
 
-    if (
-      Array.isArray(lista) &&
-      lista.length
+        respuesta?.data?.data,
+
+        respuesta?.data?.ads,
+
+        respuesta?.data?.list,
+
+        respuesta?.data?.items,
+
+        respuesta?.ads,
+
+        respuesta?.list
+
+    ];
+
+
+    for (
+        const lista of posiblesListas
     ) {
-      return lista;
+
+        if (
+            Array.isArray(lista) &&
+            lista.length
+        ) {
+
+            return lista;
+
+        }
+
     }
 
-  }
 
-  return [];
+    return [];
+
 }
 
 
-// ------------------------------------------------------------
-// CONVERTIR NÚMEROS P2P
-// ------------------------------------------------------------
+/* =========================================
+   CONVERTIR NÚMEROS P2P
+========================================= */
 
 function numeroP2P(valor) {
 
-  if (
-    valor === null ||
-    valor === undefined ||
-    valor === ""
-  ) {
-    return 0;
-  }
+    if (
+        valor === null ||
+        valor === undefined ||
+        valor === ""
+    ) {
 
-  if (typeof valor === "number") {
-    return valor;
-  }
+        return 0;
 
-  let texto = String(valor)
-    .replace(/\s/g, "");
+    }
 
-  /*
-    Permite:
-    982.899
-    982,899
-    982.899,50
-    982,50
-  */
 
-  if (
-    texto.includes(".") &&
-    texto.includes(",")
-  ) {
-    texto = texto.replace(/\./g, "");
-    texto = texto.replace(",", ".");
-  } else if (
-    texto.includes(",")
-  ) {
-    texto = texto.replace(",", ".");
-  }
+    if (typeof valor === "number") {
+        return valor;
+    }
 
-  return parseFloat(texto) || 0;
+
+    let texto =
+        String(valor)
+            .replace(/\s/g, "");
+
+
+    if (
+        texto.includes(".") &&
+        texto.includes(",")
+    ) {
+
+        texto =
+            texto
+                .replace(/\./g, "")
+                .replace(",", ".");
+
+    }
+
+    else if (
+        texto.includes(",")
+    ) {
+
+        texto =
+            texto.replace(",", ".");
+
+    }
+
+
+    return parseFloat(texto) || 0;
+
 }
 
 
-// ------------------------------------------------------------
-// NORMALIZAR ANUNCIO
-// Binance puede devolver algunos datos directamente o dentro
-// de "adv". Esta función permite trabajar con ambos formatos.
-// ------------------------------------------------------------
+/* =========================================
+   NORMALIZAR ANUNCIO P2P
+========================================= */
 
 function normalizarAnuncioP2P(anuncio) {
 
-  const adv =
-    anuncio?.adv ||
-    anuncio;
+    const adv =
+        anuncio?.adv || anuncio;
 
-  const advertiser =
-    anuncio?.advertiser ||
-    {};
+    const advertiser =
+        anuncio?.advertiser || {};
 
-  return {
 
-    original: anuncio,
+    return {
 
-    precio: numeroP2P(
-      adv?.price ??
-      anuncio?.price
-    ),
+        original: anuncio,
 
-    disponible: numeroP2P(
-      adv?.surplusAmount ??
-      adv?.surplus ??
-      adv?.availableAmount ??
-      adv?.quantity ??
-      anuncio?.surplusAmount ??
-      anuncio?.surplus ??
-      anuncio?.availableAmount ??
-      anuncio?.quantity
-    ),
+        precio: numeroP2P(
+            adv?.price ??
+            anuncio?.price
+        ),
 
-    minimoVES: numeroP2P(
-      adv?.minSingleTransAmount ??
-      adv?.minAmount ??
-      adv?.minSingleTrans ??
-      anuncio?.minSingleTransAmount ??
-      anuncio?.minAmount ??
-      anuncio?.minSingleTrans
-    ),
+        disponible: numeroP2P(
+            adv?.surplusAmount ??
+            adv?.surplus ??
+            adv?.availableAmount ??
+            adv?.quantity ??
+            anuncio?.surplusAmount ??
+            anuncio?.surplus ??
+            anuncio?.availableAmount ??
+            anuncio?.quantity
+        ),
 
-    maximoVES: numeroP2P(
-      adv?.maxSingleTransAmount ??
-      adv?.maxAmount ??
-      adv?.maxSingleTrans ??
-      anuncio?.maxSingleTransAmount ??
-      anuncio?.maxAmount ??
-      anuncio?.maxSingleTrans
-    ),
+        minimoVES: numeroP2P(
+            adv?.minSingleTransAmount ??
+            adv?.minAmount ??
+            adv?.minSingleTrans ??
+            anuncio?.minSingleTransAmount ??
+            anuncio?.minAmount ??
+            anuncio?.minSingleTrans
+        ),
 
-    comerciante:
-      advertiser?.nickName ||
-      advertiser?.nickname ||
-      adv?.nickName ||
-      adv?.nickname ||
-      anuncio?.nickName ||
-      anuncio?.nickname ||
-      anuncio?.merchantName ||
-      anuncio?.userName ||
-      "Anuncio P2P",
+        maximoVES: numeroP2P(
+            adv?.maxSingleTransAmount ??
+            adv?.maxAmount ??
+            adv?.maxSingleTrans ??
+            anuncio?.maxSingleTransAmount ??
+            anuncio?.maxAmount ??
+            anuncio?.maxSingleTrans
+        ),
 
-    adNo:
-      adv?.advNo ||
-      adv?.adNo ||
-      anuncio?.advNo ||
-      anuncio?.adNo ||
-      ""
+        comerciante:
+            advertiser?.nickName ||
+            advertiser?.nickname ||
+            adv?.nickName ||
+            adv?.nickname ||
+            anuncio?.nickName ||
+            anuncio?.nickname ||
+            anuncio?.merchantName ||
+            anuncio?.userName ||
+            "Anuncio P2P",
 
-  };
+        adNo:
+            adv?.advNo ||
+            adv?.adNo ||
+            anuncio?.advNo ||
+            anuncio?.adNo ||
+            ""
+
+    };
+
 }
 
 
-// ------------------------------------------------------------
-// COMPROBAR SI EL ANUNCIO SIRVE PARA EL MONTO
-// ------------------------------------------------------------
+/* =========================================
+   COMPROBAR ANUNCIO P2P
+========================================= */
 
-function anuncioEsUtilizable(anuncio, montoVES) {
-
-  if (!anuncio || anuncio.precio <= 0) {
-    return false;
-  }
-
-  /*
-    Si no tenemos un monto concreto,
-    simplemente consideramos válido el anuncio.
-  */
-
-  if (!montoVES || montoVES <= 0) {
-    return true;
-  }
-
-  const precio = anuncio.precio;
-
-  /*
-    Cuántos USDT necesitaríamos vender
-    para obtener el monto VES.
-  */
-
-  const usdtNecesarios =
-    montoVES / precio;
-
-
-  // Comprobar disponibilidad de USDT
-
-  if (
-    anuncio.disponible > 0 &&
-    usdtNecesarios > anuncio.disponible
-  ) {
-    return false;
-  }
-
-
-  // Comprobar mínimo de la orden
-
-  if (
-    anuncio.minimoVES > 0 &&
-    montoVES < anuncio.minimoVES
-  ) {
-    return false;
-  }
-
-
-  // Comprobar máximo de la orden
-
-  if (
-    anuncio.maximoVES > 0 &&
-    montoVES > anuncio.maximoVES
-  ) {
-    return false;
-  }
-
-
-  return true;
-}
-
-
-// ------------------------------------------------------------
-// ACTUALIZAR PRECIO P2P
-// ------------------------------------------------------------
-
-async function actualizarPrecioP2P() {
-
-  if (!p2pInput) {
-    return;
-  }
-
-  try {
-
-    if (p2pEstado) {
-      p2pEstado.textContent =
-        "🔄 Consultando anuncios P2P...";
-    }
-
-
-    /*
-      En modo GANANCIA:
-
-      capital = USDT que tenemos
-      tasa = BCV + recargo
-      montoVES = capital × tasa
-
-      Ese es el monto que intentaremos recuperar
-      mediante la venta P2P.
-    */
-
-    let montoVESObjetivo = 0;
+function anuncioEsUtilizable(
+    anuncio,
+    montoVES
+) {
 
     if (
-      typeof modoGanancia !== "undefined" &&
-      modoGanancia &&
-      saldoInput
+        !anuncio ||
+        anuncio.precio <= 0
     ) {
 
-      const capital =
-        obtenerNumero(saldoInput);
-
-      const bcv =
-        obtenerNumero(bcvInput);
-
-      const recargo =
-        obtenerNumero(recargoInput);
-
-      const tasa =
-        bcv * (1 + recargo / 100);
-
-      montoVESObjetivo =
-        capital * tasa;
-    }
-
-
-    // --------------------------------------------------------
-    // CONSULTAR BINANCE
-    // --------------------------------------------------------
-
-    const url =
-      P2P_API +
-      "?fiat=VES" +
-      "&asset=USDT" +
-      "&tradeType=SELL" +
-      "&limit=20" +
-      "&order=priceDesc" +
-      "&_=" +
-      Date.now();
-
-
-    const respuesta = await fetch(url, {
-
-      method: "GET",
-
-      cache: "no-store"
-
-    });
-
-
-    if (!respuesta.ok) {
-      throw new Error(
-        "HTTP " + respuesta.status
-      );
-    }
-
-
-    const datos =
-      await respuesta.json();
-
-
-    const anunciosBrutos =
-      obtenerAnunciosP2P(datos);
-
-
-    if (!anunciosBrutos.length) {
-
-      throw new Error(
-        "Binance no devolvió anuncios P2P"
-      );
+        return false;
 
     }
 
 
-    // --------------------------------------------------------
-    // NORMALIZAR
-    // --------------------------------------------------------
+    if (
+        !montoVES ||
+        montoVES <= 0
+    ) {
 
-    const anuncios =
-      anunciosBrutos
-        .map(normalizarAnuncioP2P)
-        .filter(anuncio =>
-          anuncio.precio > 0
-        );
-
-
-    if (!anuncios.length) {
-
-      throw new Error(
-        "No se encontraron precios P2P"
-      );
+        return true;
 
     }
-
-
-    // --------------------------------------------------------
-    // FILTRAR ANUNCIOS COMPATIBLES
-    // --------------------------------------------------------
-
-    const anunciosValidos =
-      anuncios
-        .filter(anuncio =>
-          anuncioEsUtilizable(
-            anuncio,
-            montoVESObjetivo
-          )
-        )
-        .sort(
-          (a, b) =>
-            b.precio - a.precio
-        );
-
-
-    if (!anunciosValidos.length) {
-
-      throw new Error(
-        "No hay anuncios compatibles con el monto"
-      );
-
-    }
-
-
-    /*
-      ==========================================================
-      AQUÍ ESTÁ EL CAMBIO PRINCIPAL
-
-      1.º anuncio = normalmente el precio más alto
-      2.º anuncio = referencia que utilizaremos
-      3.º anuncio = siguiente alternativa
-
-      Utilizamos el SEGUNDO anuncio válido.
-
-      Si solamente hay uno válido,
-      utilizamos el primero.
-      ==========================================================
-    */
-
-    const posicion =
-      anunciosValidos.length >= 2
-        ? 1
-        : 0;
-
-
-    const anuncio =
-      anunciosValidos[posicion];
 
 
     const precio =
-      anuncio.precio;
+        anuncio.precio;
 
 
-    if (!precio || precio <= 0) {
-
-      throw new Error(
-        "El anuncio seleccionado no tiene precio válido"
-      );
-
-    }
+    const usdtNecesarios =
+        montoVES / precio;
 
 
-    // --------------------------------------------------------
-    // GUARDAR REFERENCIA
-    // --------------------------------------------------------
-
-    localStorage.setItem(
-      "bainansP2P",
-      JSON.stringify({
-
-        precio: precio,
-
-        comerciante:
-          anuncio.comerciante,
-
-        adNo:
-          anuncio.adNo,
-
-        posicion:
-          posicion + 1,
-
-        totalValidos:
-          anunciosValidos.length,
-
-        fecha:
-          new Date().toISOString()
-
-      })
-    );
-
-
-    // --------------------------------------------------------
-    // MOSTRAR PRECIO EN LA APP
-    // --------------------------------------------------------
-
-    p2pInput.value =
-      formatoNumero(
-        precio,
-        2
-      );
-
-
-    // --------------------------------------------------------
-    // ESTADO
-    // --------------------------------------------------------
-
-    if (p2pEstado) {
-
-      const hora =
-        new Date().toLocaleTimeString(
-          "es-VE",
-          {
-            hour: "2-digit",
-            minute: "2-digit"
-          }
-        );
-
-
-      p2pEstado.textContent =
-        "🟢 Mercado P2P actualizado: " +
-        hora;
-    }
-
-
-    // --------------------------------------------------------
-    // RECALCULAR
-    // --------------------------------------------------------
+    /* DISPONIBILIDAD USDT */
 
     if (
-      typeof calcularGanancia === "function" &&
-      typeof modoGanancia !== "undefined" &&
-      modoGanancia
+        anuncio.disponible > 0 &&
+        usdtNecesarios > anuncio.disponible
     ) {
 
-      calcularGanancia();
-
-    } else if (
-      typeof calcularCompra === "function"
-    ) {
-
-      calcularCompra();
+        return false;
 
     }
 
 
-    console.log(
-      "P2P seleccionado:",
-      anuncio
-    );
+    /* MÍNIMO */
+
+    if (
+        anuncio.minimoVES > 0 &&
+        montoVES < anuncio.minimoVES
+    ) {
+
+        return false;
+
+    }
 
 
-  } catch (error) {
+    /* MÁXIMO */
 
-    console.error(
-      "Error P2P:",
-      error
-    );
+    if (
+        anuncio.maximoVES > 0 &&
+        montoVES > anuncio.maximoVES
+    ) {
 
+        return false;
 
-    // --------------------------------------------------------
-    // USAR ÚLTIMO PRECIO GUARDADO
-    // --------------------------------------------------------
-
-    const guardado =
-      localStorage.getItem(
-        "bainansP2P"
-      );
+    }
 
 
-    if (guardado) {
+    return true;
 
-      try {
+}
+
+
+/* =========================================
+   ACTUALIZAR PRECIO P2P
+========================================= */
+
+async function actualizarPrecioP2P() {
+
+    if (!p2pInput) return;
+
+
+    /*
+       MISMA ANIMACIÓN QUE BCV
+
+       Se agrega la clase "cargando"
+       al botón mientras Binance responde.
+    */
+
+    if (actualizarP2P) {
+
+        if (
+            actualizarP2P.classList.contains(
+                "cargando"
+            )
+        ) {
+
+            return;
+
+        }
+
+        actualizarP2P.classList.add(
+            "cargando"
+        );
+
+        actualizarP2P.disabled = true;
+
+    }
+
+
+    try {
+
+        if (p2pEstado) {
+
+            p2pEstado.textContent =
+                "🔄 Consultando anuncios P2P...";
+
+        }
+
+
+        /*
+           EN MODO GANANCIA:
+
+           Capital = USDT
+
+           Tasa = BCV + recargo
+
+           Monto VES =
+           capital × tasa
+        */
+
+        let montoVESObjetivo = 0;
+
+
+        if (
+            modoGanancia &&
+            saldoInput
+        ) {
+
+            const capital =
+                obtenerNumero(
+                    saldoInput
+                );
+
+            const bcv =
+                obtenerNumero(
+                    bcvInput
+                );
+
+            const recargo =
+                obtenerNumero(
+                    recargoInput
+                );
+
+            const tasa =
+                bcv *
+                (
+                    1 +
+                    recargo / 100
+                );
+
+
+            montoVESObjetivo =
+                capital * tasa;
+
+        }
+
+
+        /* CONSULTAR BINANCE */
+
+        const url =
+            P2P_API +
+            "?fiat=VES" +
+            "&asset=USDT" +
+            "&tradeType=SELL" +
+            "&limit=20" +
+            "&order=priceDesc" +
+            "&_=" +
+            Date.now();
+
+
+        const respuesta =
+            await fetch(
+                url,
+                {
+                    method: "GET",
+                    cache: "no-store"
+                }
+            );
+
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                "HTTP " +
+                respuesta.status
+            );
+
+        }
+
 
         const datos =
-          JSON.parse(guardado);
+            await respuesta.json();
+
+
+        const anunciosBrutos =
+            obtenerAnunciosP2P(
+                datos
+            );
+
+
+        if (!anunciosBrutos.length) {
+
+            throw new Error(
+                "Binance no devolvió anuncios P2P"
+            );
+
+        }
+
+
+        /* NORMALIZAR */
+
+        const anuncios =
+            anunciosBrutos
+                .map(
+                    normalizarAnuncioP2P
+                )
+                .filter(
+                    anuncio =>
+                        anuncio.precio > 0
+                );
+
+
+        if (!anuncios.length) {
+
+            throw new Error(
+                "No se encontraron precios P2P"
+            );
+
+        }
+
+
+        /* FILTRAR */
+
+        const anunciosValidos =
+            anuncios
+                .filter(
+                    anuncio =>
+                        anuncioEsUtilizable(
+                            anuncio,
+                            montoVESObjetivo
+                        )
+                )
+                .sort(
+                    (a, b) =>
+                        b.precio - a.precio
+                );
+
+
+        if (!anunciosValidos.length) {
+
+            throw new Error(
+                "No hay anuncios compatibles con el monto"
+            );
+
+        }
+
+
+        /*
+           USAMOS EL SEGUNDO ANUNCIO VÁLIDO.
+
+           Si solamente existe uno,
+           usamos el primero.
+        */
+
+        const posicion =
+            anunciosValidos.length >= 2
+                ? 1
+                : 0;
+
+
+        const anuncio =
+            anunciosValidos[posicion];
 
 
         const precio =
-          numeroP2P(
-            datos.precio
-          );
+            anuncio.precio;
+
+
+        if (
+            !precio ||
+            precio <= 0
+        ) {
+
+            throw new Error(
+                "El anuncio seleccionado no tiene precio válido"
+            );
+
+        }
+
+
+        /* GUARDAR */
+
+        localStorage.setItem(
+            "bainansP2P",
+            JSON.stringify({
+
+                precio: precio,
+
+                comerciante:
+                    anuncio.comerciante,
+
+                adNo:
+                    anuncio.adNo,
+
+                posicion:
+                    posicion + 1,
+
+                totalValidos:
+                    anunciosValidos.length,
+
+                fecha:
+                    new Date().toISOString()
+
+            })
+        );
+
+
+        /* MOSTRAR */
+
+        p2pInput.value =
+            formatoNumero(
+                precio,
+                2
+            );
+
+
+        /* ESTADO */
+
+        if (p2pEstado) {
+
+            const hora =
+                new Date().toLocaleTimeString(
+                    "es-VE",
+                    {
+                        hour: "2-digit",
+                        minute: "2-digit"
+                    }
+                );
+
+
+            p2pEstado.textContent =
+                "🟢 Mercado P2P actualizado: " +
+                hora;
+
+        }
+
+
+        /* RECALCULAR */
+
+        calcular();
+
+
+        console.log(
+            "P2P seleccionado:",
+            anuncio
+        );
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Error P2P:",
+            error
+        );
+
+
+        const guardado =
+            localStorage.getItem(
+                "bainansP2P"
+            );
+
+
+        if (guardado) {
+
+            try {
+
+                const datos =
+                    JSON.parse(
+                        guardado
+                    );
+
+
+                const precio =
+                    numeroP2P(
+                        datos.precio
+                    );
+
+
+                if (precio > 0) {
+
+                    p2pInput.value =
+                        formatoNumero(
+                            precio,
+                            2
+                        );
+
+
+                    if (p2pEstado) {
+
+                        p2pEstado.textContent =
+                            "🟠 Binance no respondió. Última tasa guardada";
+
+                    }
+
+
+                    calcular();
+
+                    return;
+
+                }
+
+            }
+
+            catch (e) {
+
+                console.error(
+                    "Error leyendo P2P guardado:",
+                    e
+                );
+
+            }
+
+        }
+
+
+        if (p2pEstado) {
+
+            p2pEstado.textContent =
+                "🔴 No se pudo actualizar P2P";
+
+        }
+
+    }
+
+    finally {
+
+        /*
+           QUITAR ANIMACIÓN
+           Y VOLVER A ACTIVAR BOTÓN
+        */
+
+        if (actualizarP2P) {
+
+            actualizarP2P.classList.remove(
+                "cargando"
+            );
+
+            actualizarP2P.disabled = false;
+
+        }
+
+    }
+
+}
+
+
+/* =========================================
+   CARGAR P2P GUARDADO
+========================================= */
+
+function cargarP2PGuardado() {
+
+    const guardado =
+        localStorage.getItem(
+            "bainansP2P"
+        );
+
+
+    if (
+        !guardado ||
+        !p2pInput
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const datos =
+            JSON.parse(
+                guardado
+            );
+
+
+        const precio =
+            numeroP2P(
+                datos.precio
+            );
 
 
         if (precio > 0) {
 
-          p2pInput.value =
-            formatoNumero(
-              precio,
-              2
-            );
+            p2pInput.value =
+                formatoNumero(
+                    precio,
+                    2
+                );
 
 
-          if (p2pEstado) {
+            if (p2pEstado) {
 
-            p2pEstado.textContent =
-              "🟠 Binance no respondió. Última tasa guardada";
+                p2pEstado.textContent =
+                    "🟠 Última tasa P2P guardada";
 
-          }
-
-
-          if (
-            typeof calcularGanancia === "function" &&
-            typeof modoGanancia !== "undefined" &&
-            modoGanancia
-          ) {
-
-            calcularGanancia();
-
-          } else if (
-            typeof calcularCompra === "function"
-          ) {
-
-            calcularCompra();
-
-          }
-
-
-          return;
+            }
 
         }
 
-      } catch (e) {
+    }
+
+    catch (error) {
 
         console.error(
-          "Error leyendo P2P guardado:",
-          e
+            "Error cargando P2P:",
+            error
         );
 
-      }
-
     }
-
-
-    // --------------------------------------------------------
-    // SIN PRECIO DISPONIBLE
-    // --------------------------------------------------------
-
-    if (p2pEstado) {
-
-      p2pEstado.textContent =
-        "🔴 No se pudo actualizar P2P";
-
-    }
-
-  }
 
 }
 
 
-// ------------------------------------------------------------
-// CARGAR ÚLTIMO P2P GUARDADO
-// ------------------------------------------------------------
-
-function cargarP2PGuardado() {
-
-  const guardado =
-    localStorage.getItem(
-      "bainansP2P"
-    );
-
-
-  if (
-    !guardado ||
-    !p2pInput
-  ) {
-    return;
-  }
-
-
-  try {
-
-    const datos =
-      JSON.parse(guardado);
-
-
-    const precio =
-      numeroP2P(
-        datos.precio
-      );
-
-
-    if (precio > 0) {
-
-      p2pInput.value =
-        formatoNumero(
-          precio,
-          2
-        );
-
-
-      if (p2pEstado) {
-
-        p2pEstado.textContent =
-          "🟠 Última tasa P2P guardada";
-
-      }
-
-    }
-
-  } catch (error) {
-
-    console.error(
-      "Error cargando P2P:",
-      error
-    );
-
-  }
-
-}
-
-
-// ------------------------------------------------------------
-// INICIAR ACTUALIZACIÓN P2P
-// ------------------------------------------------------------
+/* =========================================
+   INICIAR ACTUALIZACIÓN P2P
+========================================= */
 
 function iniciarActualizacionP2P() {
 
-  if (actualizarP2P) {
+    if (actualizarP2P) {
 
-    actualizarP2P.addEventListener(
-      "click",
-      actualizarPrecioP2P
+        actualizarP2P.addEventListener(
+            "click",
+            actualizarPrecioP2P
+        );
+
+    }
+
+
+    setInterval(
+        actualizarPrecioP2P,
+        P2P_INTERVALO
     );
 
-  }
-
-
-  setInterval(
-    actualizarPrecioP2P,
-    P2P_INTERVALO
-  );
-
 }
-     
+
 
 /* =========================================
    GUARDAR TASA BCV
@@ -1248,8 +1264,11 @@ function guardarTasaBCV(
 ) {
 
     const datos = {
+
         tasa: tasa,
+
         fecha: fecha
+
     };
 
 
@@ -1261,9 +1280,8 @@ function guardarTasaBCV(
 }
 
 
-
 /* =========================================
-   CARGAR TASA BCV
+   CARGAR TASA BCV GUARDADA
 ========================================= */
 
 function cargarTasaGuardada() {
@@ -1282,7 +1300,9 @@ function cargarTasaGuardada() {
     try {
 
         const datos =
-            JSON.parse(guardado);
+            JSON.parse(
+                guardado
+            );
 
 
         if (
@@ -1295,16 +1315,16 @@ function cargarTasaGuardada() {
                     .toLocaleString(
                         "es-VE",
                         {
-                            minimumFractionDigits:
-                                2,
-
-                            maximumFractionDigits:
-                                4
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 4
                         }
                     );
 
 
-            if (datos.fecha) {
+            if (
+                datos.fecha &&
+                bcvEstado
+            ) {
 
                 bcvEstado.textContent =
                     `🟢 Actualizada: ${datos.fecha}`;
@@ -1314,6 +1334,7 @@ function cargarTasaGuardada() {
                 );
 
             }
+
 
             return true;
 
@@ -1335,12 +1356,14 @@ function cargarTasaGuardada() {
 }
 
 
-
 /* =========================================
-   ACTUALIZAR BCV
+   ACTUALIZAR TASA BCV
 ========================================= */
 
 async function actualizarTasaBCV() {
+
+    if (!actualizarBCV) return;
+
 
     if (
         actualizarBCV.classList.contains(
@@ -1353,6 +1376,13 @@ async function actualizarTasaBCV() {
     }
 
 
+    /*
+       MISMA ANIMACIÓN
+
+       La clase "cargando" debe coincidir
+       con la que utiliza el botón P2P.
+    */
+
     actualizarBCV.classList.add(
         "cargando"
     );
@@ -1360,14 +1390,17 @@ async function actualizarTasaBCV() {
     actualizarBCV.disabled = true;
 
 
-    bcvEstado.textContent =
-        "🔄 Consultando tasa BCV...";
+    if (bcvEstado) {
 
+        bcvEstado.textContent =
+            "🔄 Consultando tasa BCV...";
 
-    bcvEstado.classList.remove(
-        "exito",
-        "error"
-    );
+        bcvEstado.classList.remove(
+            "exito",
+            "error"
+        );
+
+    }
 
 
     try {
@@ -1376,8 +1409,7 @@ async function actualizarTasaBCV() {
             await fetch(
                 BCV_API,
                 {
-                    cache:
-                        "no-store"
+                    cache: "no-store"
                 }
             );
 
@@ -1396,7 +1428,9 @@ async function actualizarTasaBCV() {
 
 
         const tasa =
-            Number(datos.USD);
+            Number(
+                datos.USD
+            );
 
 
         if (
@@ -1421,11 +1455,8 @@ async function actualizarTasaBCV() {
             tasa.toLocaleString(
                 "es-VE",
                 {
-                    minimumFractionDigits:
-                        2,
-
-                    maximumFractionDigits:
-                        4
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 4
                 }
             );
 
@@ -1441,105 +1472,159 @@ async function actualizarTasaBCV() {
         guardarDatos();
 
 
-        if (fecha) {
+        if (bcvEstado) {
 
-            bcvEstado.textContent =
-                `🟢 Actualizada: ${fecha}`;
+            if (fecha) {
+
+                bcvEstado.textContent =
+                    `🟢 Actualizada: ${fecha}`;
+
+            }
+
+            else {
+
+                bcvEstado.textContent =
+                    "🟢 Tasa BCV actualizada";
+
+            }
+
+
+            bcvEstado.classList.remove(
+                "error"
+            );
+
+            bcvEstado.classList.add(
+                "exito"
+            );
 
         }
-
-        else {
-
-            bcvEstado.textContent =
-                "🟢 Tasa BCV actualizada";
-
-        }
-
-
-        bcvEstado.classList.remove(
-            "error"
-        );
-
-        bcvEstado.classList.add(
-            "exito"
-        );
 
     }
 
     catch (error) {
 
-        console.error(error);
-
-        bcvEstado.textContent =
-            "🟠 No se actualizó. Se mantiene la última tasa.";
-
-        bcvEstado.classList.remove(
-            "exito"
+        console.error(
+            "Error BCV:",
+            error
         );
 
-        bcvEstado.classList.add(
-            "error"
-        );
+
+        if (bcvEstado) {
+
+            bcvEstado.textContent =
+                "🟠 No se actualizó. Se mantiene la última tasa.";
+
+            bcvEstado.classList.remove(
+                "exito"
+            );
+
+            bcvEstado.classList.add(
+                "error"
+            );
+
+        }
 
     }
 
+    finally {
 
-    actualizarBCV.classList.remove(
-        "cargando"
-    );
+        /*
+           DETENER GIRO
+        */
 
-    actualizarBCV.disabled = false;
+        actualizarBCV.classList.remove(
+            "cargando"
+        );
+
+        actualizarBCV.disabled = false;
+
+    }
 
 }
 
 
-actualizarBCV.addEventListener(
-    "click",
-    actualizarTasaBCV
-);
+if (actualizarBCV) {
 
+    actualizarBCV.addEventListener(
+        "click",
+        actualizarTasaBCV
+    );
+
+}
 
 
 /* =========================================
-   CAMBIAR MODO
+   CAMBIAR INTERFAZ DE MODO
 ========================================= */
 
 function actualizarInterfazModo() {
 
     if (modoGanancia) {
 
-        datosTitulo.innerHTML =
-            `<span class="section-icon">📊</span>
-             Calcular dato`;
+        if (datosTitulo) {
+
+            datosTitulo.innerHTML =
+                `<span class="section-icon">📊</span>
+                 Calcular dato`;
+
+        }
 
 
-        saldoLabel.textContent =
-            "Cuánto gano con:";
+        if (saldoLabel) {
+
+            saldoLabel.textContent =
+                "Cuánto gano con:";
+
+        }
 
 
-        saldoInput.placeholder =
-            "Ej. 400 USDT";
+        if (saldoInput) {
+
+            saldoInput.placeholder =
+                "Ej. 400 USDT";
+
+        }
 
 
-        modoCalculo.classList.add(
-            "activo"
-        );
+        if (modoCalculo) {
+
+            modoCalculo.classList.add(
+                "activo"
+            );
+
+        }
 
 
-        heroEstado.textContent =
-            "Ingresa el monto, BCV y precio P2P";
+        if (heroEstado) {
+
+            heroEstado.textContent =
+                "Ingresa el monto, BCV y precio P2P";
+
+        }
 
 
-        resultadosCompra.style.display =
-            "none";
+        if (resultadosCompra) {
+
+            resultadosCompra.style.display =
+                "none";
+
+        }
 
 
-        resultadosGanancia.style.display =
-            "grid";
+        if (resultadosGanancia) {
+
+            resultadosGanancia.style.display =
+                "grid";
+
+        }
 
 
-        textoCopiar.textContent =
-            "Copiar cálculo";
+        if (textoCopiar) {
+
+            textoCopiar.textContent =
+                "Copiar cálculo";
+
+        }
 
 
         localStorage.setItem(
@@ -1551,34 +1636,62 @@ function actualizarInterfazModo() {
 
     else {
 
-        datosTitulo.innerHTML =
-            `<span class="section-icon">📥</span>
-             Datos de compra`;
+        if (datosTitulo) {
+
+            datosTitulo.innerHTML =
+                `<span class="section-icon">📥</span>
+                 Datos de compra`;
+
+        }
 
 
-        saldoLabel.textContent =
-            "Saldo disponible (Bs)";
+        if (saldoLabel) {
+
+            saldoLabel.textContent =
+                "Saldo disponible (Bs)";
+
+        }
 
 
-        saldoInput.placeholder =
-            "Ej. 170.557";
+        if (saldoInput) {
+
+            saldoInput.placeholder =
+                "Ej. 170.557";
+
+        }
 
 
-        modoCalculo.classList.remove(
-            "activo"
-        );
+        if (modoCalculo) {
+
+            modoCalculo.classList.remove(
+                "activo"
+            );
+
+        }
 
 
-        resultadosCompra.style.display =
-            "grid";
+        if (resultadosCompra) {
+
+            resultadosCompra.style.display =
+                "grid";
+
+        }
 
 
-        resultadosGanancia.style.display =
-            "none";
+        if (resultadosGanancia) {
+
+            resultadosGanancia.style.display =
+                "none";
+
+        }
 
 
-        textoCopiar.textContent =
-            "Copiar resumen";
+        if (textoCopiar) {
+
+            textoCopiar.textContent =
+                "Copiar resumen";
+
+        }
 
 
         localStorage.setItem(
@@ -1594,24 +1707,25 @@ function actualizarInterfazModo() {
 }
 
 
-
 /* =========================================
-   CLICK DEL INTERRUPTOR
+   INTERRUPTOR DE MODO
 ========================================= */
 
-modoCalculo.addEventListener(
-    "click",
-    () => {
+if (modoCalculo) {
 
-        modoGanancia =
-            !modoGanancia;
+    modoCalculo.addEventListener(
+        "click",
+        () => {
 
+            modoGanancia =
+                !modoGanancia;
 
-        actualizarInterfazModo();
+            actualizarInterfazModo();
 
-    }
-);
+        }
+    );
 
+}
 
 
 /* =========================================
@@ -1633,7 +1747,6 @@ function calcular() {
     }
 
 }
-
 
 
 /* =========================================
@@ -1680,11 +1793,21 @@ function calcularCompra() {
 
         limpiarCompra();
 
-        heroEstado.textContent =
-            "Ingresa el saldo y la tasa BCV";
+        if (heroEstado) {
 
-        estado.textContent =
-            "⚪ Esperando cálculo";
+            heroEstado.textContent =
+                "Ingresa el saldo y la tasa BCV";
+
+        }
+
+
+        if (estado) {
+
+            estado.textContent =
+                "⚪ Esperando cálculo";
+
+        }
+
 
         return;
 
@@ -1732,118 +1855,159 @@ function calcularCompra() {
         usdQueLlegan;
 
 
-    heroUsdNumero.textContent =
-        formatoNumero(
-            usdQueLlegan
-        );
+    if (heroUsdNumero) {
+
+        heroUsdNumero.textContent =
+            formatoNumero(
+                usdQueLlegan
+            );
+
+    }
 
 
-    heroEstado.textContent =
-        "Cantidad estimada que llegará a Binance";
+    if (heroEstado) {
+
+        heroEstado.textContent =
+            "Cantidad estimada que llegará a Binance";
+
+    }
 
 
-    tasaFinal.textContent =
-        `${formatoNumero(
-            tasa,
-            4
-        )} Bs/USD`;
+    if (tasaFinal) {
+
+        tasaFinal.textContent =
+            `${formatoNumero(
+                tasa,
+                4
+            )} Bs/USD`;
+
+    }
 
 
-    usdComprados.textContent =
-        `${formatoNumero(
-            usd
-        )} USD`;
+    if (usdComprados) {
+
+        usdComprados.textContent =
+            `${formatoNumero(
+                usd
+            )} USD`;
+
+    }
 
 
-    comisionBdv.textContent =
-        `${formatoNumero(
-            comisionBDV
-        )} USD`;
+    if (comisionBdv) {
+
+        comisionBdv.textContent =
+            `${formatoNumero(
+                comisionBDV
+            )} USD`;
+
+    }
 
 
-    despuesBdv.textContent =
-        `${formatoNumero(
-            despuesBDV
-        )} USD`;
+    if (despuesBdv) {
+
+        despuesBdv.textContent =
+            `${formatoNumero(
+                despuesBDV
+            )} USD`;
+
+    }
 
 
-    comisionBpay.textContent =
-        `${formatoNumero(
-            comisionBPay
-        )} USD`;
+    if (comisionBpay) {
+
+        comisionBpay.textContent =
+            `${formatoNumero(
+                comisionBPay
+            )} USD`;
+
+    }
 
 
-    usdFinales.textContent =
-        `${formatoNumero(
-            usdQueLlegan
-        )} USD`;
+    if (usdFinales) {
+
+        usdFinales.textContent =
+            `${formatoNumero(
+                usdQueLlegan
+            )} USD`;
+
+    }
 
 
-    costoReal.textContent =
-        `${formatoNumero(
-            costo,
-            4
-        )} Bs/USD`;
+    if (costoReal) {
+
+        costoReal.textContent =
+            `${formatoNumero(
+                costo,
+                4
+            )} Bs/USD`;
+
+    }
 
 
-    if (p2p > 0) {
+    if (ahorroP2p) {
 
-        const diferencia =
-            p2p -
-            costo;
+        if (p2p > 0) {
 
-
-        const porcentaje =
-            (
-                diferencia /
-                p2p
-            ) * 100;
+            const diferencia =
+                p2p - costo;
 
 
-        if (diferencia > 0) {
+            const porcentaje =
+                (
+                    diferencia / p2p
+                ) * 100;
 
-            ahorroP2p.textContent =
-                `Ahorras ${formatoNumero(
-                    diferencia,
-                    4
-                )} Bs/USD (${formatoNumero(
-                    porcentaje
-                )}%)`;
 
-        }
+            if (diferencia > 0) {
 
-        else if (diferencia < 0) {
+                ahorroP2p.textContent =
+                    `Ahorras ${formatoNumero(
+                        diferencia,
+                        4
+                    )} Bs/USD (${formatoNumero(
+                        porcentaje
+                    )}%)`;
 
-            ahorroP2p.textContent =
-                `P2P es menor por ${formatoNumero(
-                    Math.abs(diferencia),
-                    4
-                )} Bs/USD`;
+            }
+
+            else if (diferencia < 0) {
+
+                ahorroP2p.textContent =
+                    `P2P es menor por ${formatoNumero(
+                        Math.abs(diferencia),
+                        4
+                    )} Bs/USD`;
+
+            }
+
+            else {
+
+                ahorroP2p.textContent =
+                    "Mismo costo que P2P";
+
+            }
 
         }
 
         else {
 
             ahorroP2p.textContent =
-                "Mismo costo que P2P";
+                "Ingresa precio P2P";
 
         }
 
     }
 
-    else {
 
-        ahorroP2p.textContent =
-            "Ingresa precio P2P";
+    if (estado) {
+
+        estado.textContent =
+            "🟢 Cálculo actualizado";
 
     }
 
-
-    estado.textContent =
-        "🟢 Cálculo actualizado";
-
 }
-
 
 
 /* =========================================
@@ -1857,30 +2021,25 @@ function calcularGanancia() {
             saldoInput
         );
 
-
     const bcv =
         obtenerNumero(
             bcvInput
         );
-
 
     const recargo =
         obtenerNumero(
             recargoInput
         );
 
-
     const bdv =
         obtenerNumero(
             bdvInput
         );
 
-
     const bpay =
         obtenerNumero(
             bpayInput
         );
-
 
     const p2p =
         obtenerNumero(
@@ -1896,11 +2055,21 @@ function calcularGanancia() {
 
         limpiarGanancia();
 
-        heroEstado.textContent =
-            "Ingresa monto, BCV y precio P2P";
+        if (heroEstado) {
 
-        estado.textContent =
-            "⚪ Esperando datos";
+            heroEstado.textContent =
+                "Ingresa monto, BCV y precio P2P";
+
+        }
+
+
+        if (estado) {
+
+            estado.textContent =
+                "⚪ Esperando datos";
+
+        }
+
 
         return;
 
@@ -1917,16 +2086,14 @@ function calcularGanancia() {
         );
 
 
-    /* BS NECESARIOS PARA CONSEGUIR
-       EL MONTO INDICADO */
+    /* BS NECESARIOS */
 
     const bs =
         capital *
         tasa;
 
 
-    /* USDT QUE DEBES VENDER
-       EN P2P PARA CONSEGUIR ESOS BS */
+    /* USDT A VENDER */
 
     const usdtVenta =
         bs /
@@ -1940,8 +2107,7 @@ function calcularGanancia() {
         bpay;
 
 
-    /* USDT QUE QUEDAN
-       DESPUÉS DE LAS COMISIONES */
+    /* USDT DESPUÉS DE COMISIONES */
 
     const usdtRetornados =
         capital *
@@ -1971,96 +2137,131 @@ function calcularGanancia() {
 
     /* HERO */
 
-    heroUsdNumero.textContent =
-        formatoNumero(
-            usdtRetornados
-        );
+    if (heroUsdNumero) {
+
+        heroUsdNumero.textContent =
+            formatoNumero(
+                usdtRetornados
+            );
+
+    }
 
 
-    heroEstado.textContent =
-        "Cantidad estimada que llegará a Binance";
+    if (heroEstado) {
+
+        heroEstado.textContent =
+            "Cantidad estimada que llegará a Binance";
+
+    }
 
 
     /* RESULTADOS */
 
-    ganTasaFinal.textContent =
-        `${formatoNumero(
-            tasa,
-            4
-        )} Bs/USD`;
+    if (ganTasaFinal) {
 
-
-    bsNecesarios.textContent =
-        `${formatoNumero(
-            bs
-        )} Bs`;
-
-
-    tasaBancoBinance.textContent =
-        `${formatoNumero(
-            comisionTotal
-        )}% → ${formatoNumero(
-            usdtRetornados
-        )} USDT`;
-
-
-    usdtVentaUsado.textContent =
-        `${formatoNumero(
-            usdtVenta
-        )} USDT`;
-
-
-    if (
-        gananciaCalculada >= 0
-    ) {
-
-        ganancia.textContent =
-            `+${formatoNumero(
-                gananciaCalculada
-            )} USDT`;
-
-    }
-
-    else {
-
-        ganancia.textContent =
+        ganTasaFinal.textContent =
             `${formatoNumero(
-                gananciaCalculada
+                tasa,
+                4
+            )} Bs/USD`;
+
+    }
+
+
+    if (bsNecesarios) {
+
+        bsNecesarios.textContent =
+            `${formatoNumero(
+                bs
+            )} Bs`;
+
+    }
+
+
+    if (tasaBancoBinance) {
+
+        tasaBancoBinance.textContent =
+            `${formatoNumero(
+                comisionTotal
+            )}% → ${formatoNumero(
+                usdtRetornados
             )} USDT`;
 
     }
 
 
-    roi.textContent =
-        `${formatoNumero(
-            roiCalculado
-        )}%`;
+    if (usdtVentaUsado) {
 
-
-    if (
-        gananciaCalculada >= 0
-    ) {
-
-        estado.textContent =
-            `🟢 Ganancia estimada: ${formatoNumero(
-                gananciaCalculada
+        usdtVentaUsado.textContent =
+            `${formatoNumero(
+                usdtVenta
             )} USDT`;
 
     }
 
-    else {
 
-        estado.textContent =
-            `🔴 Resultado negativo: ${formatoNumero(
-                Math.abs(
+    if (ganancia) {
+
+        if (
+            gananciaCalculada >= 0
+        ) {
+
+            ganancia.textContent =
+                `+${formatoNumero(
                     gananciaCalculada
-                )
-            )} USDT`;
+                )} USDT`;
+
+        }
+
+        else {
+
+            ganancia.textContent =
+                `${formatoNumero(
+                    gananciaCalculada
+                )} USDT`;
+
+        }
+
+    }
+
+
+    if (roi) {
+
+        roi.textContent =
+            `${formatoNumero(
+                roiCalculado
+            )}%`;
+
+    }
+
+
+    if (estado) {
+
+        if (
+            gananciaCalculada >= 0
+        ) {
+
+            estado.textContent =
+                `🟢 Ganancia estimada: ${formatoNumero(
+                    gananciaCalculada
+                )} USDT`;
+
+        }
+
+        else {
+
+            estado.textContent =
+                `🔴 Resultado negativo: ${formatoNumero(
+                    Math.abs(
+                        gananciaCalculada
+                    )
+                )} USDT`;
+
+        }
 
     }
 
 }
-
 
 
 /* =========================================
@@ -2069,43 +2270,43 @@ function calcularGanancia() {
 
 function limpiarCompra() {
 
-    heroUsdNumero.textContent =
-        "0,00";
+    if (heroUsdNumero) {
+        heroUsdNumero.textContent = "0,00";
+    }
 
+    if (tasaFinal) {
+        tasaFinal.textContent = "--";
+    }
 
-    tasaFinal.textContent =
-        "--";
+    if (usdComprados) {
+        usdComprados.textContent = "--";
+    }
 
+    if (comisionBdv) {
+        comisionBdv.textContent = "--";
+    }
 
-    usdComprados.textContent =
-        "--";
+    if (despuesBdv) {
+        despuesBdv.textContent = "--";
+    }
 
+    if (comisionBpay) {
+        comisionBpay.textContent = "--";
+    }
 
-    comisionBdv.textContent =
-        "--";
+    if (usdFinales) {
+        usdFinales.textContent = "--";
+    }
 
+    if (costoReal) {
+        costoReal.textContent = "--";
+    }
 
-    despuesBdv.textContent =
-        "--";
-
-
-    comisionBpay.textContent =
-        "--";
-
-
-    usdFinales.textContent =
-        "--";
-
-
-    costoReal.textContent =
-        "--";
-
-
-    ahorroP2p.textContent =
-        "--";
+    if (ahorroP2p) {
+        ahorroP2p.textContent = "--";
+    }
 
 }
-
 
 
 /* =========================================
@@ -2114,35 +2315,35 @@ function limpiarCompra() {
 
 function limpiarGanancia() {
 
-    heroUsdNumero.textContent =
-        "0,00";
+    if (heroUsdNumero) {
+        heroUsdNumero.textContent = "0,00";
+    }
 
+    if (ganTasaFinal) {
+        ganTasaFinal.textContent = "--";
+    }
 
-    ganTasaFinal.textContent =
-        "--";
+    if (bsNecesarios) {
+        bsNecesarios.textContent = "--";
+    }
 
+    if (tasaBancoBinance) {
+        tasaBancoBinance.textContent = "--";
+    }
 
-    bsNecesarios.textContent =
-        "--";
+    if (usdtVentaUsado) {
+        usdtVentaUsado.textContent = "--";
+    }
 
+    if (ganancia) {
+        ganancia.textContent = "--";
+    }
 
-    tasaBancoBinance.textContent =
-        "--";
-
-
-    usdtVentaUsado.textContent =
-        "--";
-
-
-    ganancia.textContent =
-        "--";
-
-
-    roi.textContent =
-        "--";
+    if (roi) {
+        roi.textContent = "--";
+    }
 
 }
-
 
 
 /* =========================================
@@ -2154,22 +2355,22 @@ function guardarDatos() {
     const datos = {
 
         saldo:
-            saldoInput.value,
+            saldoInput?.value || "",
 
         bcv:
-            bcvInput.value,
+            bcvInput?.value || "",
 
         recargo:
-            recargoInput.value,
+            recargoInput?.value || "",
 
         bdv:
-            bdvInput.value,
+            bdvInput?.value || "",
 
         bpay:
-            bpayInput.value,
+            bpayInput?.value || "",
 
         p2p:
-            p2pInput.value
+            p2pInput?.value || ""
 
     };
 
@@ -2180,7 +2381,6 @@ function guardarDatos() {
     );
 
 }
-
 
 
 /* =========================================
@@ -2206,7 +2406,10 @@ function cargarDatos() {
             );
 
 
-        if (datos.saldo) {
+        if (
+            datos.saldo &&
+            saldoInput
+        ) {
 
             saldoInput.value =
                 datos.saldo;
@@ -2214,7 +2417,10 @@ function cargarDatos() {
         }
 
 
-        if (datos.bcv) {
+        if (
+            datos.bcv &&
+            bcvInput
+        ) {
 
             bcvInput.value =
                 datos.bcv;
@@ -2222,7 +2428,10 @@ function cargarDatos() {
         }
 
 
-        if (datos.recargo !== undefined) {
+        if (
+            datos.recargo !== undefined &&
+            recargoInput
+        ) {
 
             recargoInput.value =
                 datos.recargo;
@@ -2230,7 +2439,10 @@ function cargarDatos() {
         }
 
 
-        if (datos.bdv !== undefined) {
+        if (
+            datos.bdv !== undefined &&
+            bdvInput
+        ) {
 
             bdvInput.value =
                 datos.bdv;
@@ -2238,12 +2450,26 @@ function cargarDatos() {
         }
 
 
-        if (datos.bpay !== undefined) {
+        if (
+            datos.bpay !== undefined &&
+            bpayInput
+        ) {
 
             bpayInput.value =
                 datos.bpay;
 
-        }        
+        }
+
+
+        if (
+            datos.p2p &&
+            p2pInput
+        ) {
+
+            p2pInput.value =
+                datos.p2p;
+
+        }
 
     }
 
@@ -2258,61 +2484,68 @@ function cargarDatos() {
 }
 
 
-
 /* =========================================
    CAMPOS DE ENTRADA
 ========================================= */
 
-saldoInput.addEventListener(
-    "input",
-    () => {
+if (saldoInput) {
 
-        saldoInput.value =
-            formatearEntrada(
-                saldoInput.value
+    saldoInput.addEventListener(
+        "input",
+        () => {
+
+            saldoInput.value =
+                formatearEntrada(
+                    saldoInput.value
+                );
+
+
+            saldoInput.setSelectionRange(
+                saldoInput.value.length,
+                saldoInput.value.length
             );
 
 
-        saldoInput.setSelectionRange(
-            saldoInput.value.length,
-            saldoInput.value.length
-        );
+            calcular();
+
+            guardarDatos();
+
+        }
+    );
+
+}
 
 
-        calcular();
+if (bcvInput) {
 
-        guardarDatos();
+    bcvInput.addEventListener(
+        "input",
+        () => {
 
-    }
-);
+            bcvInput.value =
+                formatearEntrada(
+                    bcvInput.value
+                );
 
 
-bcvInput.addEventListener(
-    "input",
-    () => {
-
-        bcvInput.value =
-            formatearEntrada(
-                bcvInput.value
+            bcvInput.setSelectionRange(
+                bcvInput.value.length,
+                bcvInput.value.length
             );
 
 
-        bcvInput.setSelectionRange(
-            bcvInput.value.length,
-            bcvInput.value.length
-        );
+            calcular();
 
+            guardarDatos();
 
-        calcular();
+        }
+    );
 
-        guardarDatos();
-
-    }
-);
+}
 
 
 /* =========================================
-   CAMPOS NUMÉRICOS SIMPLES
+   CAMPOS NUMÉRICOS
 ========================================= */
 
 [
@@ -2320,6 +2553,9 @@ bcvInput.addEventListener(
     bdvInput
 
 ].forEach(input => {
+
+    if (!input) return;
+
 
     input.addEventListener(
         "input",
@@ -2339,190 +2575,220 @@ bcvInput.addEventListener(
    BPAY
 ========================================= */
 
-bpayInput.addEventListener(
-    "input",
-    () => {
+if (bpayInput) {
 
-        calcular();
+    bpayInput.addEventListener(
+        "input",
+        () => {
 
-        guardarDatos();
+            calcular();
 
-    }
-);
+            guardarDatos();
+
+        }
+    );
+
+}
 
 
 /* =========================================
-   PRECIO P2P MANUAL
+   P2P MANUAL
 ========================================= */
 
-p2pInput.addEventListener(
-    "input",
-    () => {
+if (p2pInput) {
 
-        p2pInput.value =
-            formatearEntrada(
-                p2pInput.value
+    p2pInput.addEventListener(
+        "input",
+        () => {
+
+            p2pInput.value =
+                formatearEntrada(
+                    p2pInput.value
+                );
+
+
+            p2pInput.setSelectionRange(
+                p2pInput.value.length,
+                p2pInput.value.length
             );
 
 
-        p2pInput.setSelectionRange(
-            p2pInput.value.length,
-            p2pInput.value.length
-        );
+            calcular();
 
+            guardarDatos();
 
-        calcular();
+        }
+    );
 
-        guardarDatos();
-
-    }
-);
-
+}
 
 
 /* =========================================
    COPIAR RESUMEN
 ========================================= */
 
-copiarBtn.addEventListener(
-    "click",
-    async () => {
+if (copiarBtn) {
 
-        let resumen = "";
+    copiarBtn.addEventListener(
+        "click",
+        async () => {
+
+            let resumen = "";
 
 
-        if (modoGanancia) {
+            if (modoGanancia) {
 
-            resumen = `
+                resumen = `
 
 BAINANS TOOLS
 
 CÁLCULO DE GANANCIA
 
 Capital:
-${saldoInput.value || "No indicado"} USDT
+${saldoInput?.value || "No indicado"} USDT
 
 Tasa BCV:
-${bcvInput.value || "No indicada"} Bs/USD
+${bcvInput?.value || "No indicada"} Bs/USD
 
 Recargo Banco:
-${recargoInput.value || "0"}%
+${recargoInput?.value || "0"}%
 
 Tasa final:
-${ganTasaFinal.textContent}
+${ganTasaFinal?.textContent || "--"}
 
 Bs necesarios:
-${bsNecesarios.textContent}
+${bsNecesarios?.textContent || "--"}
 
 Comisión Banco + BPay:
-${tasaBancoBinance.textContent}
+${tasaBancoBinance?.textContent || "--"}
 
 USDT de venta usado:
-${usdtVentaUsado.textContent}
+${usdtVentaUsado?.textContent || "--"}
 
 Ganancia:
-${ganancia.textContent}
+${ganancia?.textContent || "--"}
 
 ROI:
-${roi.textContent}
+${roi?.textContent || "--"}
 
 USD que llegarán a Binance:
-${heroUsdNumero.textContent} USD
+${heroUsdNumero?.textContent || "0,00"} USD
 
 Precio P2P:
-${p2pInput.value || "No indicado"} Bs
+${p2pInput?.value || "No indicado"} Bs
 
-            `.trim();
+                `.trim();
 
-        }
+            }
 
-        else {
+            else {
 
-            resumen = `
+                resumen = `
 
 BAINANS TOOLS
 
 Saldo disponible:
-${saldoInput.value || "No indicado"} Bs
+${saldoInput?.value || "No indicado"} Bs
 
 Tasa BCV:
-${bcvInput.value || "No indicada"} Bs/USD
+${bcvInput?.value || "No indicada"} Bs/USD
 
 Tasa final:
-${tasaFinal.textContent}
+${tasaFinal?.textContent || "--"}
 
 USD comprados:
-${usdComprados.textContent}
+${usdComprados?.textContent || "--"}
 
 Comisión BDV:
-${comisionBdv.textContent}
+${comisionBdv?.textContent || "--"}
 
 Después de BDV:
-${despuesBdv.textContent}
+${despuesBdv?.textContent || "--"}
 
 Comisión BPay:
-${comisionBpay.textContent}
+${comisionBpay?.textContent || "--"}
 
 USD finales:
-${usdFinales.textContent}
+${usdFinales?.textContent || "--"}
 
 USD que llegarán a Binance:
-${heroUsdNumero.textContent} USD
+${heroUsdNumero?.textContent || "0,00"} USD
 
 Costo real por USD:
-${costoReal.textContent}
+${costoReal?.textContent || "--"}
 
 Ahorro frente al P2P:
-${ahorroP2p.textContent}
+${ahorroP2p?.textContent || "--"}
 
-            `.trim();
+                `.trim();
+
+            }
+
+
+            try {
+
+                await navigator.clipboard.writeText(
+                    resumen
+                );
+
+
+                if (textoCopiar) {
+
+                    textoCopiar.textContent =
+                        "Resumen copiado";
+
+                }
+
+
+                const icono =
+                    copiarBtn.querySelector(
+                        "span"
+                    );
+
+
+                if (icono) {
+
+                    icono.textContent =
+                        "✅";
+
+                }
+
+
+                setTimeout(() => {
+
+                    if (icono) {
+
+                        icono.textContent =
+                            "📋";
+
+                    }
+
+
+                    if (textoCopiar) {
+
+                        textoCopiar.textContent =
+                            modoGanancia
+                                ? "Copiar cálculo"
+                                : "Copiar resumen";
+
+                    }
+
+                }, 2000);
+
+            }
+
+            catch (error) {
+
+                alert(
+                    "No se pudo copiar el resumen."
+                );
+
+            }
 
         }
+    );
 
-
-        try {
-
-            await navigator.clipboard.writeText(
-                resumen
-            );
-
-
-            textoCopiar.textContent =
-                "Resumen copiado";
-
-
-            copiarBtn.querySelector(
-                "span"
-            ).textContent = "✅";
-
-
-            setTimeout(() => {
-
-                copiarBtn.querySelector(
-                    "span"
-                ).textContent = "📋";
-
-
-                textoCopiar.textContent =
-                    modoGanancia
-                        ? "Copiar cálculo"
-                        : "Copiar resumen";
-
-            }, 2000);
-
-        }
-
-        catch (error) {
-
-            alert(
-                "No se pudo copiar el resumen."
-            );
-
-        }
-
-    }
-);
-
+}
 
 
 /* =========================================
@@ -2539,11 +2805,15 @@ function actualizarModo() {
 
     if (oscuro) {
 
-        modoBtn.textContent =
-            "☀️";
+        if (modoBtn) {
 
-        modoBtn.title =
-            "Cambiar a modo claro";
+            modoBtn.textContent =
+                "☀️";
+
+            modoBtn.title =
+                "Cambiar a modo claro";
+
+        }
 
 
         if (themeColor) {
@@ -2559,11 +2829,15 @@ function actualizarModo() {
 
     else {
 
-        modoBtn.textContent =
-            "🌙";
+        if (modoBtn) {
 
-        modoBtn.title =
-            "Cambiar a modo oscuro";
+            modoBtn.textContent =
+                "🌙";
+
+            modoBtn.title =
+                "Cambiar a modo oscuro";
+
+        }
 
 
         if (themeColor) {
@@ -2580,85 +2854,107 @@ function actualizarModo() {
 }
 
 
-modoBtn.addEventListener(
-    "click",
-    () => {
+if (modoBtn) {
 
-        document.body.classList.toggle(
-            "dark"
-        );
+    modoBtn.addEventListener(
+        "click",
+        () => {
 
-
-        const oscuro =
-            document.body.classList.contains(
+            document.body.classList.toggle(
                 "dark"
             );
 
 
-        localStorage.setItem(
-            "bainansModo",
-            oscuro
-                ? "dark"
-                : "light"
-        );
+            const oscuro =
+                document.body.classList.contains(
+                    "dark"
+                );
 
 
-        actualizarModo();
+            localStorage.setItem(
+                "bainansModo",
+                oscuro
+                    ? "dark"
+                    : "light"
+            );
 
-    }
-);
 
+            actualizarModo();
+
+        }
+    );
+
+}
 
 
 /* =========================================
    RESULTADOS
 ========================================= */
 
-mostrarResultados.addEventListener(
-    "click",
-    () => {
+if (mostrarResultados) {
 
-        resultados.classList.toggle(
-            "visible"
-        );
+    mostrarResultados.addEventListener(
+        "click",
+        () => {
+
+            if (!resultados) return;
 
 
-        if (
-            resultados.classList.contains(
+            resultados.classList.toggle(
                 "visible"
-            )
-        ) {
+            );
 
-            mostrarResultados.innerHTML =
-                "<span>☰</span> Ocultar resultado";
+
+            if (
+                resultados.classList.contains(
+                    "visible"
+                )
+            ) {
+
+                mostrarResultados.innerHTML =
+                    "<span>☰</span> Ocultar resultado";
+
+            }
+
+            else {
+
+                mostrarResultados.innerHTML =
+                    "<span>☰</span> Resultado";
+
+            }
 
         }
+    );
 
-        else {
+}
 
-            mostrarResultados.innerHTML =
-                "<span>☰</span> Resultado";
+
+if (cerrarResultados) {
+
+    cerrarResultados.addEventListener(
+        "click",
+        () => {
+
+            if (!resultados) return;
+
+
+            resultados.classList.remove(
+                "visible"
+            );
+
+
+            if (mostrarResultados) {
+
+                mostrarResultados.innerHTML =
+                    "<span>☰</span> Resultado";
+
+            }
 
         }
+    );
 
-    }
-);
+}
 
-
-cerrarResultados.addEventListener(
-    "click",
-    () => {
-
-        resultados.classList.remove(
-            "visible"
-        );
-
-
-        mostrarResultados.innerHTML =
-            "<span>☰</span> Resultado";
-
-    }
-);
 
 /* =========================================
    INICIAR APP
@@ -2695,7 +2991,10 @@ function iniciarApp() {
 
     /* BCV */
 
-    if (!bcvInput.value) {
+    if (
+        bcvInput &&
+        !bcvInput.value
+    ) {
 
         cargarTasaGuardada();
 
@@ -2730,15 +3029,15 @@ function iniciarApp() {
     calcular();
 
 
-    /* ==============================
-       P2P BINANCE
-       ============================== */
+    /* P2P */
 
     cargarP2PGuardado();
 
     iniciarActualizacionP2P();
 
-    /* Primera consulta automática */
+
+    /* PRIMERA CONSULTA AUTOMÁTICA */
+
     actualizarPrecioP2P();
 
 }
